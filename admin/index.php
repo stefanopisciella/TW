@@ -1,6 +1,14 @@
 <?php
     require "include/template2.inc.php";
 
+    session_start();
+    
+    // una volta loggati correttamente, non è più possibile ritornare alla pagina della login
+    // se non in seguito ad un logout
+    if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
+        header('location: home.php');
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // caso in cui il client ha già visionato la pagina della login e fa "submit" delle credenziali
         $username = $_POST['Username'];
@@ -15,6 +23,7 @@
         } else {
             if(strcmp($username, "admin") == 0 && strcmp($password, "admin") == 0) {
                 // credenziali corrette
+                $_SESSION['logged'] = true;
                 header("Location: home.php");
             } else {
                 // credenziali non corrette
@@ -36,6 +45,7 @@
                 $login->setContent("wrong_credentials", "Username e/o Password non corretti");
                 $login->close();   
             }
+            session_abort();
         } else {
             // caso in cui il client carica la pagina della login, ma non ancora fa ancora il "submit" delle credenziali
             $login = new Template("skins/index.html");
