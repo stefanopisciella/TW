@@ -84,7 +84,7 @@ create table immagine (
     ID smallint primary key auto_increment,
     ID_cane smallint not null,
     ID_articolo smallint not null,
-    `path` varchar(200) not null,
+    `path` varchar(400) not null,
     # indice di visualizzazione dell'immagine
     indice smallint not null,
     constraint immagine_cane foreign key (ID_cane) references cane(ID) on update cascade on delete cascade,
@@ -137,7 +137,7 @@ create table richiesta_adozione (
     ID_utente smallint not NULL,
     ID_cane smallint not null,
     `data` date not null,
-    documento blob,
+    documento varchar(400) not null,
     constraint adozione_utente foreign key (ID_utente) references utente(ID) on update cascade on delete no action,
     constraint adozione_cane foreign key (ID_cane) references cane(ID) on update cascade on delete no action
 );
