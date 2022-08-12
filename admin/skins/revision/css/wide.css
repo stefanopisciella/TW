@@ -1,0 +1,14 @@
+/* ----------------------------------------------------------------------------- */
+/*  Wide Layout
+/* ----------------------------------------------------------------------------- */
+
+
+    #body-wrapper {
+        width: 100%;
+    }
+    .fullwidth {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
