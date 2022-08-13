@@ -191,3 +191,7 @@ create table articolo_tag (
     constraint articolo_tag_articolo foreign key (ID_articolo) references articolo(ID) on update cascade on delete no action,
     constraint articolo_tag_tag foreign key (ID_tag) references tag(ID) on update cascade on delete no action
 );
+
+# popolamento tabella ugroup
+INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
+INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori del sito web, non amministratori');
