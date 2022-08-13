@@ -1,4 +1,10 @@
 <?php
+    require "frame-public.php";
+    
+    $login = new Template("skins/login.html");
+    $frame_public->setContent("contenuto", $login->get());
+    $frame_public->close();
+    /*
     require "include/template2.inc.php";
     require "include/tags/utility.inc.php";
 
@@ -56,4 +62,5 @@
             $login->close();  
         }
     }
+    */
 ?>
