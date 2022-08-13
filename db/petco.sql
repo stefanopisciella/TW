@@ -196,8 +196,19 @@ create table articolo_tag (
 INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
 INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori del sito web, non amministratori');
 
+# popolamento tabella utente
+INSERT INTO utente (ID, nickname, nome, cognome, passwrd, email, telefono, regione, provincia, citta, via , civico) VALUES
+	(1, "stefano23", "Stefano", "Pisciella", md5(md5(md5(md5(md5("stefano"))))), "stefano@gmail.com", "3880581680", "Abruzzo", "Teramo", "Atri", "via aldo moro", 18),
+    (2, "beatrice2", "Beatrice", "Tomassi", md5(md5(md5(md5(md5("beatrice"))))), "beatrice@gmail.com", "3880581681", "Abruzzo", "Teramo", "Atri", "via aldo moro", 18),
+    (3, "nicola3", "Nicola", "Rossi", md5(md5(md5(md5(md5("nicola"))))), "nicola@gmail.com", "3880581680", "Abruzzo", "Teramo", "Atri", "via aldo moro", 18);
 # popolamento tabella categoria
 
 # popolamento tabella razza
 
 # popolamento tabella
+
+
+# GESTIONE UTENZA
+drop user if exists 'user'@'localhost';
+create user 'user'@'localhost' identified by '1234';
+grant all on petco.* to 'user'@'localhost';
