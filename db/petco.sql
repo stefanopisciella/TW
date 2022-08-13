@@ -195,3 +195,9 @@ create table articolo_tag (
 # popolamento tabella ugroup
 INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
 INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori del sito web, non amministratori');
+
+# popolamento tabella categoria
+
+# popolamento tabella razza
+
+# popolamento tabella
