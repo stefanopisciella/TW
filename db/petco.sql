@@ -19,14 +19,14 @@ create table categoria (
 # 1) tabella cane
 create table cane (
     ID smallint primary key auto_increment,
-    nome varchar(50) not null,
+    nome varchar(50) not null unique,
     sesso enum('M', 'F') not null,
     eta smallint not null,
     razza varchar(50) not null,
     ID_razza smallint not null,
     taglia enum('piccola', 'media', 'grande') not null,
     presentazione text not null,
-    chip char(15) not null,
+    chip char(15) not null unique,
     # bit è utilizzato come booleano: se a 1, allora il cane è adottabile a distanza
     distanza bit not null,
     adottato bit not null,
