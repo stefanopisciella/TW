@@ -9,12 +9,12 @@
 
         $oid = $mysqli->query($query);
 
-        if($oid) {
-            echo "OK - login";
-            return $oid;
+        try {
+            $mysqli->query($query);
         }
-        else {
-            echo "ERRORE!!";
+        catch (Exception $e) {
+            
+            throw new Exception("{$mysqli->errno}");
         }
 
     }
