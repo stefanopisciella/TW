@@ -192,10 +192,19 @@ INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amminist
 INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori del sito web, non amministratori');
 
 # popolamento tabella utente
-INSERT INTO utente (ID, nickname, nome, cognome, passwrd, email, telefono, regione, provincia, citta, via , civico) VALUES
-	(1, "stefano23", "Stefano", "Pisciella", md5(md5(md5(md5(md5("stefano"))))), "stefano@gmail.com", "3880581680", "Abruzzo", "Teramo", "Atri", "via aldo moro", 18),
-    (2, "beatrice2", "Beatrice", "Tomassi", md5(md5(md5(md5(md5("beatrice"))))), "beatrice@gmail.com", "3880581681", "Abruzzo", "Teramo", "Atri", "via aldo moro", 18),
-    (3, "nicola3", "Nicola", "Rossi", md5(md5(md5(md5(md5("nicola"))))), "nicola@gmail.com", "3880581680", "Abruzzo", "Teramo", "Atri", "via aldo moro", 18);
+INSERT INTO utente (ID, nickname, nome, cognome, passwrd, email, telefono) VALUES
+	(1, "stefano23", "Stefano", "Pisciella", md5(md5(md5(md5(md5("stefano"))))), "stefano@gmail.com", "3880581680"),
+    (2, "beatrice2", "Beatrice", "Tomassi", md5(md5(md5(md5(md5("beatrice"))))), "beatrice@gmail.com", "3880581681"),
+    (3, "nicola3", "Nicola", "Rossi", md5(md5(md5(md5(md5("nicola"))))), "nicola@gmail.com", "3880581680"),
+    (4, "admin", "admin", "admin", md5(md5(md5(md5(md5("admin"))))), "admin@mail.com", "xxxxxxxxx");
+
+# popolamento tabella user_has_ugroup
+INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES 
+    (4, 1),
+    (1, 2),
+    (2, 2),
+    (3, 2);
+
 # popolamento tabella categoria
 
 # popolamento tabella razza
