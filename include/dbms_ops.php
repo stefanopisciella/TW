@@ -18,7 +18,7 @@
         }
         catch (Exception $e) {
             
-            throw new Exception("{$mysqli->errno}");
+            return -1;
         }
 
         $rows = $oid->fetch_all(MYSQLI_ASSOC);
@@ -76,5 +76,7 @@
         else return true;
 
     }
+
+    
 
 ?>
