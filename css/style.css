@@ -2116,7 +2116,7 @@ label {
 }
 .adoption-rating ul .rating {
     font-size: 12px;
-    color: #f39c10;
+    color: #f04336;
     letter-spacing: -.5px;
 }
 .adoption-rating ul .price {
@@ -4315,6 +4315,19 @@ label {
 .align-center2 {
     width: 50vw;
     margin-left: 25vw;
+}
+
+.heart {
+    font-size: 12px;
+    color:red;
+    padding-left: 20px;
+    background: #ffffff;
+    border: hidden;
+    font-size: 230%;
+}
+
+.padding-bottom-15px {
+    padding-bottom: 15px;
 }
 
 
