@@ -18,7 +18,7 @@
         }
         catch (Exception $e) {
             
-            throw new Exception("{$mysqli->errno}");
+            return -1;
         }
 
         $rows = $oid->fetch_all(MYSQLI_ASSOC);
@@ -28,6 +28,28 @@
 
         return -1;
 
+    }
+
+    /**
+     * Funzione che restituisce, dato l'id di un utente, a quale gruppo appartiene
+     */
+    function get_group($id_utente) {
+
+        global $mysqli;
+        $query = "SELECT ID_gruppo as gruppo FROM utente AS u JOIN user_has_group AS uhg ON u.ID = uhg.ID_utente AND u.ID = {$id_utente};";
+
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            
+            throw new Exception("errno: {$mysqli->errno}");
+        }
+
+        $rows = $oid->fetch_all(MYSQLI_ASSOC);
+
+        return $rows[0]["gruppo"];
+        
     }
 
 
@@ -76,5 +98,7 @@
         else return true;
 
     }
+
+    
 
 ?>
