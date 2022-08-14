@@ -41,12 +41,7 @@ create table utente (
     cognome varchar(50) not null,
     passwrd varchar(50) not null,
     email varchar(100) not null unique,
-    telefono char(10) not null,
-    regione varchar(30) not null,
-    provincia varchar(32) not null,
-    citta varchar(30) not null,
-    via varchar(30) not null,
-    civico tinyint not null
+    telefono char(10) not null
 );
 
 # 3) tabella ugroup
