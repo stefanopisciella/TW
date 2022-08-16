@@ -44,6 +44,7 @@
             }
 
             $errore = false;
+            $url_error = "";
             foreach ($url_params as $url_param) {
                 if(isset($url_param)) {
                     $url_error .= $url_param . "&";
@@ -53,14 +54,9 @@
             
             $url_error = substr($url_error, 0, -1);
 
-            // controllo univocità email
-
-
-            // controllo univocità nickname
-
             if($errore == false) {
                 $password = md5(md5(md5(md5(md5($password)))));
-                $utente = ["'.$nickname.'", "'.$nome.'", "'.$cognome.'", "'.$password.'", "'.$email.'", "'.$telefono.'"];
+                $utente = ["'".$username."'", "'".$nome."'", "'".$cognome."'", "'".$password."'", "'".$email."'", "'".$telefono."'"];
 
                 try {
                     insert_query('utente', $utente);
@@ -69,6 +65,13 @@
                     // caso in cui viene violato uno o più vincoli di univocità (abbiamo questi vincoli per quanto riguarda l' inserimento
                     //dell'email e del nickname)
                     header("Location: registrazione.php?not_unique=1");
+
+                    // controllo univocità email
+
+                    // controllo univocità nickname
+                    
+                    // REMOVE
+                    // echo $e;
                 }
             } else {
                 // caso in cui si è verificato almeno un errore nella compilazione del form
