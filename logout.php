@@ -1,9 +1,6 @@
 <?php
     session_start();
-
-    header('location: index.php');    
-
-    if(isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-        session_destroy();
-    }
+    // unset dei dati di sessione prima della distruzione della sessione
+    $_SESSION = array();
+    session_destroy(); 
 ?>
