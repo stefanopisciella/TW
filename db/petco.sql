@@ -209,9 +209,14 @@ INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES
 
 # popolamento tabella razza
 
-# popolamento tabella
+# popolamento tabella service
+INSERT INTO `service`(ID, script, descrizione) VALUES
+	(1, "admin/index", "home della dashboard dedicata all'Admin"); 
+    
+INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
+	(1, 1, 1);
 
-
+	
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
 create user 'user'@'localhost' identified by '1234';
