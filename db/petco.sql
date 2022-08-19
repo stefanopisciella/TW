@@ -209,6 +209,7 @@ INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES
 INSERT INTO `service`(ID, script, descrizione) VALUES
 	(1, "admin/index", "home della dashboard dedicata all'Admin"); 
     
+# popolamento tabella ugroup_has_service 
 INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 	(1, 1, 1);
 
