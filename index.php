@@ -3,6 +3,5 @@
 
     $main = new Template("skins/index.html");
     
-    // $main->setContent("place", "SE VUOIIIIIIII");
     $main->close();
 ?>

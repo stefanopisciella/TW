@@ -1,6 +1,6 @@
 <?php
 
-    require "/include/dbms.inc.php";
+    require "dbms.inc.php";
 
     /**
      * Funzione per formattare nomi di colonna e valori per query (inserimento, modifica), secondo la sintassi SQL
@@ -73,6 +73,7 @@
      * Funzione per la costruzione e l'invio di query di inserimento parametrizzate
      * @param String $nome_tabella
      * @param String[] $valori valori da inserire nella tabella
+     * @return int 0 per successo, codice errore altrimenti
      */
 
     function insert_query($nome_tabella, $valori) {
@@ -88,13 +89,13 @@
 
         // mando la query
         global $mysqli;
-        $oid = $mysqli->query($query);
 
-        if($oid) {
-            echo "OK - inserimento";
+        try {
+            $mysqli->query($query);
         }
-        else {
-            echo "ERRORE!!";
+        catch (Exception $e) {
+            
+            throw new Exception("{$mysqli->errno}");
         }
     }
 
@@ -127,13 +128,13 @@
 
         // mando la query
         global $mysqli;
-        $oid = $mysqli->query($query);
 
-        if($oid) {
-            echo "OK - update";
+        try {
+            $mysqli->query($query);
         }
-        else {
-            echo "ERRORE!!";
+        catch (Exception $e) {
+            
+            throw new Exception("{$mysqli->errno}");
         }
 
     }
@@ -151,11 +152,12 @@
         global $mysqli;
         $oid = $mysqli->query($query);
 
-        if($oid) {
-            echo "OK - delete";
+        try {
+            $mysqli->query($query);
         }
-        else {
-            echo "ERRORE!!";
+        catch (Exception $e) {
+            
+            throw new Exception("{$mysqli->errno}");
         }
 
     }

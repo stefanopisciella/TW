@@ -2116,7 +2116,7 @@ label {
 }
 .adoption-rating ul .rating {
     font-size: 12px;
-    color: #f39c10;
+    color: #f04336;
     letter-spacing: -.5px;
 }
 .adoption-rating ul .price {
@@ -4063,8 +4063,272 @@ label {
     min-width: 120px;
 }
 
+.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+    }
+    
+    @media (min-width: 1025px) {
+    .h-custom-2 {
+    height: 100%;
+    }
+}
 
+.margin-bottom-100px {
+    margin-bottom: 100px;
+}
 
+.item-position-center {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.item-position-center2 {
+    padding: 8%;
+}
+
+.item-position-center3 {
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.p_star {
+    display: inline-block;
+    position: relative;
+  }
+  
+.p_star input {
+    background: #fff;
+}
+
+.p_star input:focus + .placeholder {
+    display: none;
+}
+
+.p_star .placeholder {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 30px;
+    z-index: 1;
+}
+
+.p_star .placeholder::before {
+    content: attr(data-placeholder);
+    color: #777;
+}
+
+.p_star .placeholder::after {
+    content: " *";
+    color: tomato;
+}
+
+.billing_details .contact_form .form-group {
+    margin-bottom: 20px;
+}
+
+.billing_details .contact_form .form-group input {
+    border-radius: 3px;
+    color: #797979;
+}
+
+.billing_details .contact_form .form-group input.placeholder {
+    color: #797979;
+}
+
+.billing_details .contact_form .form-group input:-moz-placeholder {
+    color: #797979;
+}
+
+.billing_details .contact_form .form-group input::-moz-placeholder {
+    color: #797979;
+}
+
+.billing_details .contact_form .form-group input::-webkit-input-placeholder {
+    color: #797979;
+}
+
+.billing_details .contact_form .form-group textarea {
+    height: 150px;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+
+.billing_details .contact_form .form-group .country_select {
+    width: 100%;
+}
+
+.billing_details .contact_form .form-group .country_select span {
+    color: #797979;
+}
+
+.billing_details .contact_form .form-group .country_select .list {
+    width: 100%;
+    border-radius: 0px;
+}
+
+.billing_details .contact_form .form-group .country_select .list li {
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+}
+
+.billing_details .contact_form .form-group .creat_account #f-option2 {
+    margin-right: 5px;
+}
+
+.billing_details .contact_form .form-group .creat_account #f-option3 {
+    margin-right: 5px;
+}
+
+.billing_details .contact_form .form-group .creat_account a {
+    color: #ff3368;
+}
+
+.form-floating2 {
+    position: relative;
+}
+
+.form-floating2 > .form-control,
+.form-floating2 > .form-select {
+    height: calc(3.5rem + 2px);
+    line-height: 1.25;
+}
+.form-floating2 > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+.form-floating2 > label {
+    transition: none;
+}
+}
+.form-floating2 > .form-control {
+    padding: 1rem 0.75rem;
+}
+.form-floating2 > .form-control::-moz-placeholder {
+    color: transparent;
+}
+.form-floating2 > .form-control::placeholder {
+    color: transparent;
+}
+.form-floating2 > .form-control:not(:-moz-placeholder-shown) {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+.form-floating2 > .form-control:focus, .form-floating2 > .form-control:not(:placeholder-shown) {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+.form-floating2 > .form-control:-webkit-autofill {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+.form-floating2 > .form-select {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+.form-floating2 > .form-control:not(:-moz-placeholder-shown) ~ label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+.form-floating2 > .form-control:focus ~ label,
+.form-floating2 > .form-control:not(:placeholder-shown) ~ label,
+.form-floating2 > .form-select ~ label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+.form-floating2 > .form-control:-webkit-autofill ~ label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+  
+.width-100 {
+    width: 100%;
+}
+
+.width-70 {
+    width: 70%;
+}
+
+.login-btn {
+    -moz-user-select: none;
+    user-select: none;
+    background: #f04336 none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1;
+    margin-bottom: 0;
+    padding: 17px 25px;
+    text-align: center;
+    text-transform: capitalize;
+    touch-action: manipulation;
+    transition: all 0.3s ease 0s;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-family: 'Nunito', sans-serif;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+.login-btn::before {
+    content: "";
+    position: absolute;
+    -webkit-transition-duration: 800ms;
+    transition-duration: 800ms;
+    width: 200%;
+    height: 200%;
+    top: 110%;
+    left: 50%;
+    background: #0a303a;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z-index: -1;
+}
+.login-btn:hover:before {
+    top: -40%;
+}
+.login-btn:hover {
+	color: #fff;
+}
+.login-btn img {
+	max-width: 20px;
+	margin-left: 10px;
+}
+.align-center2 {
+    width: 50vw;
+    margin-left: 25vw;
+}
+
+.heart {
+    font-size: 12px;
+    color:red;
+    padding-left: 20px;
+    background: #ffffff;
+    border: hidden;
+    font-size: 230%;
+}
+
+.padding-bottom-15px {
+    padding-bottom: 15px;
+}
 
 
 

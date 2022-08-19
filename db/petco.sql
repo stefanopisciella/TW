@@ -19,14 +19,14 @@ create table categoria (
 # 1) tabella cane
 create table cane (
     ID smallint primary key auto_increment,
-    nome varchar(50) not null,
+    nome varchar(50) not null unique,
     sesso enum('M', 'F') not null,
     eta smallint not null,
     razza varchar(50) not null,
     ID_razza smallint not null,
     taglia enum('piccola', 'media', 'grande') not null,
     presentazione text not null,
-    chip char(15) not null,
+    chip char(15) not null unique,
     # bit è utilizzato come booleano: se a 1, allora il cane è adottabile a distanza
     distanza bit not null,
     adottato bit not null,
@@ -41,12 +41,7 @@ create table utente (
     cognome varchar(50) not null,
     passwrd varchar(50) not null,
     email varchar(100) not null unique,
-    telefono char(10) not null,
-    regione varchar(30) not null,
-    provincia varchar(32) not null,
-    citta varchar(30) not null,
-    via varchar(30) not null,
-    civico tinyint not null
+    telefono char(10) not null
 );
 
 # 3) tabella ugroup
@@ -196,8 +191,25 @@ create table articolo_tag (
 INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
 INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori del sito web, non amministratori');
 
+# popolamento tabella utente
+INSERT INTO utente (ID, nickname, nome, cognome, passwrd, email, telefono) VALUES
+	(1, "stefano23", "Stefano", "Pisciella", md5(md5(md5(md5(md5("stefano"))))), "stefano@gmail.com", "3880581680"),
+    (2, "beatrice2", "Beatrice", "Tomassi", md5(md5(md5(md5(md5("beatrice"))))), "beatrice@gmail.com", "3880581681"),
+    (3, "nicola3", "Nicola", "Rossi", md5(md5(md5(md5(md5("nicola"))))), "nicola@gmail.com", "3880581680"),
+    (4, "admin", "admin", "admin", md5(md5(md5(md5(md5("admin"))))), "admin@mail.com", "xxxxxxxxx");
+
+# popolamento tabella user_has_ugroup
+INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES 
+    (4, 1),
+    (1, 2),
+    (2, 2),
+    (3, 2);
+
 # popolamento tabella categoria
 
 # popolamento tabella razza
 
-# popolamento tabella
+# GESTIONE UTENZA
+drop user if exists 'user'@'localhost';
+create user 'user'@'localhost' identified by '1234';
+grant all on petco.* to 'user'@'localhost';
