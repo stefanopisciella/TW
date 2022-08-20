@@ -4,7 +4,6 @@
 
         function dummy() {}
 
-        
         function notify($name, $data, $pars) {
 
             switch($data) {
@@ -35,23 +34,11 @@
 
         }
 
-        
         function show($name, $data, $pars) {
-            global $mysqli;
-            
-            
-            if(isset($mysqli) == true) {
-                $set = "è settato";
-            } else {
-                $set = "non è settato";
-            }
-
-            echo $set;
+            require "include/dbms.inc.php";
             
             $main = new Template("skins/slider-home.html");
 
-            
-            
             $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null and ID_articolo is null;");
 
             if (!$oid) {
@@ -61,18 +48,10 @@
             $data = $oid->fetch_all(MYSQLI_ASSOC);
 
             foreach($data as $slide) {
-                
-                /*
-                $template = new Template("skins/revision/dtml/slide_{$slide['type']}.html");
-                $template->setContent("title", $slide['title']);
-                $template->setContent("subtitle", $slide['subtitle']); */
-                
                 $main->setContent("path", $slide['path']);
             } 
             
-        
             return $main->get();
-
         }
 
         function report($name, $data, $pars) {
@@ -98,8 +77,5 @@
 
             return $report->get();
         }
-
-
     }
-
 ?>

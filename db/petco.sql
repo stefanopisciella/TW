@@ -77,8 +77,8 @@ create table articolo (
 # 6) tabella immagine
 create table immagine (
     ID smallint primary key auto_increment,
-    ID_cane smallint not null,
-    ID_articolo smallint not null,
+    ID_cane smallint,
+    ID_articolo smallint,
     `path` varchar(400) not null,
     # indice di visualizzazione dell'immagine
     indice smallint not null,
@@ -195,12 +195,12 @@ INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori 
 INSERT INTO utente (ID, nickname, nome, cognome, passwrd, email, telefono) VALUES
 	(1, "stefano23", "Stefano", "Pisciella", md5(md5(md5(md5(md5("stefano"))))), "stefano@gmail.com", "3880581680"),
     (2, "beatrice2", "Beatrice", "Tomassi", md5(md5(md5(md5(md5("beatrice"))))), "beatrice@gmail.com", "3880581681"),
-    (3, "nicola3", "Nicola", "Rossi", md5(md5(md5(md5(md5("nicola"))))), "nicola@gmail.com", "3880581680"),
-    (4, "admin", "admin", "admin", md5(md5(md5(md5(md5("admin"))))), "admin@mail.com", "xxxxxxxxx");
+    (3, "nicola3", "Nicola", "Rossi", md5(md5(md5(md5(md5("nicola"))))), "nicola@gmail.com", "3880581682"),
+    (4, "admin", "nome_admin", "cognome_admin", md5(md5(md5(md5(md5("admin"))))), "admin@mail.com", "3880581683");
 
 # popolamento tabella user_has_ugroup
 INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES 
-    (4, 1),
+   # (4, 1),
     (1, 2),
     (2, 2),
     (3, 2);
@@ -217,6 +217,12 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 # popolamento tabella categoria
 
 # popolamento tabella razza
+
+# popolamento tabella immagine
+INSERT INTO immagine(ID, ID_cane, ID_articolo, `path`, indice) VALUES
+	(1, null, null, "immagini/shiba.png", 1),
+	(2, null, null, "immagini/cane.jpg", 1);
+
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
