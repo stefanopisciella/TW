@@ -38,6 +38,7 @@
             
             $main = new Template("skins/slider-home.html");
 
+            // query per selezionare foto SLIDER HOME
             $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null and ID_articolo is null;");
 
             if (!$oid) {
@@ -46,9 +47,23 @@
 
             $data = $oid->fetch_all(MYSQLI_ASSOC);
 
-            foreach($data as $slide) {
-                $main->setContent("path", $slide['path']);
+            // query per selezionare titolo e sottotitolo
+            // lunghezza titolo 50 caratteri, sottotitolo 200
+            $oid = $mysqli->query("SELECT titolo, sottotitolo FROM slider_home;");
+
+            if (!$oid) {
+                echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
             } 
+
+            $titoli = $oid->fetch_all(MYSQLI_ASSOC);
+
+            // inserimento titoli, sottotitoli e immagini alle slides
+            // supponendo che il numero di immagini per lo slider = numero titoli/sottotitoli
+            for ($i = 0; $i < sizeof($data); $i++) {
+                $main->setContent("path", $data[$i]['path']);
+                $main->setContent("titolo", $titoli[$i]['titolo']);
+                $main->setContent("sottotitolo", $titoli[$i]['sottotitolo']);
+            }
             
             return $main->get();
         }

@@ -194,6 +194,12 @@ create table slider_home (
     sottotitolo varchar(200)
 );
 
+# popolamento tabella slider_home
+insert into slider_home(titolo, sottotitolo) values
+    ("titolo 1", "sottotitolo 1"),
+    ("titolo 2", "sottotitolo 2"),
+    ("titolo 3", "sottotitolo 3");
+
 # popolamento tabella ugroup
 INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
 INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori del sito web, non amministratori');
