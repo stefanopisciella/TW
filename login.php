@@ -31,13 +31,17 @@
                 $group_id = get_group($user_id);
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['group_id'] = $group_id;
-                
                 $nome_script = "admin/index";
                 if(user_group_check_script($user_id, $nome_script)) {
                     // client accede alla dashboard dell'admin
-                    header("Location: admin/home.php?");
+                    $_SESSION['admin'] = true;
+                    header("Location: admin/index.php?");
                 } else {
                     // client accede alla home non pubblica
+                    
+                    // il client C è un utente normale ==> a C viene revocata l'autorizzazione
+                    // di eseguire gli script della dashboard dedicata all'admin
+                    $_SESSION['admin'] = false;
                     header("Location: index.php?");
                 }
             } else {
