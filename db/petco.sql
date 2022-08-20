@@ -231,6 +231,15 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 # popolamento tabella categoria
 
 # popolamento tabella razza
+    
+# popolamento tabella cane
+INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
+	(1, "Birillo", "M", 2, "", "piccola", "", "04837264869", true, false),
+	(2, "Nerone", "M", 5, "Labrador retriver", "media", "", "04837264869478", false, false),
+	(3, "Ares", "M", 4, "", "grande", "", "048372648696778", false, false),
+	(4, "Aida", "F", 5, "", "piccola", "", "068372648694783", true, false),
+	(5, "Akira", "F", 6, "", "media", "", "048372649694783", false, false),
+	(6, "Dusky", "M", 5, "Carlino", "piccola", "", "048692648694783", false, false);
 
 # popolamento tabella immagine
 INSERT INTO immagine(ID, ID_cane, ID_articolo, `path`, indice) VALUES
@@ -251,16 +260,6 @@ INSERT INTO immagine(ID, ID_cane, ID_articolo, `path`, indice) VALUES
 	(12, 4, null, "immagini/10.jpg", 1),
 	(13, 5, null, "immagini/11.jpg", 1),
 	(14, 6, null, "immagini/12.jpg", 1);
-    
-# popolamento tabella cane
-INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
-	(1, "Birillo", "M", 2, "", "piccola", "", "04837264869", true, false),
-	(2, "Nerone", "M", 5, "Labrador retriver", "media", "", "04837264869478", false, false),
-	(3, "Ares", "M", 4, "", "grande", "", "048372648696778", false, false),
-	(4, "Aida", "F", 5, "", "piccola", "", "068372648694783", true, false),
-	(5, "Akira", "F", 6, "", "media", "", "048372649694783", false, false),
-	(6, "Dusky", "M", 5, "Carlino", "piccola", "", "048692648694783", false, false);
-
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
