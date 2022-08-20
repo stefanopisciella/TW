@@ -35,13 +35,24 @@
 
         }
 
+        
         function show($name, $data, $pars) {
-            global 
-                $mysqli;
+            global $mysqli;
             
-            $main = new Template("skins/revision/dtml/slider.html");
+            
+            if(isset($mysqli) == true) {
+                $set = "è settato";
+            } else {
+                $set = "non è settato";
+            }
 
-            $oid = $mysqli->query("SELECT * FROM slider");
+            echo $set;
+            
+            $main = new Template("skins/slider-home.html");
+
+            
+            
+            $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null and ID_articolo is null;");
 
             if (!$oid) {
                 echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
@@ -51,13 +62,15 @@
 
             foreach($data as $slide) {
                 
+                /*
                 $template = new Template("skins/revision/dtml/slide_{$slide['type']}.html");
                 $template->setContent("title", $slide['title']);
-                $template->setContent("subtitle", $slide['subtitle']);
-                $main->setContent("item", $template->get());
-
-            }
+                $template->setContent("subtitle", $slide['subtitle']); */
+                
+                $main->setContent("path", $slide['path']);
+            } 
             
+        
             return $main->get();
 
         }
