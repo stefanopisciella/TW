@@ -24,16 +24,43 @@
         } else {
             // cripta la password perché nel DB queste ultime non sono salvate in chiaro
             $password = md5(md5(md5(md5(md5($password)))));
-            $user_id = login_query($username, $password);
-            if(isset($user_id) && $user_id != -1) {
+            
+
+            $user_id = -1;
+            try {
+                $user_id = login_query($username, $password);
+            }
+            catch (Exception $e) {
+                // gestione errore
+            }
+
+            if(isset($user_id) && $user_id >= 1) {
                 // credenziali corrette
                 $_SESSION['user_id'] = $user_id;
-                // !
-                header("Location: index.php");
+                $group_id = get_group($user_id);
+                
+                // REMOVE
+                echo $group_id;
+               
+                $nome_script = "admin/index";
+                // verifica se lo script può essere eseguito da un utente non amministratore
+                if(user_group_check_script($nome_script) == false) {
+                    if($group_id == 1) {
+                        // caso in cui accede l'amministratore
+                        $_SESSION['admin'] = true;
+                        header("Location: admin/home.php?");
+                    } else {
+                        // caso in cui accede un utente non amministatore
+                        $_SESSION['admin'] = false;
+                        header("Location: index.php?");
+                    } 
+                }
             } else {
                 // credenziali non corrette
                 header("Location: login.php?wrong_credentials=2");
             }
+
+
         }
     } else {
         // caso in cui il client carica la pagina con il metodo GET
