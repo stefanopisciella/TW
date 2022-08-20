@@ -58,7 +58,7 @@
      * @param String $nome_script
      * @return boolean true se accedibile, false altrimenti
      */
-    function user_group_check_script(/*$id_utente, */$nome_script) {
+    function user_group_check_script($id_utente, $nome_script) {
 
         // estrapolo l'id del servizio associato al nome dello script cercato
         global $mysqli;
@@ -79,8 +79,11 @@
 
         $id_servizio = $rows[0]["ID"];
 
+        // dato l'id dell'utente, estraggo il gruppo a cui appartiene
+        $id_gruppo = get_group($id_utente);
+
         // verifico che l'utente che ne fa richiesta ($id_utente) abbia i permessi per lo script ($id_servizio) richiesto
-        $query = "SELECT COUNT(ID) AS count FROM ugroup_has_service WHERE ID_servizio='{$id_servizio}' AND ID_gruppo='2';";
+        $query = "SELECT COUNT(ID) AS count FROM ugroup_has_service WHERE ID_servizio='{$id_servizio}' AND ID_gruppo='{$id_gruppo}';";
 
         try {
             $oid = $mysqli->query($query);
