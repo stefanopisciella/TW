@@ -27,7 +27,6 @@
 
             }
 
-
             $result ="<div class=\"{$class}\"><button class=\"close\" data-dismiss=\"alert\"></button>{$msg}. </div>";
 
             return $result;
