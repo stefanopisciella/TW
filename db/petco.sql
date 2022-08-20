@@ -187,6 +187,13 @@ create table articolo_tag (
     constraint articolo_tag_tag foreign key (ID_tag) references tag(ID) on update cascade on delete no action
 );
 
+#20) tabella slider-home
+create table slider_home (
+    ID smallint primary key auto_increment,
+    titolo varchar(50),
+    sottotitolo varchar(200)
+);
+
 # popolamento tabella ugroup
 INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
 INSERT INTO ugroup(nome, descrizione) VALUES ('utente', 'gruppo utenti fruitori del sito web, non amministratori');
