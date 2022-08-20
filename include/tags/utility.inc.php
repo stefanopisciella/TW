@@ -35,37 +35,42 @@
 
         function show($name, $data, $pars) {
             require "include/dbms.inc.php";
-            
-            $main = new Template("skins/slider-home.html");
 
-            // query per selezionare foto SLIDER HOME
-            $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null and ID_articolo is null;");
+            if (strcmp($pars['location'], "sh") == 0) {
+                $main = new Template("skins/slider-home.html");
 
-            if (!$oid) {
-                echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
-            } 
+                // query per selezionare foto SLIDER HOME
+                $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null and ID_articolo is null;");
 
-            $data = $oid->fetch_all(MYSQLI_ASSOC);
+                if (!$oid) {
+                    echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
+                } 
 
-            // query per selezionare titolo e sottotitolo
-            // lunghezza titolo 50 caratteri, sottotitolo 200
-            $oid = $mysqli->query("SELECT titolo, sottotitolo FROM slider_home;");
+                $data = $oid->fetch_all(MYSQLI_ASSOC);
 
-            if (!$oid) {
-                echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
-            } 
+                // query per selezionare titolo e sottotitolo
+                // lunghezza titolo 50 caratteri, sottotitolo 200
+                $oid = $mysqli->query("SELECT titolo, sottotitolo FROM slider_home;");
 
-            $titoli = $oid->fetch_all(MYSQLI_ASSOC);
+                if (!$oid) {
+                    echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
+                } 
 
-            // inserimento titoli, sottotitoli e immagini alle slides
-            // supponendo che il numero di immagini per lo slider = numero titoli/sottotitoli
-            for ($i = 0; $i < sizeof($data); $i++) {
-                $main->setContent("path", $data[$i]['path']);
-                $main->setContent("titolo", $titoli[$i]['titolo']);
-                $main->setContent("sottotitolo", $titoli[$i]['sottotitolo']);
+                $titoli = $oid->fetch_all(MYSQLI_ASSOC);
+
+                // inserimento titoli, sottotitoli e immagini alle slides
+                // supponendo che il numero di immagini per lo slider = numero titoli/sottotitoli
+                for ($i = 0; $i < sizeof($data); $i++) {
+                    $main->setContent("path", $data[$i]['path']);
+                    $main->setContent("titolo", $titoli[$i]['titolo']);
+                    $main->setContent("sottotitolo", $titoli[$i]['sottotitolo']);
+                }
+                
+                return $main->get();
             }
             
-            return $main->get();
+            echo "niente";
+            
         }
 
         function report($name, $data, $pars) {
