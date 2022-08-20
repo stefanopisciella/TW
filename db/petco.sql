@@ -5,10 +5,11 @@ CREATE DATABASE IF NOT EXISTS petco;
 use petco;
 
 # 12) tabella razza
+/*
 create table razza (
     ID smallint primary key auto_increment,
     nome varchar(30)
-);
+); */
 
 # 13) tabella categoria
 create table categoria (
@@ -23,14 +24,14 @@ create table cane (
     sesso enum('M', 'F') not null,
     eta smallint not null,
     razza varchar(50) not null,
-    ID_razza smallint not null,
+    # ID_razza smallint not null,
     taglia enum('piccola', 'media', 'grande') not null,
     presentazione text not null,
     chip char(15) not null unique,
     # bit è utilizzato come booleano: se a 1, allora il cane è adottabile a distanza
     distanza bit not null,
-    adottato bit not null,
-    constraint articolo_razza foreign key (ID_razza) references razza(ID) on update cascade on delete cascade
+    adottato bit not null
+    # constraint articolo_razza foreign key (ID_razza) references razza(ID) on update cascade on delete cascade
 );
 
 # 2) tabella utente
@@ -220,8 +221,32 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 
 # popolamento tabella immagine
 INSERT INTO immagine(ID, ID_cane, ID_articolo, `path`, indice) VALUES
-	(1, null, null, "immagini/shiba.png", 1),
-	(2, null, null, "immagini/cane.jpg", 1);
+	# immagini per lo slider della home
+    (1, null, null, "immagini/shiba.png", 1),
+	(2, null, null, "immagini/cane.jpg", 1),
+	
+    (3, 1, null, "immagini/1.jpg", 1),
+	(4, 2, null, "immagini/2.jpg", 1),
+	(5, 3, null, "immagini/3.jpg", 1),
+	(6, 4, null, "immagini/4.jpg", 1),
+	(7, 5, null, "immagini/5.jpg", 1),
+	(8, 6, null, "immagini/6.jpg", 1),
+    
+	(9, 1, null, "immagini/7.jpg", 1),
+	(10, 2, null, "immagini/8.jpg", 1),
+	(11, 3, null, "immagini/9.jpg", 1),
+	(12, 4, null, "immagini/10.jpg", 1),
+	(13, 5, null, "immagini/11.jpg", 1),
+	(14, 6, null, "immagini/12.jpg", 1);
+    
+# popolamento tabella cane
+INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
+	(1, "Birillo", "M", 2, "", "piccola", "", "04837264869", true, false),
+	(2, "Nerone", "M", 5, "Labrador retriver", "media", "", "04837264869478", false, false),
+	(3, "Ares", "M", 4, "", "grande", "", "048372648696778", false, false),
+	(4, "Aida", "F", 5, "", "piccola", "", "068372648694783", true, false),
+	(5, "Akira", "F", 6, "", "media", "", "048372649694783", false, false),
+	(6, "Dusky", "M", 5, "Carlino", "piccola", "", "048692648694783", false, false);
 
 
 # GESTIONE UTENZA
