@@ -4323,7 +4323,7 @@ label {
     padding-left: 20px;
     background: #ffffff;
     border: hidden;
-    font-size: 230%;
+    font-size: 150%;
 }
 
 .padding-bottom-15px {
@@ -4332,6 +4332,10 @@ label {
 
 .padding-top-20px {
     padding-top: 20px;
+}
+
+.table {
+    color: #F5F2EB;
 }
 
 
