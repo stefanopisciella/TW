@@ -64,14 +64,14 @@ create table articolo (
     ID smallint primary key auto_increment,
     ID_utente smallint,
     # default 1 indica la categoria 'senza categoria'
-    ID_categoria smallint default 1,
+    # ID_categoria smallint default 1,
     titolo varchar(100) not null,
     contenuto text not null,
     autore varchar(100) not null,
     `data` date not null,
     categoria varchar(30) not null,
-    constraint articolo_utente foreign key (ID_utente) references utente(ID) on update cascade on delete set null,
-    constraint articolo_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete set NULL
+    constraint articolo_utente foreign key (ID_utente) references utente(ID) on update cascade on delete set null#,
+    #constraint articolo_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete set NULL
     # NOTA: se una categoria viene eliminata, va cambiato il nome della categoria in 'no categoria'
 );
 
@@ -248,6 +248,12 @@ INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, dista
 	(5, "Chica", "F", 6, "Border Collie", "media", "", "048372649694783", false, false),
 	(6, "Olimpia", "F", 5, "Pitbull", "piccola", "", "048692648694783", false, false);
 
+# inserimento articoli prova
+INSERT INTO articolo(ID_utente, titolo, contenuto, autore, `data`, categoria) VALUES
+    (4, "VACCINI", "Questo è l'articolo 1 di prova. Si parlerà di cose varie e si torverà nella categoria 'Salute&Benessere' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-06-12", "Salute&Benessere"),
+    (1, "LA STORIA DI STE E ALBERT", "Questo è l'articolo 2 di prova. Si parlerà di cose varie e si torverà nella categoria 'Le Vostre Storie' e racconta la storia dell'adozione del cane Albert da parte di Stefano. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Stefano Pisciella", "2022-07-01", "Storie a lieto fine"),
+    (4, "FERIE ESTIVE", "Questo è l'articolo 3 di prova. Si parlerà di cose varie e si torverà nella categoria 'News' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-08-08", "News");
+
 # popolamento tabella immagine
 INSERT INTO immagine(ID_cane, ID_articolo, `path`, indice) VALUES
 
@@ -255,6 +261,11 @@ INSERT INTO immagine(ID_cane, ID_articolo, `path`, indice) VALUES
     (null, null, "immagini/slider_home_1_1.jpg", 1),
 	(null, null, "immagini/slider_home_2_2.jpg", 1),
     (null, null, "immagini/slider_home_3.jpg", 1),
+
+    # immagini per gli articoli
+    (null, 1, "immagini/articolo_1.jpg", 1),
+    (null, 2, "immagini/articolo_2.jpg", 1),
+    (null, 3, "immagini/articolo_3.jpg", 1),
 	
     #immagini cani
 
