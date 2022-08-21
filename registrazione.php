@@ -1,23 +1,6 @@
 <?php
     require "frame-public.php";
     require 'include/utils_dbms.php';
-     
-    /*
-    session_start();
-    // unset dei dati di sessione
-    $_SESSION = array();
-    // si distrugge la sessione per evitare che siano attive più di una sessione 
-    // associata ad un singolo client, cosa che può succedere se il client decide
-    // di registrarsi da loggato
-    session_destroy(); */
-    
-    /*
-    if (isset($_SESSION['user_id'])) {
-        $id = $_SESSION['user_id'];
-        echo $id;
-    } else {
-        echo "porcodio";
-    } */
    
     // non è possibile effettuare la registrazione se non si effettua prima il logout
     session_start();

@@ -1,13 +1,15 @@
 <?php
     require "include/template2.inc.php";
     require 'include/utils_dbms.php';
+    require "include/dbms_ops.php";
 
     session_start();
-    if ((isset($_SESSION['admin']) && $_SESSION['admin'] == false) ||
-        !isset($_SESSION['user_id'])) {
-        // caso in cui il client non è loggato oppure è loggato ma non risulta essere l'admin
+    $nome_script = "admin/faq";
+    if(!isset($_SESSION['user_id']) ||
+       user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
+    {
         echo "Unauthorized";
-        exit;
+        exit;   
     }
 
     $page = new Template("skins/faq.html");
@@ -23,18 +25,20 @@
         if (!isset($domanda) || 
             !isset($risposta) ||
             strlen(trim($domanda)) == 0 ||
-            strlen(trim($risposta) == 0)
-        ){
+            strlen(trim($risposta)) == 0)
+        {
             // faq non valida
             header("Location: faq.php?empty_faq=1");
+            exit;
         } else {
             $t_domanda = trim($domanda);
             $t_risposta = trim($risposta);
             // controlla il numero di caratteri della domanda e della risposta:
             if(strlen($t_domanda) > $max_char_domanda ||
-               strlen($t_risposta) > $max_char_risposta
-            ){
+               strlen($t_risposta) > $max_char_risposta)
+            {
                 header("Location: faq.php?out_of_limit=1");
+                exit;
             }
 
             $faq = ["'".$t_domanda."'", "'".$t_risposta."'"];
@@ -42,6 +46,7 @@
             try {
                 insert_query('faq', $faq);
                 header("Location: faq.php?");
+                exit;
             } catch (Exception $e){
                 // ...
             }
