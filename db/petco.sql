@@ -198,8 +198,8 @@ create table slider_home (
 # popolamento tabella slider_home
 insert into slider_home(titolo, sottotitolo) values
     ("Migliori amici per la zampa.", "La tua nuova dose giornaliera di serotonina. <br> Trova il tuo futuro amico a quattro zampe!"),
-    ("Adozioni!", "Adotta un cane, anche a distanza! Visita la sezione del sito dedicata!"),
-    ("titolo 3", "sottotitolo 3");
+    ("Adozioni!", "Adotta un cane, anche a distanza! <br> Visita la sezione del sito dedicata!"),
+    ("Informati bene!", "Prima di andar via, dai un'occhiata al blog! :)");
 
 # popolamento tabella ugroup
 INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
@@ -249,37 +249,38 @@ INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, dista
 	(6, "Olimpia", "F", 5, "Pitbull", "piccola", "", "048692648694783", false, false);
 
 # popolamento tabella immagine
-INSERT INTO immagine(ID, ID_cane, ID_articolo, `path`, indice) VALUES
+INSERT INTO immagine(ID_cane, ID_articolo, `path`, indice) VALUES
 
 	# immagini per lo slider della home
-    (1, null, null, "immagini/slider_home_1_1.jpg", 1),
-	(2, null, null, "immagini/slider_home_2_2.jpg", 1),
+    (null, null, "immagini/slider_home_1_1.jpg", 1),
+	(null, null, "immagini/slider_home_2_2.jpg", 1),
+    (null, null, "immagini/slider_home_3.jpg", 1),
 	
     #immagini cani
 
     # cane 1
-    (3, 1, null, "immagini/bulldog_inglese_1_1.jpg", 1),
-    (9, 1, null, "immagini/immagini/bulldog_inglese_1_1.jpg", 1),
+    (1, null, "immagini/bulldog_inglese_1_1.jpg", 1),
+    (1, null, "immagini/immagini/bulldog_inglese_1_1.jpg", 1),
 
     #cane 2
 
-	(4, 2, null, "immagini/meticcio_2_1.jpeg", 1),
-    (10, 2, null, "immagini/meticcio_2_2.jpeg", 1),
+	(2, null, "immagini/meticcio_2_1.jpeg", 1),
+    (2, null, "immagini/meticcio_2_2.jpeg", 1),
 
     # cane 3
-	(5, 3, null, "immagini/meticcio_3_1.jpg", 1),
-    (11, 3, null, "immagini/meticcio_3_2.jpg", 1),
+	(3, null, "immagini/meticcio_3_1.jpg", 1),
+    (3, null, "immagini/meticcio_3_2.jpg", 1),
 
     # cane 4
-	(6, 4, null, "immagini/meticcio_4_1.jpeg", 1),
-    (12, 4, null, "immagini/meticcio_4_2.jpeg", 1),
+	(4, null, "immagini/meticcio_4_1.jpeg", 1),
+    (4, null, "immagini/meticcio_4_2.jpeg", 1),
 
     # cane 5
-	(7, 5, null, "immagini/border_collie_5_1.jpeg", 1),
+	(5, null, "immagini/border_collie_5_1.jpeg", 1),
 
     # cane 6
-	(8, 6, null, "immagini/pitbull_6_1.jpeg", 1),
-	(14, 6, null, "immagini/pitbull_6_2.jpeg", 1);
+	(6, null, "immagini/pitbull_6_1.jpeg", 1),
+	(6, null, "immagini/pitbull_6_2.jpeg", 1);
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
