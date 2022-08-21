@@ -198,7 +198,7 @@ create table slider_home (
 # popolamento tabella slider_home
 insert into slider_home(titolo, sottotitolo) values
     ("Migliori amici per la zampa.", "La tua nuova dose giornaliera di serotonina. <br> Trova il tuo futuro amico a quattro zampe!"),
-    ("Adozioni!", "Adotta un cane, anche a distanza! Visita le sezioni del sito dedicate!"),
+    ("Adozioni!", "Adotta un cane, anche a distanza! Visita la sezione del sito dedicata!"),
     ("titolo 3", "sottotitolo 3");
 
 # popolamento tabella ugroup
