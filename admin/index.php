@@ -1,13 +1,16 @@
 <?php
-    require "include/template2.inc.php";
+    require "include/template2.inc.php"; 
+    require "include/dbms_ops.php";
 
     session_start();
-    if ((isset($_SESSION['admin']) && $_SESSION['admin'] == false) ||
-        !isset($_SESSION['user_id'])) {
-        // caso in cui il client non è loggato oppure è loggato ma non risulta essere l'admin
+    $nome_script = "admin/index";
+    if(!isset($_SESSION['user_id']) ||
+       user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
+    {
         echo "Unauthorized";
-    } else {
-        $main = new Template("skins/index.html");
-        $main->close();   
-    }  
+        exit;   
+    }
+
+    $main = new Template("skins/index.html");
+    $main->close(); 
 ?>
