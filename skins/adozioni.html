@@ -45,42 +45,45 @@
                                     <form action="#" class="sidebar-find-pets">
                                         <div class="row">
                                             <div class="col-6">
+                                                <label for="sesso">sesso</label>
                                                 <div class="form-grp">
-                                                    <i class="flaticon-sex"></i>
+                                                    <i class="flaticon-sex" id="sesso"></i>
                                                     <select name="name" class="selected">
-                                                        <option value="">Sesso</option>
+                                                        <option value="">-</option>
                                                         <option value="">Femmina</option>
                                                         <option value="">Maschio</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-6">
+                                                <label for="razza">razza</label>
                                                 <div class="form-grp">
-                                                    <i class="flaticon-color-palette"></i>
+                                                    <i class="flaticon-color-palette" id="razza"></i>
                                                     <select name="name" class="selected">
-                                                        <option value="">Razza</option>
-                                                        <option value="">Incrocio</option>
-                                                        <option value="">Labrador</option>
-                                                        <option value="">Husky</option>
+                                                        <option value="">-</option>
+                                                        <!-- RAZZE POPOLATE DINAMICAMENTE -->
+                                                        <[opzioni_razza]>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-6">
+                                                <label for="taglia">taglia</label>
                                                 <div class="form-grp">
-                                                    <i class="flaticon-sex"></i>
+                                                    <i class="flaticon-sex" id="taglia"></i>
                                                     <select name="name" class="selected">
-                                                        <option value="">Taglia</option>
-                                                        <option value="">Taglia Piccola</option>
-                                                        <option value="">Taglia Media</option>
-                                                        <option value="">Taglia Grande</option>
+                                                        <option value="-">-</option>
+                                                        <option value="Piccola">Piccola</option>
+                                                        <option value="Media">Media</option>
+                                                        <option value="Grande">Grande</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-6">
+                                                <label for="eta">età</label>
                                                 <div class="form-grp">
-                                                    <i class="flaticon-plus-18-movie"></i>
+                                                    <i class="flaticon-plus-18-movie" id="eta"></i>
                                                     <select name="name" class="selected">
-                                                        <option value="">Età</option>
+                                                        <option value="">-</option>
                                                         <option value="">6 Mesi</option>
                                                         <option value="">9 Mesi</option>
                                                         <option value="">1 Anno</option>
@@ -97,6 +100,7 @@
                     </div>
                 </section>
                 <div class="row justify-content-center">
+                    <[cani]>
                     <!-- INIZIO PARTE DA COMPONENTIZZARE. Prendete da qua a riga 129 e ripetetelo al massimo 12 volte -->
                     <div class="col-lg-4 col-md-6">
                         <div class="adoption-shop-item"> 

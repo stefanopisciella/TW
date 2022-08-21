@@ -5,11 +5,11 @@ CREATE DATABASE IF NOT EXISTS petco;
 use petco;
 
 # 12) tabella razza
-/*
+
 create table razza (
     ID smallint primary key auto_increment,
     nome varchar(30)
-); */
+);
 
 # 13) tabella categoria
 create table categoria (
@@ -231,14 +231,18 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 # popolamento tabella categoria
 
 # popolamento tabella razza
+INSERT INTO razza(nome) VALUES 
+    ("Incrocio"),
+    ("Labrador Retriever"),
+    ("Carlino");
     
 # popolamento tabella cane
 INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
-	(1, "Birillo", "M", 2, "", "piccola", "", "04837264869", true, false),
+	(1, "Birillo", "M", 2, "Incrocio", "piccola", "", "04837264869", true, false),
 	(2, "Nerone", "M", 5, "Labrador retriver", "media", "", "04837264869478", false, false),
-	(3, "Ares", "M", 4, "", "grande", "", "048372648696778", false, false),
-	(4, "Aida", "F", 5, "", "piccola", "", "068372648694783", true, false),
-	(5, "Akira", "F", 6, "", "media", "", "048372649694783", false, false),
+	(3, "Ares", "M", 4, "Incrocio", "grande", "", "048372648696778", false, false),
+	(4, "Aida", "F", 5, "Incrocio", "piccola", "", "068372648694783", true, false),
+	(5, "Akira", "F", 6, "Incrocio", "media", "", "048372649694783", false, false),
 	(6, "Dusky", "M", 5, "Carlino", "piccola", "", "048692648694783", false, false);
 
 # popolamento tabella immagine
