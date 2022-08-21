@@ -221,13 +221,15 @@ INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES
 
 # popolamento tabella service
 INSERT INTO `service`(ID, script, descrizione) VALUES
-	(1, "admin/index", "home della dashboard dedicata all'Admin"); 
+	(1, "admin/index", "home della dashboard dedicata all'Admin"),
+	(2, "admin/faq", "gestisce l'inserimento delle faq"); 
+
     
 # popolamento tabella ugroup_has_service 
 INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
-	(1, 1, 1);
-
-
+	(1, 1, 1),
+    (2, 2, 1);
+    
 # popolamento tabella categoria
 
 # popolamento tabella razza

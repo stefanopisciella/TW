@@ -4,6 +4,7 @@
 
         function dummy() {}
 
+        
         function notify($name, $data, $pars) {
 
             switch($data) {
@@ -27,6 +28,7 @@
 
             }
 
+
             $result ="<div class=\"{$class}\"><button class=\"close\" data-dismiss=\"alert\"></button>{$msg}. </div>";
 
             return $result;
@@ -34,43 +36,30 @@
         }
 
         function show($name, $data, $pars) {
-            require "include/dbms.inc.php";
+            global 
+                $mysqli;
+            
+            $main = new Template("skins/revision/dtml/slider.html");
 
-            if (strcmp($pars['location'], "sh") == 0) {
-                $main = new Template("skins/slider-home.html");
+            $oid = $mysqli->query("SELECT * FROM slider");
 
-                // query per selezionare foto SLIDER HOME
-                $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null and ID_articolo is null;");
+            if (!$oid) {
+                echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
+            } 
 
-                if (!$oid) {
-                    echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
-                } 
+            $data = $oid->fetch_all(MYSQLI_ASSOC);
 
-                $data = $oid->fetch_all(MYSQLI_ASSOC);
-
-                // query per selezionare titolo e sottotitolo
-                // lunghezza titolo 50 caratteri, sottotitolo 200
-                $oid = $mysqli->query("SELECT titolo, sottotitolo FROM slider_home;");
-
-                if (!$oid) {
-                    echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
-                } 
-
-                $titoli = $oid->fetch_all(MYSQLI_ASSOC);
-
-                // inserimento titoli, sottotitoli e immagini alle slides
-                // supponendo che il numero di immagini per lo slider = numero titoli/sottotitoli
-                for ($i = 0; $i < sizeof($data); $i++) {
-                    $main->setContent("path", $data[$i]['path']);
-                    $main->setContent("titolo", $titoli[$i]['titolo']);
-                    $main->setContent("sottotitolo", $titoli[$i]['sottotitolo']);
-                }
+            foreach($data as $slide) {
                 
-                return $main->get();
+                $template = new Template("skins/revision/dtml/slide_{$slide['type']}.html");
+                $template->setContent("title", $slide['title']);
+                $template->setContent("subtitle", $slide['subtitle']);
+                $main->setContent("item", $template->get());
+
             }
             
-            echo "niente";
-            
+            return $main->get();
+
         }
 
         function report($name, $data, $pars) {
@@ -96,5 +85,8 @@
 
             return $report->get();
         }
+
+
     }
+
 ?>
