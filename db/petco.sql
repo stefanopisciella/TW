@@ -197,8 +197,8 @@ create table slider_home (
 
 # popolamento tabella slider_home
 insert into slider_home(titolo, sottotitolo) values
-    ("titolo 1", "sottotitolo 1"),
-    ("titolo 2", "sottotitolo 2"),
+    ("Migliori amici per la zampa.", "La tua nuova dose giornaliera di serotonina. <br> Trova il tuo futuro amico a quattro zampe!"),
+    ("Adozioni!", "Adotta un cane, anche a distanza! Visita le sezioni del sito dedicate!"),
     ("titolo 3", "sottotitolo 3");
 
 # popolamento tabella ugroup
@@ -234,38 +234,52 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 
 # popolamento tabella razza
 INSERT INTO razza(nome) VALUES 
-    ("Incrocio"),
-    ("Labrador Retriever"),
-    ("Carlino");
+    ("Meticcio"),
+    ("Bulldog Inglese"),
+    ("Pitbull"),
+    ("Border Collie");
     
 # popolamento tabella cane
 INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
-	(1, "Birillo", "M", 2, "Incrocio", "piccola", "", "04837264869", true, false),
-	(2, "Nerone", "M", 5, "Labrador retriver", "media", "", "04837264869478", false, false),
-	(3, "Ares", "M", 4, "Incrocio", "grande", "", "048372648696778", false, false),
-	(4, "Aida", "F", 5, "Incrocio", "piccola", "", "068372648694783", true, false),
-	(5, "Akira", "F", 6, "Incrocio", "media", "", "048372649694783", false, false),
-	(6, "Dusky", "M", 5, "Carlino", "piccola", "", "048692648694783", false, false);
+	(1, "Mafalda", "F", 2, "Bulldog Inglese", "piccola", "", "04837264869", true, false),
+	(2, "Clica", "F", 5, "Meticcio", "media", "", "04837264869478", false, false),
+	(3, "Miriam", "F", 4, "Meticcio", "grande", "", "048372648696778", false, false),
+	(4, "Ettore", "M", 5, "Meticcio", "piccola", "", "068372648694783", true, false),
+	(5, "Chica", "F", 6, "Border Collie", "media", "", "048372649694783", false, false),
+	(6, "Olimpia", "F", 5, "Pitbull", "piccola", "", "048692648694783", false, false);
 
 # popolamento tabella immagine
 INSERT INTO immagine(ID, ID_cane, ID_articolo, `path`, indice) VALUES
+
 	# immagini per lo slider della home
-    (1, null, null, "immagini/shiba.png", 1),
-	(2, null, null, "immagini/cane.jpg", 1),
+    (1, null, null, "immagini/slider_home_1_1.jpg", 1),
+	(2, null, null, "immagini/slider_home_2_2.jpg", 1),
 	
-    (3, 1, null, "immagini/1.jpg", 1),
-	(4, 2, null, "immagini/2.jpg", 1),
-	(5, 3, null, "immagini/3.jpg", 1),
-	(6, 4, null, "immagini/4.jpg", 1),
-	(7, 5, null, "immagini/5.jpg", 1),
-	(8, 6, null, "immagini/6.jpg", 1),
-    
-	(9, 1, null, "immagini/7.jpg", 1),
-	(10, 2, null, "immagini/8.jpg", 1),
-	(11, 3, null, "immagini/9.jpg", 1),
-	(12, 4, null, "immagini/10.jpg", 1),
-	(13, 5, null, "immagini/11.jpg", 1),
-	(14, 6, null, "immagini/12.jpg", 1);
+    #immagini cani
+
+    # cane 1
+    (3, 1, null, "immagini/bulldog_inglese_1_1.jpg", 1),
+    (9, 1, null, "immagini/immagini/bulldog_inglese_1_1.jpg", 1),
+
+    #cane 2
+
+	(4, 2, null, "immagini/meticcio_2_1.jpeg", 1),
+    (10, 2, null, "immagini/meticcio_2_2.jpeg", 1),
+
+    # cane 3
+	(5, 3, null, "immagini/meticcio_3_1.jpg", 1),
+    (11, 3, null, "immagini/meticcio_3_2.jpg", 1),
+
+    # cane 4
+	(6, 4, null, "immagini/meticcio_4_1.jpeg", 1),
+    (12, 4, null, "immagini/meticcio_4_2.jpeg", 1),
+
+    # cane 5
+	(7, 5, null, "immagini/border_collie_5_1.jpeg", 1),
+
+    # cane 6
+	(8, 6, null, "immagini/pitbull_6_1.jpeg", 1),
+	(14, 6, null, "immagini/pitbull_6_2.jpeg", 1);
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
