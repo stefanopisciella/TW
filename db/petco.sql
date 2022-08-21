@@ -214,7 +214,7 @@ INSERT INTO utente (ID, nickname, nome, cognome, passwrd, email, telefono) VALUE
 
 # popolamento tabella user_has_ugroup
 INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES 
-   # (4, 1),
+    (4, 1),
     (1, 2),
     (2, 2),
     (3, 2);
