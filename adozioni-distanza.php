@@ -3,9 +3,9 @@
     require "include/dbms.inc.php";
 
     $head = new Template("skins/frame-public.html");
-    $blog = new Template("skins/blog.html");
+    $adozioni_distanza = new Template("skins/adozioni-a-distanza.html");
 
-    $head->setContent("contenuto", $blog->get());
+    $head->setContent("contenuto", $adozioni_distanza->get());
     
     $head->close();
 ?>
