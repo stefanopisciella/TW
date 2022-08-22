@@ -1040,7 +1040,7 @@ label {
 .slider-content .title {
     font-size: 70px;
     line-height: 1;
-    color: #0a303a;
+    color: #fff;
     margin-bottom: 0;
     letter-spacing: -.9px;
 }
@@ -1060,7 +1060,7 @@ label {
 }
 .slider-content .desc {
     font-size: 18px;
-    color: #0a303a;
+    color: #fff;
     line-height: 30px;
     margin-bottom: 0;
     font-family: 'Nunito', sans-serif;
@@ -1954,7 +1954,7 @@ label {
     z-index: 1;
 }
 .faq-two-img {
-    background-image: url(../img/images/s_faq_img.jpg);
+    background-image: url(../immagini/donazione.jpg);
     background-position: center;
     background-size: cover;
     position: absolute;

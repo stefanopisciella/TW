@@ -36,6 +36,7 @@
         function show($name, $data, $pars) {
             require "include/dbms.inc.php";
 
+            // caso 1: vengono richieste le immaigni per lo slider in home (sh)
             if (strcmp($pars['location'], "sh") == 0) {
                 $main = new Template("skins/slider-home.html");
 
@@ -68,8 +69,28 @@
                 
                 return $main->get();
             }
+
+            // caso 2: vengono richieste le immaigni per lo slider nel dettaglio cane (sc)
             
-            echo "niente";
+            if (strcmp($pars['location'], "sc") == 0) {
+                $main = new Template("skins/slider-foto-cane.html");
+
+                $id_cane = $_GET['id'];
+                // query per selezionare foto SLIDER HOME
+                $oid = $mysqli->query("SELECT `path` AS img FROM immagine WHERE ID_cane = '{$id_cane}' ORDER BY RAND();");
+
+                if (!$oid) {
+                    echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
+                }
+
+                while($row = mysqli_fetch_array($oid)) {
+                    $main->setContent("path_immagine", $row['img']);
+                }
+                
+                return $main->get();
+            }
+
+            return null;
             
         }
 

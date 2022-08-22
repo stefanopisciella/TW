@@ -1,0 +1,122 @@
+<!-- main-area -->
+<main>
+
+    <!-- start dettaglio cane -->
+    <section class="breeder-details-area">
+        <div class="container">
+            <div class="row" style="align-items: center;">
+                <div class="breeder-details-content" style="margin-left: 100px; margin-right: 100px;">
+                    <h4 class="title">Nome</h4>
+                    <p>The domestic dog is a doiated dendant of the wolf. The dog t is derived from an ancient, extinct wolf, and the modern grey wolf is the dog's nesdarest living relative. The dog was the first species to be domesticated, by
+                    hunter–gateiherers. These will include the core vaccines, which are in a series of three: at 6-, 12-, and 16 weeks old.</p>
+                    <p>The dog was the first species to be domesticated, by hunter–gateiherers. These will include and the modern grey wolf is the dog's.</p>
+                    <div class="breeder-details-img">
+                        <div class="col-lg-6 order-0 order-lg-2">
+                            <div class="breeder-gallery-active">
+                                <div class="breeder-gallery-item">
+                                    <img src="img/images/breeder_gallery01.jpg" alt="">
+                                </div>
+                                <div class="breeder-gallery-item">
+                                    <img src="img/images/breeder_gallery02.jpg" alt="">
+                                </div>
+                                <div class="breeder-gallery-item">
+                                    <img src="img/images/breeder_gallery03.jpg" alt="">
+                                </div>
+                                <div class="breeder-gallery-item">
+                                    <img src="img/images/breeder_gallery04.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="breeder-dog-info">
+                        <h5 class="title">Informazioni</h5>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="breeder-info-item">
+                                    <h6>Sesso:</h6>
+                                    <span>Male</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="breeder-info-item">
+                                    <h6>Età:</h6>
+                                    <span>1 year</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="breeder-info-item">
+                                    <h6>Razza:</h6>
+                                    <span>White</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="breeder-info-item">
+                                    <h6>Taglia:</h6>
+                                    <span>09481</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>                       
+                            <a class="btn" id="adotta">Adotta a distanza <img src="img/icon/w_pawprint.png" alt=""></a>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end dettaglio cane -->
+
+    <!-- start procedi alla donazione -->
+    <section class="related-products-wrap" style="padding-top: 50px; padding-bottom: 50px; margin-left: 500px; margin-right: 500px;">
+        <div class="container" id="next-step">
+            <form action="#" class="sidebar-find-pets">
+                <h3 for="importo" style="text-align: center;">Importo da donare e cadenza:</h3>
+                    <div class="row" style="margin-top: 25px;">
+                        <div class="col-6" style="align-items: center;">
+                            <div class="form-grp">
+                                <select name="importo" id="importo" class="selected">
+                                    <option value="10">10€</option>
+                                    <option value="20">20€</option>
+                                    <option value="50">50€</option>
+                                    <option value="100">100€</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-grp">
+                                <select name="cadenza" id="tempo" class="selected">
+                                    <option value="1">Ogni mese</option>
+                                    <option value="2">Ogni 2 mesi</option>
+                                    <option value="3">Ogni 3 mesi</option>
+                                    <option value="6">Ogni 6 mesi</option>
+                                </select>
+                            </div>
+                        </div>
+                    <a class="btn" id="paga" style="align-items: center; margin-top: 25px;">Prosegui con Paypal</a>
+                </form>
+            </form>
+        </div>
+    </section>
+    <!-- end procedi alla donazione-->
+
+</main>
+<!-- main-area-end -->
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#next-step").hide();  
+  });
+
+  $("#adotta").on("click", function(e){
+    e.preventDefault();
+    $("#next-step").show();    
+    window.location.hash = 'adotta';
+  });
+
+  $("#paga").on("click", function(e){
+    alert("Implementazione del pagamento");
+  
+  });
+
+</script>
