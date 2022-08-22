@@ -40,7 +40,7 @@
                 $main = new Template("skins/slider-home.html");
 
                 // query per selezionare foto SLIDER HOME
-                $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null and ID_articolo is null;");
+                $oid = $mysqli->query("SELECT `path` FROM immagine where ID_cane is null;");
 
                 if (!$oid) {
                     echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
