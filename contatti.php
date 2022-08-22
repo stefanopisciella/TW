@@ -97,6 +97,7 @@
             header("Location: contatti.php?");
         } catch (Exception $e){
             // echo $e;
+            
         }
     }
     $head->setContent("contenuto", $contatti->get());
