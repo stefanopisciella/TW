@@ -32,21 +32,23 @@
                             <h2 class="title">Facci le tue <span>domande</span>.</h2>
                         </div>
                         <div class="contact-wrap-content">
-                            <form action="#" class="contact-form">
+                            <form action="contatti.php" method="POST" class="contact-form">
                                 <div class="form-grp">
                                     <label for="name">Il tuo nome <span>*</span></label>
-                                    <input type="text" id="name">
+                                    <input name="name" type="text" value="<[nome]>" id="name" <[readonly]>>
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">La tua email <span>*</span></label>
-                                    <input type="text" id="email">
+                                    <input name="email" type="email" value="<[email]>" id="email" <[readonly]>>
                                 </div>
                                 <div class="form-grp">
                                     <label for="message">Il tuo messaggio <span>*</span></label>
                                     <textarea name="message" id="message"></textarea>
                                 </div>
-                                <h6 style="color: red">Riempire tutti i campi</h6>
+                                <h6 style="color: red"><[error]></h6>
+                                <button class="width-70 login-btn btn-lg ">Registrati<img src="img/icon/w_pawprint.png" alt=""></button>
                                 <button type="button" class="btn rounded-btn">Invia</button>
+
                             </form>
                         </div>
                     </div>
