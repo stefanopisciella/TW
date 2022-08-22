@@ -11,7 +11,7 @@
     // injection categorie
     $categorie = new Template("skins/categorie.html");
 
-    $query_categorie = "SELECT ID, nome FROM categoria;";
+    $query_categorie = "SELECT ID, nome FROM categoria WHERE tipo='articolo';";
 
     try {
         $oid = $mysqli->query($query_categorie);
@@ -31,7 +31,7 @@
     // injection 3 articoli pagina principale del blog
     $articoli_facciata = new Template("skins/articolo-facciata.html");
 
-    $id_categoria = $_GET['cat'];
+    //$id_categoria = $_GET['cat'];
     /*$parola_chiave = $_GET['keyword'];
 
     // RICERCA PER PAROLA CHIAVE
@@ -73,7 +73,9 @@
     }*/
 
     // CASO IN CUI VIENE SPECIFICATA UNA CATEGORIA (FILTRO ARTICOLI SU CATEGORIA)
-    if ($id_categoria != null) {
+    if (isset($_GET['cat'])) {
+
+        $id_categoria = $_GET['cat'];
 
         // estrazione informazioni 3 articoli da presentare
 

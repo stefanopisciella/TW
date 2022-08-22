@@ -14,6 +14,7 @@ create table razza (
 # 13) tabella categoria
 create table categoria (
     ID smallint primary key auto_increment,
+    tipo enum('articolo', 'faq') not null,
     nome varchar(50) not null
 );
 
@@ -108,7 +109,8 @@ create table tag (
 create table faq (
     ID smallint primary key auto_increment,
     domanda varchar(300) not null,
-    risposta text not null
+    risposta text not null,
+    categoria varchar(50)
 );
 
 # 10) tabella donazione
@@ -232,10 +234,20 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
     (2, 2, 1);
     
 # popolamento tabella categoria
-insert into categoria(nome) values
-    ("Salute&Benessere"),
-    ("Le Vostre Storie"),
-    ("News");
+insert into categoria(tipo, nome) values
+    ("articolo", "Salute&Benessere"),
+    ("articolo", "Le Vostre Storie"),
+    ("articolo", "News"),
+    ("faq", "Microchip"),
+    ("faq", "Benessere animale e salute"),
+    ("faq", "Donazioni");
+
+# popolamento faq
+insert into faq(domanda, risposta, categoria) values 
+    ("Domanda 1 per categoria 1 (Microchip)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Microchip"),
+    ("Domanda 2 per categoria 2 (Benessere animale e salute)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Benessere animale e salute"),
+    ("Domanda 3 per categoria 3 (Donazioni)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Donazioni"),
+    ("Domanda 2 per categoria 1 (Microchip)", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Microchip");
 
 # popolamento tabella razza
 INSERT INTO razza(nome) VALUES 
