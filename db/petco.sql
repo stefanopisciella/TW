@@ -356,6 +356,7 @@ INSERT INTO immagine(ID_cane, `path`, indice) VALUES
 	(6, "immagini/pitbull_6_1.jpeg", 1),
 	(6, "immagini/pitbull_6_2.jpeg", 1);
 
+
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
 create user 'user'@'localhost' identified by '1234';
