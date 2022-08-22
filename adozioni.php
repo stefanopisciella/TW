@@ -31,13 +31,15 @@
     // devo estarre le informazioni sui cani, considerando anche i filtri
 
     // prendo dall'html i filtri selezionati
-    $sesso = $_POST['sesso'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $sesso = $_POST['sesso'];
 
-    $taglia = $_POST['taglia'];
+        $taglia = $_POST['taglia'];
 
-    $razza = $_POST['razza'];
+        $razza = $_POST['razza'];
 
-    $eta = $_POST['eta'];
+        $eta = $_POST['eta'];
+    }
 
     // injection adozioni.html contenuto del frame-public
     $head->setContent("contenuto", $adozioni->get());
