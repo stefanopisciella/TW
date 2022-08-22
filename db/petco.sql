@@ -63,16 +63,15 @@ create table `service` (
 create table articolo (
     ID smallint primary key auto_increment,
     ID_utente smallint,
-    # default 1 indica la categoria 'senza categoria'
-    # ID_categoria smallint default 1,
+    ID_categoria smallint,
     titolo varchar(100) not null,
     contenuto text not null,
     autore varchar(100) not null,
     `data` date not null,
     categoria varchar(30) not null,
     `path` varchar(400) not null,
-    constraint articolo_utente foreign key (ID_utente) references utente(ID) on update cascade on delete set null#,
-    #constraint articolo_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete set NULL
+    constraint articolo_utente foreign key (ID_utente) references utente(ID) on update cascade on delete set null,
+    constraint articolo_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete set NULL
     # NOTA: se una categoria viene eliminata, va cambiato il nome della categoria in 'no categoria'
 );
 
@@ -233,6 +232,10 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
     (2, 2, 1);
     
 # popolamento tabella categoria
+insert into categoria(nome) values
+    ("Salute&Benessere"),
+    ("Le Vostre Storie"),
+    ("News");
 
 # popolamento tabella razza
 INSERT INTO razza(nome) VALUES 
@@ -274,12 +277,12 @@ Un rifugio, un canile non possono sostituirsi all’amore di una famiglia. Regal
 Un rifugio, un canile non possono sostituirsi all’amore di una famiglia. Regala la vera vita…adotta!", "048692648694783", false, false);
 
 # inserimento articoli prova
-INSERT INTO articolo(ID_utente, titolo, contenuto, autore, `data`, categoria, `path`) VALUES
-    (4, "VACCINI", "Questo è l'articolo 1 di prova. Si parlerà di cose varie e si torverà nella categoria 'Salute&Benessere' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-06-12", "Salute&Benessere", "immagini/articolo_1.jpg"),
-    (1, "LA STORIA DI STE E ALBERT", "Questo è l'articolo 2 di prova. Si parlerà di cose varie e si torverà nella categoria 'Le Vostre Storie' e racconta la storia dell'adozione del cane Albert da parte di Stefano. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Stefano Pisciella", "2022-07-01", "Le Vostre Storie", "immagini/articolo_2.jpg"),
-    (4, "FERIE ESTIVE", "Questo è l'articolo 3 di prova. Si parlerà di cose varie e si torverà nella categoria 'News' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-08-08", "News", "immagini/articolo_3.jpg"),
-    (4, "Aggiornamenti procedure affido", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-05-27", "News", "immagini/articolo_4.jpg"),
-    (4, "Aggiornamento norme di comportamento COVID-19", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-04-10", "News", "immagini/articolo_5.jpg");
+INSERT INTO articolo(ID_utente, ID_categoria, titolo, contenuto, autore, `data`, categoria, `path`) VALUES
+    (4, 1, "VACCINI", "Questo è l'articolo 1 di prova. Si parlerà di cose varie e si torverà nella categoria 'Salute&Benessere' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-06-12", "Salute&Benessere", "immagini/articolo_1.jpg"),
+    (1, 2, "LA STORIA DI STE E ALBERT", "Questo è l'articolo 2 di prova. Si parlerà di cose varie e si torverà nella categoria 'Le Vostre Storie' e racconta la storia dell'adozione del cane Albert da parte di Stefano. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Stefano Pisciella", "2022-07-01", "Le Vostre Storie", "immagini/articolo_2.jpg"),
+    (4, 3, "FERIE ESTIVE", "Questo è l'articolo 3 di prova. Si parlerà di cose varie e si torverà nella categoria 'News' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-08-08", "News", "immagini/articolo_3.jpg"),
+    (4, 3, "Aggiornamenti procedure affido", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-05-27", "News", "immagini/articolo_4.jpg"),
+    (4, 3, "Aggiornamento norme di comportamento COVID-19", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-04-10", "News", "immagini/articolo_5.jpg");
 
 # popolamento tabella tags
 insert into tag (nome) values 
