@@ -64,14 +64,15 @@ create table articolo (
     ID smallint primary key auto_increment,
     ID_utente smallint,
     # default 1 indica la categoria 'senza categoria'
-    ID_categoria smallint default 1,
+    # ID_categoria smallint default 1,
     titolo varchar(100) not null,
     contenuto text not null,
     autore varchar(100) not null,
     `data` date not null,
     categoria varchar(30) not null,
-    constraint articolo_utente foreign key (ID_utente) references utente(ID) on update cascade on delete set null,
-    constraint articolo_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete set NULL
+    `path` varchar(400) not null,
+    constraint articolo_utente foreign key (ID_utente) references utente(ID) on update cascade on delete set null#,
+    #constraint articolo_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete set NULL
     # NOTA: se una categoria viene eliminata, va cambiato il nome della categoria in 'no categoria'
 );
 
@@ -79,12 +80,10 @@ create table articolo (
 create table immagine (
     ID smallint primary key auto_increment,
     ID_cane smallint,
-    ID_articolo smallint,
     `path` varchar(400) not null,
     # indice di visualizzazione dell'immagine
     indice smallint not null,
-    constraint immagine_cane foreign key (ID_cane) references cane(ID) on update cascade on delete cascade,
-    constraint immagine_articolo foreign key (ID_articolo) references articolo(ID) on update cascade on delete cascade
+    constraint immagine_cane foreign key (ID_cane) references cane(ID) on update cascade on delete cascade
 );
 
 # 7) tabella richiesta_info
@@ -197,9 +196,9 @@ create table slider_home (
 
 # popolamento tabella slider_home
 insert into slider_home(titolo, sottotitolo) values
-    ("titolo 1", "sottotitolo 1"),
-    ("titolo 2", "sottotitolo 2"),
-    ("titolo 3", "sottotitolo 3");
+    ("Migliori amici per la zampa.", "La tua nuova dose giornaliera di serotonina. <br> Trova il tuo futuro amico a quattro zampe!"),
+    ("Adozioni!", "Adotta un cane, anche a distanza! <br> Visita la sezione del sito dedicata!"),
+    ("Informati bene!", "Prima di andar via, dai un'occhiata al blog! :)");
 
 # popolamento tabella ugroup
 INSERT INTO ugroup(nome, descrizione) VALUES ('admin', 'gruppo utente/i amministratori del sito web');
@@ -234,38 +233,59 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 
 # popolamento tabella razza
 INSERT INTO razza(nome) VALUES 
-    ("Incrocio"),
-    ("Labrador Retriever"),
-    ("Carlino");
+    ("Meticcio"),
+    ("Bulldog Inglese"),
+    ("Pitbull"),
+    ("Border Collie");
     
 # popolamento tabella cane
 INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
-	(1, "Birillo", "M", 2, "Incrocio", "piccola", "", "04837264869", true, false),
-	(2, "Nerone", "M", 5, "Labrador retriver", "media", "", "04837264869478", false, false),
-	(3, "Ares", "M", 4, "Incrocio", "grande", "", "048372648696778", false, false),
-	(4, "Aida", "F", 5, "Incrocio", "piccola", "", "068372648694783", true, false),
-	(5, "Akira", "F", 6, "Incrocio", "media", "", "048372649694783", false, false),
-	(6, "Dusky", "M", 5, "Carlino", "piccola", "", "048692648694783", false, false);
+	(1, "Mafalda", "F", 2, "Bulldog Inglese", "piccola", "", "04837264869", true, false),
+	(2, "Clica", "F", 5, "Meticcio", "media", "", "04837264869478", false, false),
+	(3, "Miriam", "F", 4, "Meticcio", "grande", "", "048372648696778", false, false),
+	(4, "Ettore", "M", 5, "Meticcio", "piccola", "", "068372648694783", true, false),
+	(5, "Chica", "F", 6, "Border Collie", "media", "", "048372649694783", false, false),
+	(6, "Olimpia", "F", 5, "Pitbull", "piccola", "", "048692648694783", false, false);
+
+# inserimento articoli prova
+INSERT INTO articolo(ID_utente, titolo, contenuto, autore, `data`, categoria, `path`) VALUES
+    (4, "VACCINI", "Questo è l'articolo 1 di prova. Si parlerà di cose varie e si torverà nella categoria 'Salute&Benessere' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-06-12", "Salute&Benessere", "immagini/articolo_1.jpg"),
+    (1, "LA STORIA DI STE E ALBERT", "Questo è l'articolo 2 di prova. Si parlerà di cose varie e si torverà nella categoria 'Le Vostre Storie' e racconta la storia dell'adozione del cane Albert da parte di Stefano. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Stefano Pisciella", "2022-07-01", "Le Vostre Storie", "immagini/articolo_2.jpg"),
+    (4, "FERIE ESTIVE", "Questo è l'articolo 3 di prova. Si parlerà di cose varie e si torverà nella categoria 'News' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-08-08", "News", "immagini/articolo_3.jpg");
 
 # popolamento tabella immagine
-INSERT INTO immagine(ID, ID_cane, ID_articolo, `path`, indice) VALUES
+INSERT INTO immagine(ID_cane, `path`, indice) VALUES
+
 	# immagini per lo slider della home
-    (1, null, null, "immagini/shiba.png", 1),
-	(2, null, null, "immagini/cane.jpg", 1),
+    (null, "immagini/slider_home_1_1.jpg", 1),
+	(null, "immagini/slider_home_2_2.jpg", 1),
+    (null, "immagini/slider_home_3.jpg", 1),
 	
-    (3, 1, null, "immagini/1.jpg", 1),
-	(4, 2, null, "immagini/2.jpg", 1),
-	(5, 3, null, "immagini/3.jpg", 1),
-	(6, 4, null, "immagini/4.jpg", 1),
-	(7, 5, null, "immagini/5.jpg", 1),
-	(8, 6, null, "immagini/6.jpg", 1),
-    
-	(9, 1, null, "immagini/7.jpg", 1),
-	(10, 2, null, "immagini/8.jpg", 1),
-	(11, 3, null, "immagini/9.jpg", 1),
-	(12, 4, null, "immagini/10.jpg", 1),
-	(13, 5, null, "immagini/11.jpg", 1),
-	(14, 6, null, "immagini/12.jpg", 1);
+    #immagini cani
+
+    # cane 1
+    (1, "immagini/bulldog_inglese_1_1.jpg", 1),
+    (1, "immagini/immagini/bulldog_inglese_1_1.jpg", 1),
+
+    #cane 2
+
+	(2, "immagini/meticcio_2_1.jpeg", 1),
+    (2, "immagini/meticcio_2_2.jpeg", 1),
+
+    # cane 3
+	(3, "immagini/meticcio_3_1.jpg", 1),
+    (3, "immagini/meticcio_3_2.jpg", 1),
+
+    # cane 4
+	(4, "immagini/meticcio_4_1.jpeg", 1),
+    (4, "immagini/meticcio_4_2.jpeg", 1),
+
+    # cane 5
+	(5, "immagini/border_collie_5_1.jpeg", 1),
+
+    # cane 6
+	(6, "immagini/pitbull_6_1.jpeg", 1),
+	(6, "immagini/pitbull_6_2.jpeg", 1);
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
