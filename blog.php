@@ -13,7 +13,7 @@
 
     // estrazione informazioni 3 articoli casuali, da presentare
 
-    $query = "SELECT titolo, contenuto, autore, `data`, categoria, `path` FROM articolo JOIN immagine ON articolo.ID = ID_articolo ORDER BY RAND() LIMIT 3;";
+    $query = "SELECT titolo, contenuto, autore, `data`, categoria, `path` FROM articolo ORDER BY RAND() LIMIT 3;";
 
     try {
         $oid = $mysqli->query($query);
@@ -46,7 +46,7 @@
     // injection articoli recenti (2)
     $articoli_recenti = new Template("skins/articoli-recenti.html");
 
-    $query = "SELECT titolo, autore, `data`, `path` FROM articolo JOIN immagine ON articolo.ID = ID_articolo ORDER BY `data` DESC LIMIT 2;";
+    $query = "SELECT titolo, autore, `data`, `path` FROM articolo ORDER BY `data` DESC LIMIT 2;";
 
     try {
         $oid = $mysqli->query($query);
