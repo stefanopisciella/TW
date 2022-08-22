@@ -102,6 +102,22 @@
 
     }
 
-    
+    /**
+     * Funzione che restituisce le informazioni di un utente dato il suo ID
+     */
+    function get_user($id_utente) {
+        global $mysqli;
+        $query = "SELECT * FROM utente u WHERE u.ID='{$id_utente}';";
 
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            throw new Exception("errno: {$mysqli->errno}");
+        }
+
+        $rows = $oid->fetch_all(MYSQLI_ASSOC);
+
+        return $rows[0];
+    }
 ?>
