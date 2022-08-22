@@ -13,7 +13,7 @@
 
     // estrazione informazioni 3 articoli casuali, da presentare
 
-    $query = "SELECT titolo, contenuto, autore, `data`, categoria, `path` FROM articolo ORDER BY RAND() LIMIT 3;";
+    $query = "SELECT ID, titolo, contenuto, autore, `data`, categoria, `path` FROM articolo ORDER BY RAND() LIMIT 3;";
 
     try {
         $oid = $mysqli->query($query);
@@ -26,6 +26,8 @@
 
     // injection nella pagina principale del blog
     foreach($info_articoli as $articolo) {
+
+        $articoli_facciata->setContent("id", $articolo["ID"]);
         $articoli_facciata->setContent("img", $articolo["path"]);
         $articoli_facciata->setContent("categoria", $articolo["categoria"]);
         $articoli_facciata->setContent("autore", $articolo["autore"]);
@@ -46,7 +48,7 @@
     // injection articoli recenti (2)
     $articoli_recenti = new Template("skins/articoli-recenti.html");
 
-    $query = "SELECT titolo, autore, `data`, `path` FROM articolo ORDER BY `data` DESC LIMIT 2;";
+    $query = "SELECT ID, titolo, autore, `data`, `path` FROM articolo ORDER BY `data` DESC LIMIT 2;";
 
     try {
         $oid = $mysqli->query($query);
@@ -59,6 +61,8 @@
 
     // injection di ogni articolo recente nello spazio apposito
     foreach($articoli_rec as $articolo) {
+
+        $articoli_recenti->setContent("id", $articolo["ID"]);
         $articoli_recenti->setContent("img", $articolo["path"]);
         $articoli_recenti->setContent("autore", $articolo["autore"]);
 

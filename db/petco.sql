@@ -281,7 +281,28 @@ INSERT INTO articolo(ID_utente, titolo, contenuto, autore, `data`, categoria, `p
     (4, "Aggiornamenti procedure affido", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-05-27", "News", "immagini/articolo_4.jpg"),
     (4, "Aggiornamento norme di comportamento COVID-19", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-04-10", "News", "immagini/articolo_5.jpg");
 
+# popolamento tabella tags
+insert into tag (nome) values 
+    ("sicurezza"),
+    ("vaccino"),
+    ("covid-19"),
+    ("estate"),
+    ("ferie"),
+    ("comunicazione"),
+    ("lieto fine");
 
+# popolamento tabella articolo_tag
+insert into articolo_tag (ID_articolo, ID_tag) VALUES
+    (1, 1),
+    (1, 2),
+    (2, 7),
+    (3, 4),
+    (3, 5),
+    (3, 6),
+    (4, 6),
+    (5, 1),
+    (5, 3),
+    (5, 6);
 
 # popolamento tabella immagine
 INSERT INTO immagine(ID_cane, `path`, indice) VALUES
