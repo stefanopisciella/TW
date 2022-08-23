@@ -22,7 +22,7 @@
             $contatti->setContent("error", "Non tutti i campi sono stanti compilati");
             $head->setContent("contenuto", $contatti->get());
             $head->close();
-            exit;
+            exit; 
         }
         
         if(isset($_GET['out_of_limit']) && $_GET['out_of_limit'] == 1){
@@ -36,8 +36,11 @@
             $contatti->setContent("error", "L'indirizzo email non è valido");
             $head->setContent("contenuto", $contatti->get());
             $head->close();
-            exit;
+            exit; 
         }
+
+        $head->setContent("contenuto", $contatti->get());
+        $head->close();
     } else {
         // caso in cui l'utente ha già visionato la pagina e fa "submit" del messaggio
         $messaggio = $_POST['message'];
@@ -82,7 +85,7 @@
                 exit;
             }
         } else {
-            // utente logatto ==> recuperiamo il nome e la email del client dal DB
+            // utente loggato ==> recuperiamo il nome e la email del client dal DB
             $utente = get_user($_SESSION['user_id']); 
             
             $user_id = $_SESSION['user_id'];
@@ -96,24 +99,17 @@
             insert_query('richiesta_info', $richiesta_info);
             header("Location: contatti.php?");
         } catch (Exception $e){
-            // echo $e;
-            
+        
         }
     }
-    $head->setContent("contenuto", $contatti->get());
-    $head->close();
-
+    
     function autocompila_textfield(){
         $utente = get_user($_SESSION['user_id']);            
         
-        // vengono inseriti nome e cognome del client nei relativi textfield
+        // vengono inseriti nome ed email del client nei relativi textfield
         $GLOBALS['contatti']->setContent("nome", $utente['nome']);
         $GLOBALS['contatti']->setContent("email", $utente['email']);
         // per rendere non editabili i textfield relativi all'email e al nome utente
         $GLOBALS['contatti']->setContent("readonly", "readonly");
-        
-        $GLOBALS['head']->setContent("contenuto", $GLOBALS['contatti']->get());
-        $GLOBALS['head']->close();
-        exit;
     }
 ?>
