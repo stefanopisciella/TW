@@ -1,10 +1,9 @@
 <?php
-    require "include/template2.inc.php";
     require "include/dbms.inc.php";
+    require "frame-public.php";
 
     global $mysqli;
 
-    $head = new Template("skins/frame-public.html");
     $adozioni = new Template("skins/adozioni.html");
 
     // injection opzioni razze nel relativo filtro di ricerca

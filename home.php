@@ -1,10 +1,9 @@
 <?php
 
-    require "include/template2.inc.php";
     require "include/dbms.inc.php";
     require "include/php-utils/varie.php";
+    require "frame-public.php";
 
-    $head = new Template("skins/frame-public.html");
     $home = new Template("skins/home.html");
 
     global $mysqli;
