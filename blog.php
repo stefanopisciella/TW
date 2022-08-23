@@ -52,29 +52,36 @@
             catch (Exception $e) {
                 throw new Exception("{$mysqli->errno}");
             }
-    
-            $res = $oid->fetch_all(MYSQLI_ASSOC);
-    
-            // injection nella pagina principale del blog
-            foreach($res as $articolo) {
-    
-                $articoli_facciata->setContent("id", $articolo["ID"]);
-                $articoli_facciata->setContent("img", $articolo["path"]);
-                $articoli_facciata->setContent("categoria", $articolo["categoria"]);
-                $articoli_facciata->setContent("autore", $articolo["autore"]);
-    
-                // formattazione della data in formato italiano
-                $articoli_facciata->setContent("data", formatta_data_stringhe($articolo["data"]));
-    
-                $articoli_facciata->setContent("titolo", $articolo["titolo"]);
-    
-                // si modifica la stringa relativa al contenuto da visualizzare, trocandola ai primi 280 caratteri, facendo seguire tre punti di sospensione
-                $anteprima_testo = substr($articolo["contenuto"], 0, 280)." ...";
-    
-                $articoli_facciata->setContent("testo", $anteprima_testo);
+
+            if ($oid->num_rows == 0) {
+                $not_found = new Template("skins/not-found.html");
+                $blog->setContent("articoli-facciata", $not_found->get());
             }
+
+            else {
+                $res = $oid->fetch_all(MYSQLI_ASSOC);
     
-            $blog->setContent("articoli-facciata", $articoli_facciata->get());
+                // injection nella pagina principale del blog
+                foreach($res as $articolo) {
+        
+                    $articoli_facciata->setContent("id", $articolo["ID"]);
+                    $articoli_facciata->setContent("img", $articolo["path"]);
+                    $articoli_facciata->setContent("categoria", $articolo["categoria"]);
+                    $articoli_facciata->setContent("autore", $articolo["autore"]);
+        
+                    // formattazione della data in formato italiano
+                    $articoli_facciata->setContent("data", formatta_data_stringhe($articolo["data"]));
+        
+                    $articoli_facciata->setContent("titolo", $articolo["titolo"]);
+        
+                    // si modifica la stringa relativa al contenuto da visualizzare, trocandola ai primi 280 caratteri, facendo seguire tre punti di sospensione
+                    $anteprima_testo = substr($articolo["contenuto"], 0, 280)." ...";
+        
+                    $articoli_facciata->setContent("testo", $anteprima_testo);
+                }
+        
+                $blog->setContent("articoli-facciata", $articoli_facciata->get());
+            }
         }
     
         // CASO IN CUI VIENE SPECIFICATA UNA CATEGORIA (FILTRO ARTICOLI SU CATEGORIA)
