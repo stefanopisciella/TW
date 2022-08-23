@@ -1,11 +1,7 @@
 <?php
-    require "include/template2.inc.php";
-    require "include/dbms_ops.php";
     require "include/utils_dbms.php";
+    require "frame-public.php";
 
-    session_start();
-
-    $head = new Template("skins/frame-public.html");
     $contatti = new Template("skins/contatti.html");
   
     $max_char_mex = 1500; 
