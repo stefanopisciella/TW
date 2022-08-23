@@ -87,6 +87,7 @@
     } else {
         // caso in cui il client carica la pagina con il metodo GET
         $signup = new Template("skins/registrazione.html");
+        $frame_public = new Template("skins/frame-public.html");
         
         if (isset ($_GET['empty_fields'])) {
             $param = $_GET['empty_fields'];

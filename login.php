@@ -56,12 +56,14 @@
             // client visualizza errore riguardante le credenziali
             if ($param == 1) {
                 $login = new Template("skins/login.html");
+                $frame_public = new Template("skins/frame-public.html");
                 $login->setContent("wrong_credentials", "Username e/o Password non sono stanti compilati");
                 $frame_public->setContent("contenuto", $login->get());
                 $frame_public->close();
             }  
             if ($param == 2) {
                 $login = new Template("skins/login.html");
+                $frame_public = new Template("skins/frame-public.html");
                 $login->setContent("wrong_credentials", "Username e/o Password non corretti");
                 $frame_public->setContent("contenuto", $login->get());
                 $frame_public->close();  
@@ -70,6 +72,7 @@
         } else {
             // caso in cui il client carica la pagina della login, ma non ancora fa ancora il "submit" delle credenziali
             $login = new Template("skins/login.html");
+            $frame_public = new Template("skins/frame-public.html");
             $frame_public->setContent("contenuto", $login->get());
             $frame_public->close();
         }
