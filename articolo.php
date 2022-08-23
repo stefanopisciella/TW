@@ -1,11 +1,10 @@
 <?php
-    require "include/template2.inc.php";
     require "include/dbms.inc.php";
     require "include/php-utils/varie.php";
+    require "frame-public.php";
 
     global $mysqli;
 
-    $head = new Template("skins/frame-public.html");
     $articolo = new Template("skins/articolo.html");
 
     // injection informazioni articolo selezionato

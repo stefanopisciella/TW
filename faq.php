@@ -1,10 +1,9 @@
 <?php
-    require "include/template2.inc.php";
     require "include/dbms.inc.php";
+    require "frame-public.php";
 
     global $mysqli;
 
-    $head = new Template("skins/frame-public.html");
     $faq = new Template("skins/faq.html");
 
     // injection categorie (componente outer)
