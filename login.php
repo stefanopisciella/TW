@@ -39,7 +39,7 @@
                     // il client C è un utente normale ==> a C viene revocata l'autorizzazione
                     // di eseguire gli script della dashboard dedicata all'admin
                     $_SESSION['admin'] = false;
-                    header("Location: index.php?");
+                    header("Location: home.php?");
                 }
             } else {
                 // credenziali non corrette
