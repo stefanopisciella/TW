@@ -1,9 +1,7 @@
 <?php
     require "frame-public.php";
-    require 'include/utils_dbms.php';
    
     // non è possibile effettuare la registrazione se non si effettua prima il logout
-    session_start();
     if (isset($_SESSION['user_id']) && $_SESSION['user_id'] >= 1) {
         header('location: index.php');
     } 
@@ -92,8 +90,8 @@
             $param = $_GET['empty_fields'];
             if ($param == 1) {
                 $signup->setContent("empty_fields", "Non tutti i campi sono stanti compilati <br>");
-                $frame_public->setContent("contenuto", $signup->get());
-                $frame_public->close();
+                $head->setContent("contenuto", $signup->get());
+                $head->close();
                 exit;
             }  
         }
@@ -126,7 +124,7 @@
             }  
         }
 
-        $frame_public->setContent("contenuto", $signup->get());
-        $frame_public->close();
+        $head->setContent("contenuto", $signup->get());
+        $head->close();
     }
 ?>

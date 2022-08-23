@@ -1,11 +1,7 @@
 <?php
-    require "include/template2.inc.php";
-    require "include/dbms_ops.php";
     require "include/utils_dbms.php";
+    require "frame-public.php";
 
-    session_start();
-
-    $head = new Template("skins/frame-public.html");
     $donazioni = new Template("skins/donazioni.html");
   
     if ($_SERVER["REQUEST_METHOD"] == "GET") {

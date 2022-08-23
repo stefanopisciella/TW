@@ -1,9 +1,6 @@
 <?php
-    require "include/dbms_ops.php";
     require "frame-public.php";
 
-    session_start();
-    
     // una volta loggati correttamente, non è più possibile ritornare alla pagina della login
     // se non in seguito ad un logout
     if (isset($_SESSION['user_id']) && $_SESSION['user_id'] >= 1) {
@@ -56,22 +53,25 @@
             // client visualizza errore riguardante le credenziali
             if ($param == 1) {
                 $login = new Template("skins/login.html");
+                // $head = new Template("skins/frame-public.html");
                 $login->setContent("wrong_credentials", "Username e/o Password non sono stanti compilati");
-                $frame_public->setContent("contenuto", $login->get());
-                $frame_public->close();
+                $head->setContent("contenuto", $login->get());
+                $head->close();
             }  
             if ($param == 2) {
                 $login = new Template("skins/login.html");
+                // $head = new Template("skins/frame-public.html");
                 $login->setContent("wrong_credentials", "Username e/o Password non corretti");
-                $frame_public->setContent("contenuto", $login->get());
-                $frame_public->close();  
+                $head->setContent("contenuto", $login->get());
+                $head->close();  
             }
             session_abort();
         } else {
             // caso in cui il client carica la pagina della login, ma non ancora fa ancora il "submit" delle credenziali
             $login = new Template("skins/login.html");
-            $frame_public->setContent("contenuto", $login->get());
-            $frame_public->close();
+            // $head = new Template("skins/frame-public.html");
+            $head->setContent("contenuto", $login->get());
+            $head->close();
         }
     }
 ?>
