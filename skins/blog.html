@@ -33,8 +33,8 @@
                         <div class="widget">
                             <h4 class="sidebar-title">Cerca per parola chiave</h4>
                             <div class="sidebar-search">
-                                <form action="#">
-                                    <input type="text" placeholder="Cerca ...">
+                                <form id="finder" method="POST" action="blog.php">
+                                    <input name="keyword" id="finder_param" type="text" placeholder="Cerca ...">
                                     <button type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
@@ -61,6 +61,18 @@
         </div>
     </section>
     <!-- blog-area-end -->
+
+    <!--<script>
+        $("#finder").on("click", function()
+        {
+            var param = $('#finder_param').val();
+            param = param.replaceAll(" ", "_");
+
+            var qrystr = "?keyword=" + param;
+            $("#finder").attr("href", qrystr);
+            $("#finder")[0].click();
+        });
+    </script>-->
 
 </main>
 <!-- main-area-end -->
