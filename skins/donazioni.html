@@ -46,14 +46,16 @@
                 <div class="col-xl-7 col-lg-6">
                     <div class="faq-wrapper">
                         <div class="container" style="vertical-align: center;">
-                            <form action="#" class="sidebar-find-pets">
+                            <form action="donazioni.php" method="POST" class="sidebar-find-pets">
                                 <h3 for="importo" style="text-align: center;">Importo da donare:</h3>
                                     <div class="row" style="margin-top: 25px;">
                                         <div class="col-6" style="margin-left: 25%;">
                                             <div class="form-grp">
-                                                <form action="#" class="contact-form">
+                                                <form action="donazioni.php" method="POST" class="contact-form">
                                                     <div class="form-grp col-xl-9 col-lg-4">
-                                                        <input type="number" id="name" style="text-align: center;">
+                                                        <input name="importo" type="number" id="name" style="text-align: center;">
+                                                        <input name="email" type="email" value="<[email]>" id="email" <[readonly]>>
+                                                        <button class="width-70 login-btn btn-lg ">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -63,8 +65,8 @@
                                         </div>
                                     </div>
                                     <div style="position: relative;">
-                                        <h5 style="color: red; margin-top: 10px; text-align: center;">Importo non valido</h5>
-                                        <button class="btn" style="margin-left: 29%; margin-top: 10px;">Prosegui con PayPal</button>
+                                        <h5 style="color: red; margin-top: 10px; text-align: center;"><[error]></h5>
+                                        <!-- <button class="btn" style="margin-left: 29%; margin-top: 10px;">Prosegui con PayPal</button> -->
                                     </div>
                             </form>
                         </div>
