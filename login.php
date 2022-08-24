@@ -4,7 +4,7 @@
     // una volta loggati correttamente, non è più possibile ritornare alla pagina della login
     // se non in seguito ad un logout
     if (isset($_SESSION['user_id']) && $_SESSION['user_id'] >= 1) {
-        header('location: index.php');
+        header('location: home.php');
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
