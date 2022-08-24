@@ -72,21 +72,24 @@
                             <!-- FINE -->
                         </div>
                         <div class="contact-wrap-content">
-                            <form action="#" class="contact-form">
+                            <form action="dettaglio-cane.php" method="POST" class="contact-form" onsubmit="set_dog_id()">
                                 <div class="form-grp">
                                     <label for="name">Il tuo nome <span>*</span></label>
-                                    <input type="text" id="name">
+                                    <input name="name" type="text" value="<[nome_utente]>" id="name" <[readonly]>>
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">La tua email <span>*</span></label>
-                                    <input type="text" id="email">
+                                    <input name="email" type="email" value="<[email]>" id="email" <[readonly]>>
                                 </div>
                                 <div class="form-grp">
                                     <label for="message">Il tuo messaggio <span>*</span></label>
                                     <textarea name="message" id="message"></textarea>
+                                    <!-- con questo input nascosto passo al server l'id del cane che il client sta visualizzando-->
+                                    <input id="input_with_dog_id" name="id" type="hidden" value="">
                                 </div>
-                                <h6 style="color: red">Riempire tutti i campi</h6>
-                                <button type="button" class="btn rounded-btn" style="margin-bottom: 40px;">Invia</button>
+                                <h6 style="color: red"><[error]></h6>
+                                <button class="width-70 login-btn btn-lg ">Invia<img src="img/icon/w_pawprint.png" alt=""></button>
+                                <!--<button type="button" class="btn rounded-btn" style="margin-bottom: 40px;">Invia</button>-->
                             </form>
                         </div>
                     </div>
@@ -98,3 +101,24 @@
 
 </main>
 <!-- main-area-end -->
+
+<script>
+    function set_dog_id() {
+        // estrae l'url del sito che il client sta visitando
+        // let url = window.location.href; 
+        // cerca l'id del cane dall'URL della pagina che il client sta visitando
+        
+        // estrae la query string
+        const params = new URLSearchParams(window.location.search);
+        
+        let param_value = null;
+        if(params.has('id')) {
+            param_value = params.get('id');
+        }
+        
+        // seleziono l'input A che avrà come valore l'id del cane
+        let input  = document.querySelector('#input_with_dog_id');
+        // setto il valore di A con l'id del cane
+        input.setAttribute('value', param_value);
+    }
+</script>
