@@ -12,7 +12,7 @@
     // inserimento 6 cani da adottare
 
     // query per ottenere 6 cani da mostrare in home (DATI E 1 IMMAGINE)
-    $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane GROUP BY nome ORDER BY RAND() LIMIT 6;";
+    $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND distanza=false GROUP BY nome ORDER BY RAND() LIMIT 6;";
 
     try {
         $oid = $mysqli->query($query_cani);

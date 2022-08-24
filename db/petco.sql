@@ -260,31 +260,19 @@ INSERT INTO razza(nome) VALUES
     ("Meticcio"),
     ("Bulldog Inglese"),
     ("Pitbull"),
-    ("Border Collie");
+    ("Border Collie"),
+    ("Corso"),
+    ("Terrier");
     
 # popolamento tabella cane
 INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
-	(1, "Mafalda", "F", 2, "Bulldog Inglese", "piccola", "Mafalda è una bulldog inglese nata sfortunata; più piccina dei fratelli, troppo chiara per lo standard di razza e, soprattutto, con un grave problema congenito al cuore. 
-
-È stata operata da una equipe specializzata che le ha creato una nuova valvola cardiaca e ed è intervenuta anche su palato e alle narici, in modo da poter respirare meglio.  
+	(1, "Mafalda", "F", 2, "Bulldog Inglese", "piccola", "Mafalda è una bulldog inglese nata sfortunata; più piccina dei fratelli, troppo chiara per lo standard di razza e, soprattutto, con un grave problema congenito al cuore. È stata operata da una equipe specializzata che le ha creato una nuova valvola cardiaca e ed è intervenuta anche su palato e alle narici, in modo da poter respirare meglio.  
 La sua qualità di vita è nello standard di qualunque bulldog anche se dovrà fare controlli cardiologici periodici e continuare per il momento con la terapia e potrà essere sterilizzata tra circa un anno.
-Nonostante i suoi problemi di salute è una cagnolina allegra e gioiosa, che cerca molto il contatto fisico e le coccole. 
-
-Sta aspettando qualcuno che sappia amarla e una famiglia per la vita.
-
-Un rifugio, un canile non possono sostituirsi all’amore di una famiglia. Regala la vera vita…adotta!", "04837264869", true, false),
+Nonostante i suoi problemi di salute è una cagnolina allegra e gioiosa, che cerca molto il contatto fisico e le coccole.", "04837264869", true, false),
 	(2, "Calica", "F", 5, "Meticcio", "media", "Una ragazza speciale, dall’olfatto strepitoso, che ama la campagna, correre e passeggiare. Sempre in cerca di novità è super socievole con tutti. Taglia media saprà riempire le vostre giornate di gioia.", "04837264869478", false, false),
 	(3, "Miriam", "F", 4, "Meticcio", "grande", "Miriam è una cagnolina che ama interagire con i suoi simili ma è insicura con le persone. 
-Ha bisogno di stabilità e di una routine quotidiana che le permetta di instaurare un legame di fiducia duraturo con chi farà parte della sua vita.
-
-E’ una taglia media.
-
-Il nostro team vi aiuterà a trovare insieme il modo migliore per costruire un rapporto stupendo.
-
-Si trova a Vairano (Pavia) a pochi passi da Milano. 
-
-Un rifugio, un canile non possono sostituirsi all’amore di una famiglia. Regala la vera vita…adotta!", "048372648696778", false, false),
-	(4, "Ettore", "M", 5, "Meticcio", "piccola", "Un bellissimo incrocio di pastore tedesco, socievole e dolce con le persone, curioso, possessivo e qualche volta un po’ testardo e arrogante con gli altri maschi. Grazie a un breve percorso con i nostri educatori, e a un po’ di pazienza, saprete trovare la giusta sintonia.
+Ha bisogno di stabilità e di una routine quotidiana che le permetta di instaurare un legame di fiducia duraturo con chi farà parte della sua vita.", "048372648696778", false, false),
+	(4, "Ettore", "M", 5, "Meticcio", "media", "Un bellissimo incrocio di pastore tedesco, socievole e dolce con le persone, curioso, possessivo e qualche volta un po’ testardo e arrogante con gli altri maschi.
 
 Un canile, un rifugio, l'impegno di tutti noi non sostituiscono l'amore di una famiglia.", "068372648694783", true, false),
 	(5, "Chica", "F", 6, "Border Collie", "media", "Chica è un border collie che ha trascorso la giovinezza in campagna fra animali domestici di ogni specie, e con la sorella Cindy. Nata nel 2012, è abituata a vivere in un grande spazio, ed è un cane energico e attivo. Nonostante questo presenta qualche problema di salute, di cui ci si occupa con attenzione in rifugio. Nonostante la sua età, ha ancora voglia di giocare e amare una famiglia, che possa ricambiare il suo amore. 
@@ -292,7 +280,37 @@ Un canile, un rifugio, l'impegno di tutti noi non sostituiscono l'amore di una f
 Un rifugio, un canile non possono sostituirsi all’amore di una famiglia. Regala la vera vita…adotta!", "048372649694783", false, false),
 	(6, "Olimpia", "F", 5, "Pitbull", "piccola", "Olimpia è un pitbull con lo sguardo attento, un po’ testarda ma che sa farsi volere bene dagli umani, con i quali diventa affettuosa e coccolona. Non ama la compagnia di altri animali, infatti sogna di essere adottata e iniziare una nuova vita in una casa accogliente, in cui essere protetta e amata da nuovi amici umani con cui fare tante passeggiate. É giovane ma con qualche acciacco, tenuto sotto controllo dai veterinari. 
 
-Un rifugio, un canile non possono sostituirsi all’amore di una famiglia. Regala la vera vita…adotta!", "048692648694783", false, false);
+Un rifugio, un canile non possono sostituirsi all’amore di una famiglia. Regala la vera vita…adotta!", "0486926484783", false, false),
+
+    (7, "Lupin", "M", 7, "Meticcio", "media", "Simpatico vecchietto, un po’ diffidente con i cani maschi ma affettuosissimo con le persone. Un vero curiosone dal carattere semplice a cui basterà solo tanto amore.", "048692648699783", true, false),
+
+    (8, "Tyson", "M", 8, "Corso", "grande", "Un bellissimo cane corso dal carattere eccezionale di natura amabile con le persone  anche se un po’ scontroso con gli altri cani maschi.", "048692648694183", true, false),
+
+    (9, "Dada", "F", 2, "Meticcio", "grande", "Cagnolona sensibile che dopo un po’ di timidezza iniziale saprà essere dolcissima e coccolona. Deve ancora abituarsi a controllare la sua curiosità quando è in giro al guinzaglio. Bravissima con i cani maschi da valutare inserimento con una femmina.", "048666648694783", false, false),
+
+    (10, "Igor", "M", 1, "Meticcio", "media", "Un giovane cagnolino in arrivo dalla Sicilia, è capace di adattarsi e socievole con i suoi simili. Mostra un po’ di timidezza e insicurezza nell’affrontare le situazioni nuove, ma con amore e pazienza saprà ripagarvi del vostro impegno e affetto.", "048697748694783", false, false),
+
+    (11, "Starsky", "M", 1, "Meticcio", "grande", "Un cucciolo giocherellone, un po’ timido e sensibile con le persone che non conosce ma con qualche incontro in cascina con i nostri educatori saprete certamente imparare a conoscervi e Starsky potrà dimostrare tutta la sua dolcezza.", "00692648694783", false, false),
+
+    (12, "Gegia", "F", 4, "Meticcio", "piccola", "Una bella cagnolina, giovane e di taglia media piccola. Vivace e scatenata, socievole con gli altri cani, mostra un po’ di diffidenza nei confronti di persone e situazioni nuove.
+
+Un percorso con i nostri educatori vi aiuterà a scoprire il miglior modo per iniziare la vostra convivenza.", "048692008864783", false, false),
+
+    (13, "Spino", "M", 7, "Terrier", "piccola", "Un vero terrier che non ama molto socializzare con i suoi simili, un po’ timido con le persone ma rispettando i suoi tempi e con un approccio coerente diventerà un buon compagno di vita.", "048692648694999", false, false),
+
+    (14, "Linus", "M", 5, "Meticcio", "grande", "Un cagnolone indipendente ed energico, selettivo con le persone, ama stare all’aria aperta e a contatto con la natura nonostante sia già abituato a stare in casa. A tratti un po’ ostinato e testardo, non ama la compagnia degli altri cani. Al contrario, si lega molto alle persone con cui entra in sintonia. ", "048692123694783", false, false),
+
+    (15, "Eva", "F", 5, "Pitbull", "piccola", "Un incrocio spinone-segugio, un carattere fantastico sia con i suoi simili che con le persone: affettuosa, curiosa e amorevole, ha voglia di giocare ma anche di farsi coccolare. Saprà essere un’ottima compagna di viaggio.", "000092648694783", false, false),
+
+    (16, "Sofia", "F", 2, "Meticcio", "piccola", "Una bella cagnolina giovane e di taglia media piccola, tranquilla, socievole ma timida con le persone che non conosce e con le nuove situazioni.
+
+Un percorso insieme ai nostri educatori saprà aiutarvi a trovare la giusta sinergia.", "048692698694783", false, false),
+
+    (17, "Charly", "M", 3, "Meticcio", "media", "Un amore vero e proprio, un carattere solare, un po’ timido con le persone. Giocherellone e comunicatore, curioso e intelligente questo incrocio di maremmano saprà certamente farsi amare.
+
+Un piccolo percorso con i nostri educatori sapranno inserirlo al meglio in famiglia, con una piccola attenzione solo verso il momento della pappa.", "048692648884783", false, false);
+
+    
 
 # inserimento articoli prova
 INSERT INTO articolo(ID_utente, ID_categoria, titolo, contenuto, autore, `data`, categoria, `path`) VALUES
@@ -357,7 +375,48 @@ INSERT INTO immagine(ID_cane, `path`, indice) VALUES
 
     # cane 6
 	(6, "immagini/pitbull_6_1.jpeg", 1),
-	(6, "immagini/pitbull_6_2.jpeg", 1);
+	(6, "immagini/pitbull_6_2.jpeg", 1),
+
+    # cane 7
+    (7, "immagini/7_1.jpeg", 1),
+	(7, "immagini/7_2.jpeg", 1),
+
+    # cane 8
+    (8, "immagini/8_1.png", 1),
+	(8, "immagini/8_2.png", 1),
+
+    # cane 9
+    (9, "immagini/9_1.jpg", 1),
+
+    # cane 10
+    (10, "immagini/10_1.jpeg", 1),
+	(10, "immagini/10_2.jpeg", 1),
+
+    # cane 11
+    (11, "immagini/11_1.png", 1),
+	(11, "immagini/11_2.png", 1),
+
+    # cane 12
+    (12, "immagini/12_1.jpeg", 1),
+	(12, "immagini/12_2.jpeg", 1),
+
+    # cane 13
+    (13, "immagini/13_1.jpg", 1),
+	(13, "immagini/13_2.jpg", 1),
+
+    # cane 14
+    (14, "immagini/14_1.jpeg", 1),
+
+    # cane 15
+    (15, "immagini/15_1.jpeg", 1),
+	(15, "immagini/15_2.jpeg", 1),
+
+    # cane 16
+    (16, "immagini/16_1.jpeg", 1),
+	(16, "immagini/16_2.jpeg", 1),
+
+    # cane 17 
+    (17, "immagini/17_1.jpeg", 1);
 
 
 # GESTIONE UTENZA
