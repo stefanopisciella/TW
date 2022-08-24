@@ -58,7 +58,7 @@
     // injection cani per pagina corrente
     $singolo_cane = new Template("skins/singolo-cane.html");
     // tengo memorizzati i cani (divisi per pagina) in un array: posizione 1 -> pagina 1, ..., posizione n -> pagina n
-    
+
     $cani_paginati = array();
 
     // riempio l'array

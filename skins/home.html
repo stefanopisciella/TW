@@ -71,98 +71,39 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="col-md-10">
-                        <div class="breeder-active owl-carousel">
-                            <div class="breeder-item">
-                                <a href="breeder-details.html">
-                                    <img src="img/images/breeder_img01.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="breeder-item">
-                                <a href="breeder-details.html">
-                                    <img src="img/images/breeder_img02.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="breeder-item">
-                                <a href="breeder-details.html">
-                                    <img src="img/images/breeder_img03.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="breeder-item">
-                                <a href="breeder-details.html">
-                                    <img src="img/images/breeder_img04.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="breeder-item">
-                                <a href="breeder-details.html">
-                                    <img src="img/images/breeder_img05.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
+                        <a href="breeder-details.html">
+                            <img src="immagini/faq-home.jpg" alt="">
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="faq-wrapper">
                         <div class="section-title mb-35">
-                            <h5 class="sub-title">FAQ Question</h5>
-                            <h2 class="title">History & Family Adoption</h2>
+                            <h5 class="sub-title">FAQ</h5>
+                            <h2 class="title"></h2>
                         </div>
                         <div class="accordion" id="accordionExample">
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left" type="button"
-                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                            Working for dog adoption
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        The best overall dog DNA test is embark breed & health Kit (view atths Chewy), which
-                                        provides you with a breed brwn and ition on provides ancestors most dogs.
+                            <[foreach]>
+                                <div class="card">   
+                                    <div class="card-header" id="headingOne">      
+                                        <h2 class="mb-0">   
+                                                <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                    data-toggle="collapse" data-target="#collapse<[id]>" aria-expanded="true"
+                                                    aria-controls="collapse<[id]>">
+                                                    <[categoria]>
+                                                </button> 
+                                        </h2>
+                                    </div>
+                                    <div id="collapse<[id]>" class="collapse" aria-labelledby="heading<[id]>"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <[domande_risposte]>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                                            aria-controls="collapseTwo">
-                                            Competitions & Awards
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        The best overall dog DNA test is embark breed & health Kit (view atths Chewy), which
-                                        provides you with a breed brwn and ition on provides ancestors most dogs.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingThree">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                            data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                                            aria-controls="collapseThree">
-                                            The puppies are 3 months old
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        The best overall dog DNA test is embark breed & health Kit (view atths Chewy), which
-                                        provides you with a breed brwn and ition on provides ancestors most dogs.
-                                    </div>
-                                </div>
-                            </div>
+                            <[/foreach]>
                         </div>
-                        <a href="adozioni.php" class="btn" style="margin-top: 50px;" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">Guarda di più<img src="img/icon/w_pawprint.png" alt=""></a>
+                        <a href="faq.php" class="btn" style="margin-top: 50px;" data-animation="fadeInUpBig" data-delay=".6s" data-duration="1.2s">Guarda di più<img src="img/icon/w_pawprint.png" alt=""></a>
                     </div>
                 </div>
             </div>
