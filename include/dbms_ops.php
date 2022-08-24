@@ -120,4 +120,56 @@
 
         return $rows[0];
     }
+
+    /**
+     * Funzione che restituisce i cani in base ai flitri selezionati
+     */
+    function get_dogs_filtered($arg) {
+        global $mysqli;
+
+        // preparo la query in base ai filtri selezionati
+        $query_1 = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND ";
+        $query_2 =  "GROUP BY nome;";
+
+        $filtri = "";
+
+        foreach($arg as $filtro => $val) {
+            if ($val != null) {
+
+                // dato che per la razza mi viene passato l'id, devo cercarne il nome per riusicre a fare la query sulla tabella cane
+                // quindi estrapolo, dato l'id, il nome della razza richiesta
+                if ($filtro == "razza") {
+                    try {
+                        $res = mysqli_fetch_array($mysqli->query("SELECT nome FROM razza WHERE ID = '{$val}';"));
+                        $razza = $res['nome'];
+                    }
+                    catch (Exception $e) {
+                        throw new Exception("{$mysqli->errno}");
+                    }
+                    $filtri = $filtri."{$filtro}='{$razza}' AND ";
+                }
+
+                else if ($filtro == "eta") {
+                    
+                }
+
+                // concateno il filtro di cui ho verificato che non sia nullo, quindi richiesto
+                else $filtri = $filtri."{$filtro}='{$val}' AND ";
+            }
+        }
+
+        // rimuovo l'ultimo 'AND' dalla striga $filtri
+        $filtri = substr($filtri, 0, -5);
+    
+        // compongo le stringhe a formare la stringha che rappresenta la query
+        $query_cani = $query_1.$filtri.$query_2;
+
+        // eseguo la query
+        try {
+            return $mysqli->query($query_cani);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+    }
 ?>
