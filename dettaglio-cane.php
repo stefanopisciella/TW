@@ -1,30 +1,166 @@
 <?php
     require "include/dbms.inc.php";
     require "frame-public.php";
+    require "include/utils_dbms.php";
 
     $dettaglio_cane = new Template("skins/dettaglio-cane.html");
 
-    // injection informazioni cane
-    $id_cane = $_GET['id'];
-    $query_info_cane = "SELECT nome, presentazione, sesso, eta, razza, taglia FROM cane WHERE ID = '{$id_cane}';";
-
-    try {
-        $oid = $mysqli->query($query_info_cane);
-    }
-    catch (Exception $e) {
-        throw new Exception("{$mysqli->errno}");
-    }
-
-    $info_cane = $oid->fetch_all(MYSQLI_ASSOC);
-
-    $dettaglio_cane->setContent("nome", $info_cane[0]["nome"]);
-    $dettaglio_cane->setContent("presentazione", $info_cane[0]["presentazione"]);
-    $dettaglio_cane->setContent("sesso", $info_cane[0]["sesso"]);
-    $dettaglio_cane->setContent("eta", $info_cane[0]["eta"]);
-    $dettaglio_cane->setContent("razza", $info_cane[0]["razza"]);
-    $dettaglio_cane->setContent("taglia", $info_cane[0]["taglia"]);
-
-    $head->setContent("contenuto", $dettaglio_cane->get());
+    $max_char_mex = 1500; 
     
-    $head->close();
+    // injection informazioni cane
+    if(isset($_REQUEST['id'])) {
+        // la variabile $_REQUEST permette al server di ricervere l'id del cane dal client C 
+        // sia quando C visita la pagina con il metodo GET che con il metodo POST
+        $id_cane = $_REQUEST['id'];  
+        
+        $query_info_cane = "SELECT nome, presentazione, sesso, eta, razza, taglia, chip FROM cane WHERE ID = '{$id_cane}';";
+
+        try {
+            $oid = $mysqli->query($query_info_cane);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+
+        $info_cane = $oid->fetch_all(MYSQLI_ASSOC); 
+
+        $dettaglio_cane->setContent("nome", $info_cane[0]["nome"]);
+        $dettaglio_cane->setContent("presentazione", $info_cane[0]["presentazione"]);
+        $dettaglio_cane->setContent("sesso", $info_cane[0]["sesso"]);
+        $dettaglio_cane->setContent("eta", $info_cane[0]["eta"]);
+        $dettaglio_cane->setContent("razza", $info_cane[0]["razza"]);
+        $dettaglio_cane->setContent("taglia", $info_cane[0]["taglia"]);
+    }
+
+    // GESTIONE FORM RICHIESTA INFORMAZIONE
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        // caso in cui il client carica la pagina con il metodo GET
+
+        // controlla che l'utente sia loggato
+        if (isset($_SESSION['user_id']) && $_SESSION['user_id'] >= 1){
+            // utente loggato  
+            autocompila_textfield();
+        }
+        
+        if (isset ($_GET['empty_fields']) && $_GET['empty_fields'] == 1) {
+            $dettaglio_cane->setContent("error", "Non tutti i campi sono stanti compilati");
+            $head->setContent("contenuto", $dettaglio_cane->get());
+            $head->close();
+            exit; 
+        }
+        
+        if(isset($_GET['out_of_limit']) && $_GET['out_of_limit'] == 1){
+            $dettaglio_cane->setContent("error", "Il messaggio non può avere più di $max_char_mex caratteri");
+            $head->setContent("contenuto", $dettaglio_cane->get());
+            $head->close();
+            exit;
+        } 
+
+        if (isset($_GET['wrong_email']) && $_GET['wrong_email'] == 1){
+            $dettaglio_cane->setContent("error", "L'indirizzo email non è valido");
+            $head->setContent("contenuto", $dettaglio_cane->get());
+            $head->close();
+            exit; 
+        }
+
+        $head->setContent("contenuto", $dettaglio_cane->get());
+        $head->close();
+    } else {
+        // caso in cui l'utente ha già visionato la pagina e fa "submit" del messaggio con
+        // il metodo POST
+        
+        // quando il server S riceve una richiesta verso dettaglio-cane.php con il metodo 
+        // post da parte del client C, S deve ricevere da C l'ID del cane di cui C sta 
+        // visualizzando i dettagli. In questo modo S sarà in grado di reindirizzare C alla
+        // pagina di dettaglio-cane relativa al cane con ID di cui sopra
+        
+        $param_name = 'id=';
+        // $param_value contiene l'id del cane
+        $param_value = $_POST['id'];
+        $messaggio = $_POST['message'];
+        $chip = get_chip_query($param_value);
+
+        // controlla che il messaggio non sia vuoto
+        if (!isset($messaggio) || strlen(trim($messaggio)) == 0)
+        {
+            // messaggio vuoto
+            header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
+            exit;
+        } else {
+            // messaggio non vuoto
+            $messaggio = trim($messaggio);
+            // controlla che il numero di caratteri del messaggio non superi il limite
+            if(strlen($messaggio) > $max_char_mex)
+            {
+                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&out_of_limit=1');
+                exit;
+            }
+        }
+
+        if (!isset($_SESSION['user_id'])){
+            // utente non loggato ==> bisogna recuperare dalla form il nome e la email del
+            // client. Di conseguenza è anche necessario controllare la validità dell'email 
+            // inserita e che il campo del nome non sia nullo 
+            $email = $_POST['email'];
+            $nome = $_POST['name'];
+            $user_id = "NULL";
+
+            if (!isset($email) || strlen(trim($email)) == 0){
+
+                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
+                exit;
+            }
+            
+            if (!isset($nome) || strlen(trim($nome)) == 0){
+                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
+                exit;
+            }
+
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&wrong_email=1');
+                exit;
+            }
+        } else {
+            // utente loggato ==> recuperiamo il nome e la email del client dal DB
+            $utente = get_user($_SESSION['user_id']); 
+            
+            $user_id = $_SESSION['user_id'];
+            $email = $utente['email'];
+            $nome = $utente['nome'];
+        }
+        
+        $actual_date = date("Y/m/d");
+        $richiesta_info = [$user_id, "'".$nome."'", "'".$email."'", "'".$actual_date."'", "'".$chip."'", "'".$messaggio."'"];
+        try {
+            insert_query('richiesta_info', $richiesta_info);
+            header('Location: dettaglio-cane.php?' . $param_name . $param_value);
+        } catch (Exception $e){
+        
+        }
+    }
+
+    function autocompila_textfield(){
+        $utente = get_user($_SESSION['user_id']);            
+        
+        // vengono inseriti nome ed email del client nei relativi textfield
+        $GLOBALS['dettaglio_cane']->setContent("nome_utente", $utente['nome']);
+        $GLOBALS['dettaglio_cane']->setContent("email", $utente['email']);
+        // per rendere non editabili i textfield relativi all'email e al nome utente
+        $GLOBALS['dettaglio_cane']->setContent("readonly", "readonly");
+    }
+
+    function get_chip_query($id_cane) {
+        $query_chip_cane = "SELECT chip FROM cane WHERE ID = '{$id_cane}';";
+
+        try {
+            $oid = $GLOBALS['mysqli']->query($query_chip_cane);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$GLOBALS['mysqli']->errno}");
+        }
+
+        $query_result = $oid->fetch_all(MYSQLI_ASSOC); 
+        $chip = $query_result[0]['chip'];
+        return $chip;
+    }
 ?>

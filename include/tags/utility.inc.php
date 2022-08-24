@@ -75,7 +75,7 @@
             if (strcmp($pars['location'], "sc") == 0) {
                 $main = new Template("skins/slider-foto-cane.html");
 
-                $id_cane = $_GET['id'];
+                $id_cane = $_REQUEST['id'];
                 // query per selezionare foto SLIDER HOME
                 $oid = $mysqli->query("SELECT `path` AS img FROM immagine WHERE ID_cane = '{$id_cane}' ORDER BY RAND();");
 
