@@ -364,3 +364,4 @@ INSERT INTO immagine(ID_cane, `path`, indice) VALUES
 drop user if exists 'user'@'localhost';
 create user 'user'@'localhost' identified by '1234';
 grant all on petco.* to 'user'@'localhost';
+
