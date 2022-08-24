@@ -28,7 +28,14 @@
     while($row = mysqli_fetch_array($oid)) {
         $cani_home->setContent("id", $row['ID']);
         $cani_home->setContent("nome", $row['nome']);
-        $cani_home->setContent("eta", $row['eta']);
+
+        // sistemazione stringa età in home
+        $eta = $row['eta'];
+
+        if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+        else $eta = substr($eta, 0, -1)." mesi";
+        $cani_home->setContent("eta", $eta);
+
         $cani_home->setContent("sesso", $row['sesso']);
         $cani_home->setContent("razza", $row['razza']);
         $cani_home->setContent("img", $row['img']);

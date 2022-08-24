@@ -1,5 +1,6 @@
 <?php
     require "include/dbms.inc.php";
+    //require "include/dbms_ops.php";
     require "frame-public.php";
 
     global $mysqli;
@@ -60,26 +61,41 @@
         exit;
     }
 
-    // caso SEMPLICE - no filtri
+    // no filtri
     else {
 
         // verifico cosa sia settato nella query string
-        if(isset($_GET['sesso'])) $sesso = $_GET['sesso'];
-        if(isset($_GET['taglia'])) $taglia = $_GET['taglia'];
-        if(isset($_GET['razza'])) $razza = $_GET['razza'];
-        if(isset($_GET['eta'])) $eta = $_GET['eta'];
-        
-        
+        $sesso = null;
+        $taglia = null;
+        $razza = null;
+        $eta = null;
 
-        // preparo la query nel caso più semplice, cioè quello in cui non ci sono filtri
-        $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false GROUP BY nome;";
+        if(isset($_GET['sesso'])) {global $sesso; $sesso = $_GET['sesso'];}
+        if(isset($_GET['taglia'])) {global $taglia; $taglia = $_GET['taglia'];}
+        if(isset($_GET['razza'])) {global $razza; $razza = $_GET['razza'];}
+        if(isset($_GET['eta'])) {global $eta; $eta = $_GET['eta'];}
 
-        // eseguo la query
-        try {
-            $oid2 = $mysqli->query($query_cani);
+        $arg = array("sesso"=>$sesso, "taglia"=>$taglia, "razza"=>$razza, "eta"=>$eta);
+
+        $no_filtri = $sesso == null && $taglia == null && $razza == null && $eta == null;
+        
+        // caso senza filtri
+        if ($no_filtri) {
+            // preparo la query nel caso più semplice, cioè quello in cui non ci sono filtri
+            $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false GROUP BY nome;";
+
+            // eseguo la query
+            try {
+                $oid2 = $mysqli->query($query_cani);
+            }
+            catch (Exception $e) {
+                throw new Exception("{$mysqli->errno}");
+            }
         }
-        catch (Exception $e) {
-            throw new Exception("{$mysqli->errno}");
+
+        // caso con i filtri (query parametrica)
+        else {
+            $oid2 = get_dogs_filtered($arg);
         }
 
         // injection numero pagine: ceiling(num cani / num cani per pagina) (parte intera superiore)
@@ -91,7 +107,26 @@
 
         // injection numero pagine
         for ($i = 1; $i <= $num_pagine; ) {
-            $page_shifter->setContent("page_no", $i++);
+
+            // se non ci sono filtri devo inserire nell'HTML dinamico solo l'informazione relativa al numero di pagina
+            if ($no_filtri) {
+                $page_shifter->setContent("page_no", $i++);
+                $page_shifter->setContent("filtri", "");
+            }
+            // se invece ci sono i filtri, devo inserire anche l'informazione relativa
+            else {
+                $page_shifter->setContent("page_no", $i++);
+                global $arg;
+                $url_filtri = "&";
+                foreach ($arg as $curr => $val) {
+                    if ($val != null) {
+                        $url_filtri = $url_filtri."{$curr}={$val}&";
+                    }
+                }
+                $url_filtri = substr($url_filtri, 0, -1);
+                $page_shifter->setContent("filtri", $url_filtri);
+            }
+            
         }
 
         $adozioni->setContent("page_shifter", $page_shifter->get());
@@ -124,7 +159,13 @@
                 $singolo_cane->setContent("id", $cane['ID']);
                 $singolo_cane->setContent("nome", $cane['nome']);
                 $singolo_cane->setContent("razza", $cane['razza']);
-                $singolo_cane->setContent("eta", $cane['eta']);
+
+                // sistemazione stringa età
+                $eta = $cane['eta'];
+                if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+                else $eta = substr($eta, 0, -1)." mesi";
+                $singolo_cane->setContent("eta", $eta);
+
                 $singolo_cane->setContent("sesso", $cane['sesso']);
             }
 
@@ -141,7 +182,13 @@
                 $singolo_cane->setContent("id", $cane['ID']);
                 $singolo_cane->setContent("nome", $cane['nome']);
                 $singolo_cane->setContent("razza", $cane['razza']);
-                $singolo_cane->setContent("eta", $cane['eta']);
+
+                // sistemazione stringa età
+                $eta = $cane['eta'];
+                if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+                else $eta = substr($eta, 0, -1)." mesi";
+                $singolo_cane->setContent("eta", $eta);
+
                 $singolo_cane->setContent("sesso", $cane['sesso']);
             }
 

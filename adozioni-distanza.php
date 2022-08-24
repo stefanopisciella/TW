@@ -56,7 +56,13 @@
             $singolo_cane->setContent("id", $cane['ID']);
             $singolo_cane->setContent("nome", $cane['nome']);
             $singolo_cane->setContent("razza", $cane['razza']);
-            $singolo_cane->setContent("eta", $cane['eta']);
+
+            // sistemazione stringa età
+            $eta = $cane['eta'];
+            if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+            else $eta = substr($eta, 0, -1)." mesi";
+            $singolo_cane->setContent("eta", $eta);
+
             $singolo_cane->setContent("sesso", $cane['sesso']);
         }
 
@@ -73,7 +79,13 @@
             $singolo_cane->setContent("id", $cane['ID']);
             $singolo_cane->setContent("nome", $cane['nome']);
             $singolo_cane->setContent("razza", $cane['razza']);
-            $singolo_cane->setContent("eta", $cane['eta']);
+
+            // sistemazione stringa età
+                $eta = $cane['eta'];
+                if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+                else $eta = substr($eta, 0, -1)." mesi";
+                $singolo_cane->setContent("eta", $eta);
+                
             $singolo_cane->setContent("sesso", $cane['sesso']);
         }
 
