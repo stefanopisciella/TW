@@ -39,10 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- FINE -->
-                        <div>                       
-                            <a class="btn" id="adotta">Adotta a distanza <img src="img/icon/w_pawprint.png" alt=""></a>
-                        </div>
+                        <!-- FINE --> 
                     </div>
                 </div>
             </div>
@@ -53,7 +50,7 @@
     <!-- start procedi alla donazione -->
     <section class="related-products-wrap" style="padding-top: 50px; padding-bottom: 50px; margin-left: 500px; margin-right: 500px;">
         <div class="container" id="next-step">
-            <form action="#" class="sidebar-find-pets">
+            <form action="dettaglio-cane-distanza.php" method="POST" class="sidebar-find-pets" onsubmit="set_dog_id()">
                 <h3 for="importo" style="text-align: center;">Importo da donare e cadenza:</h3>
                     <div class="row" style="margin-top: 25px;">
                         <div class="col-6" style="align-items: center;">
@@ -76,9 +73,13 @@
                                 </select>
                             </div>
                         </div>
-                    <a class="btn" id="paga" style="align-items: center; margin-top: 25px;">Prosegui con PayPal</a>
+                    <button class="width-70 login-btn btn-lg ">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></button>
+                    <!-- questo bottone non funziona
+                    <a class="btn" id="paga" href="dettaglio-cane-distanza.php" style="align-items: center; margin-top: 25px;">Prosegui con PayPal</a>
+                    -->
+                    <!-- con questo input nascosto passo al server l'id del cane che il client sta visualizzando-->
+                    <input id="input_with_dog_id" name="id" type="hidden" value="">
                 </form>
-            </form>
         </div>
     </section>
     <!-- end procedi alla donazione-->
@@ -86,7 +87,7 @@
 </main>
 <!-- main-area-end -->
 
-<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<!--<script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function () {
     $("#next-step").hide();  
@@ -103,4 +104,25 @@
   
   });
 
+</script>-->
+
+<script>
+    function set_dog_id() {
+        // estrae l'url del sito che il client sta visitando
+        // let url = window.location.href; 
+        // cerca l'id del cane dall'URL della pagina che il client sta visitando
+        
+        // estrae la query string
+        const params = new URLSearchParams(window.location.search);
+        
+        let param_value = null;
+        if(params.has('id')) {
+            param_value = params.get('id');
+        }
+        
+        // seleziono l'input A che avrà come valore l'id del cane
+        let input  = document.querySelector('#input_with_dog_id');
+        // setto il valore di A con l'id del cane
+        input.setAttribute('value', param_value);
+    }
 </script>
