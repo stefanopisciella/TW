@@ -2,7 +2,7 @@
     include "../dbms.inc.php";
     global $mysqli;
 
-    $result = "";
+    $result = "null";
 
     session_start();
 

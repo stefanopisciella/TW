@@ -129,8 +129,7 @@
         url: 'include/ajax/find_favorites-ajax.php',
         type: 'POST'
     }).done(function (response) {
-        console.log(response + "ciao");
-        if (response == "")
+        if (response == "null")
             $(".cuore").each( function(){
                 $(this).css("color", "rgb(127, 127, 127)");
             });
@@ -154,47 +153,74 @@
     });
 
     $(".cuore").each(function(){
-        var chip = $(this).parents('.dog_parent').find('h6').text();
-        var chip = $(this).parents('.dog_parent').find('h4').text();
+        var chip     = $(this).parents('.dog_parent').find('h6').text();
+        var dog_name = $(this).parents('.dog_parent').find('h4').text();
 
         $(this).on("click", function(){
-            if ($(this).css("color") == "rgb(255, 0, 0)")
-            {
-                $.ajax({
-                    url: 'include/ajax/set_favorites-ajax.php',
-                    type: 'POST',
-                    data: {
-                        setpref: "rem",
-                        IDD: chip
-                    }
-                }).done(function (response) {
-                    if (response == "erased")
+            let heart = this;
+
+            $.ajax({
+                url: 'include/ajax/check-if-user-is-logged-ajax.php',
+                type: 'POST'
+            }).done(function(response){
+                if (response == "1")
+                {
+                    if ($(heart).css("color") == "rgb(255, 0, 0)")
                     {
-                        swal({
-                            title: "Hai rimosso",
-                            text: "Messaggio inviato",
-                            type: "success"
-                        })
+                        $.ajax({
+                            url: 'include/ajax/set_favorites-ajax.php',
+                            type: 'POST',
+                            data: {
+                                setpref: "rem",
+                                IDD: chip
+                            }
+                        }).done(function (response) {
+                            if (response == "erased")
+                            {
+                                swal({
+                                    title: "Preferito rimosso",
+                                    text: "Hai rimosso " + dog_name + " dai tuoi preferiti",
+                                    type: "success"
+                                });
+                            }
+                        });
                     }
-                });
-            }
-            else
-            {
-                $.ajax({
-                    url: 'include/ajax/set_favorites-ajax.php',
-                    type: 'POST',
-                    data: {
-                        setpref: "add",
-                        IDD: chip
+                    else
+                    {
+                        $.ajax({
+                            url: 'include/ajax/set_favorites-ajax.php',
+                            type: 'POST',
+                            data: {
+                                setpref: "add",
+                                IDD: chip
+                            }
+                        }).done(function (response) {
+                            if (response == "added")
+                            {
+                                swal({
+                                    title: "Preferito aggiunto",
+                                    text: "Hai aggiunto " + dog_name + " ai tuoi preferiti",
+                                    type: "success"
+                                });
+                            }
+                        });
                     }
-                }).done(function (response) {
-                    console.log(response);
-                });
-            }
 
-
-        $(this).css("color",
-            $(this).css("color") == "rgb(255, 0, 0)" ? "rgb(127, 127, 127)" : "rgb(255, 0, 0)");
+                    $(heart).css("color",
+                        $(heart).css("color") == "rgb(255, 0, 0)" ?
+                            "rgb(127, 127, 127)" : "rgb(255, 0, 0)");
+                }
+                else
+                {
+                    swal({
+                        title: "Attenzione",
+                        text: "Devi effettuare il login per aggiungere un cane nei tuoi preferiti",
+                        type: "error"
+                    }).then(function (){
+                        window.location.href = "login.php";
+                    });
+                }
+            });
         })
     });
 </script>

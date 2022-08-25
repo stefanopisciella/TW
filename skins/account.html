@@ -94,6 +94,7 @@
 </section>
 <!-- shop-details-area-end -->
 
+<script src="js/sweetalert.min.js"></script>
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script>
      $(".cuore").each(function(){
@@ -102,6 +103,7 @@
 
 
      $(".cuore").each(function() {
+         var dog_name = $(this).parents('.dog_parent').find('h4').text();
          var chip = $(this).parents('.dog_parent').find('h6').text();
 
          var jthis = this;
@@ -116,7 +118,15 @@
                      }
                  }).done(function (response) {
                      if (response == "erased")
-                         $(jthis).parents('.anchestor').remove();
+                     {
+                         swal({
+                             title: "Preferito rimosso",
+                             text: "Hai rimosso " + dog_name + " dai tuoi preferiti",
+                             type: "success"
+                         }).then(function (){
+                             $(jthis).parents('.anchestor').remove();
+                         });
+                     }
                  });
              }
          })
