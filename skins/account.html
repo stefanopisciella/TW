@@ -7,7 +7,7 @@
                     <ul class="nav nav-tabs" id="myTabTwo" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab"
-                                aria-controls="details" aria-selected="true">Dettagli</a>
+                                aria-controls="details" aria-selected="true">Dettagli Profilo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="val-tab" data-toggle="tab" href="#val" role="tab" aria-controls="val"
@@ -32,7 +32,7 @@
                                                         <p class="mb-0">Nome e cognome</p>
                                                     </div>
                                                     <div class="col-sm-9">
-                                                        <p class="text-muted mb-0"><[nome_e_cognome]>
+                                                        <p class="text-muted mb-0"><[nome_cognome]>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -75,129 +75,17 @@
                     <!-- ADOTTATI -->
                         <div class="tab-pane fade" id="val" role="tabpanel" aria-labelledby="val-tab">
                             <div class="container custom-container">
-                                <div class="row">
-                                    <div class="col-xl-4" style="padding-bottom: 50px;">
-                                        <div class="adoption-item">
-                                            <div class="adopt-thumb">
-                                                <a href="breeder-details.html"><img src="img/images/adop_img01.png" alt=""></a>
-                                            </div>
-                                            <div class="adopt-content">
-                                                <div class="adopt-date"><i class="far fa-calendar-alt"></i> Adozione: 2021</div>
-                                                <h3 class="title"><a href="breeder-details.html">Razza cane?</a></h3>
-                                                <a class="read-more">Documento di adozione<img src="img/icon/pawprint.png" alt=""></a>
-                                                <a href="scrivi-la-tua-storia.php" class="read-more">Racconta la tua storia<img src="img/icon/pawprint.png" alt=""></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4" style="padding-bottom: 50px;">
-                                        <div class="adoption-item">
-                                            <div class="adopt-thumb">
-                                                <a href="breeder-details.html"><img src="img/images/adop_img01.png" alt=""></a>
-                                            </div>
-                                            <div class="adopt-content">
-                                                <div class="adopt-date"><i class="far fa-calendar-alt"></i> Adozione: 2021</div>
-                                                <h3 class="title"><a href="breeder-details.html">Razza cane?</a></h3>
-                                                <a class="read-more">Documento di adozione<img src="img/icon/pawprint.png" alt=""></a>
-                                                <a href="scrivi-la-tua-storia.php" class="read-more">Racconta la tua storia<img src="img/icon/pawprint.png" alt=""></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4" style="padding-bottom: 50px;">
-                                        <div class="adoption-item">
-                                            <div class="adopt-thumb">
-                                                <a href="breeder-details.html"><img src="img/images/adop_img01.png" alt=""></a>
-                                            </div>
-                                            <div class="adopt-content">
-                                                <div class="adopt-date"><i class="far fa-calendar-alt"></i> Adozione: 2021</div>
-                                                <h3 class="title"><a href="breeder-details.html">Razza cane?</a></h3>
-                                                <a class="read-more">Documento di adozione<img src="img/icon/pawprint.png" alt=""></a>
-                                                <a href="scrivi-la-tua-storia.php" class="read-more">Racconta la tua storia<img src="img/icon/pawprint.png" alt=""></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4" style="padding-bottom: 50px;">
-                                        <div class="adoption-item">
-                                            <div class="adopt-thumb">
-                                                <a href="breeder-details.html"><img src="img/images/adop_img01.png" alt=""></a>
-                                            </div>
-                                            <div class="adopt-content">
-                                                <div class="adopt-date"><i class="far fa-calendar-alt"></i> Adozione: 2021</div>
-                                                <h3 class="title"><a href="breeder-details.html">Razza cane?</a></h3>
-                                                <a class="read-more">Documento di adozione<img src="img/icon/pawprint.png" alt=""></a>
-                                                <a href="scrivi-la-tua-storia.php" class="read-more">Racconta la tua storia<img src="img/icon/pawprint.png" alt=""></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="row justify-content-center">
+                                    <[cani_adottati]>
                                 </div>
                             </div>
                         </div>
                         <!-- PREFERITI -->
                         <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                             <div class="row justify-content-center">
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="adoption-shop-item"> 
-                                        <div class="adoption-shop-thumb">
-                                            <img src="img/product/adoption_shop_thumb01.jpg" alt="">
-                                            <a href="dettaglio-cane.php" class="btn">Adotta <img src="img/icon/w_pawprint.png" alt=""></a>
-                                        </div>
-                                        <div class="adoption-shop-content padding-bottom-15">
-                                            <!-- DA COMPONENTIZZARE NOME -->
-                                            <h4 class="title"><a href="shop-details.html">Mister Tartosh</a></h4>
-                                            <div class="adoption-meta">
-                                                <ul>
-                                                    <!-- DA COMPONENTIZZARE RAZZA E ETà -->
-                                                    <li><i class="fas fa-cog"></i><a href="#">Siberian Husky</a></li>
-                                                    <li><i class="far fa-calendar-alt"></i> Età: 6 mesi</li>
-                                                </ul>
-                                            </div>
-                                            <div class="adoption-rating">
-                                                <ul>
-                                                    <li class="heart">
-                                                        <div>
-                                                            <a class="wishlist-btn heart"><i class="fas fa-heart"></i></a>
-                                                        </div>
-                                                    </li>
-                                                    <!-- DA COMPONENTIZZARE SESSO -->
-                                                    <li class="price">Maschio</span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="adoption-shop-item"> 
-                                        <div class="adoption-shop-thumb">
-                                            <img src="img/product/adoption_shop_thumb01.jpg" alt="">
-                                            <a href="dettaglio-cane.php" class="btn">Adotta <img src="img/icon/w_pawprint.png" alt=""></a>
-                                        </div>
-                                        <div class="adoption-shop-content padding-bottom-15">
-                                            <!-- DA COMPONENTIZZARE NOME -->
-                                            <h4 class="title"><a href="shop-details.html">Mister Tartosh</a></h4>
-                                            <div class="adoption-meta">
-                                                <ul>
-                                                    <!-- DA COMPONENTIZZARE RAZZA E ETà -->
-                                                    <li><i class="fas fa-cog"></i><a href="#">Siberian Husky</a></li>
-                                                    <li><i class="far fa-calendar-alt"></i> Età: 6 mesi</li>
-                                                </ul>
-                                            </div>
-                                            <div class="adoption-rating">
-                                                <ul>
-                                                    <li class="heart">
-                                                        <div>
-                                                            <a class="wishlist-btn heart"><i class="fas fa-heart"></i></a>
-                                                        </div>
-                                                    </li>
-                                                    <!-- DA COMPONENTIZZARE SESSO -->
-                                                    <li class="price">Maschio</span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <[preferiti]>
                             </div>
                         </div>
-
-                        
                     </div>
                 </div>
             </div>
@@ -205,3 +93,9 @@
     </div>
 </section>
 <!-- shop-details-area-end -->
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script>
+     $(".cuore").each(function(){$(this).css("color", "rgb(127, 127, 127)")});
+    $(".cuore").each(function(){$(this).on("click", function(){$(this).css("color", $(this).css("color")=="rgb(255, 0, 0)"?"rgb(127, 127, 127)":"rgb(255, 0, 0)")})});
+</script>

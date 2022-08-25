@@ -4319,7 +4319,6 @@ label {
 
 .heart {
     font-size: 12px;
-    color:red;
     padding-left: 20px;
     background: #ffffff;
     border: hidden;
@@ -4336,6 +4335,10 @@ label {
 
 .table {
     color: #F5F2EB;
+}
+
+.cuore {
+    color: rgb(127, 127, 127);
 }
 
 

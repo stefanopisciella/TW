@@ -134,3 +134,9 @@
 
 
 </main>
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script>
+     $(".cuore").each(function(){$(this).css("color", "rgb(127, 127, 127)")});
+    $(".cuore").each(function(){$(this).on("click", function(){$(this).css("color", $(this).css("color")=="rgb(255, 0, 0)"?"rgb(127, 127, 127)":"rgb(255, 0, 0)")})});
+</script>
