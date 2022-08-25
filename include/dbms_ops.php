@@ -128,7 +128,7 @@
         global $mysqli;
 
         // preparo la query in base ai filtri selezionati
-        $query_1 = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND ";
+        $query_1 = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND adottato=false AND ";
         $query_2 =  "GROUP BY nome;";
 
         $filtri = "";
@@ -150,7 +150,40 @@
                 }
 
                 else if ($filtro == "eta") {
-                    
+
+                    // utilizzo l'ordinameto lessicografico
+
+                    // 6 mesi (escluso) o meno
+                    if ($val == 1) {
+                        $filtri = $filtri."STRCMP($filtro, '6m') = -1 AND $filtro LIKE '%m' AND ";
+                    }
+
+                    // 6-9 mesi  (6 incluso, 9 escluso)
+                    if ($val == 2) {
+                        $filtri = $filtri."( (STRCMP($filtro, '6m') = 1 OR STRCMP($filtro, '6m') = 0) AND STRCMP($filtro, '9m') = -1 ) AND $filtro LIKE '%m' AND ";
+                    }
+
+                    // 9 mesi-1 anno  (9 incluso, 1 escluso)
+                    if ($val == 3) {
+                        $filtri = $filtri."( (STRCMP($filtro, '9m') = 1 OR STRCMP($filtro, '9m') = 0) AND STRCMP($filtro, '1a') = -1 ) AND $filtro LIKE '%m' AND ";
+                    }
+
+                    // 1-2 anni  (1 incluso, 2 escluso)
+                    if ($val == 4) {
+                        //AND $filtro LIKE '%m'
+                        $filtri = $filtri."( (STRCMP($filtro, '1a') = 1 OR STRCMP($filtro, '1a') = 0) AND STRCMP($filtro, '2a') = -1 ) AND ";
+                    }
+
+                    // 2-5 anni (2 incluso, 5 escluso)
+                    if ($val == 5) {
+                        $filtri = $filtri."( (STRCMP($filtro, '2a') = 1 OR STRCMP($filtro, '2a') = 0) AND STRCMP($filtro, '5a') = -1 ) AND ";
+                    }
+
+                    // 5+ anni (5 incluso)
+                    if ($val == 6) {
+                        $filtri = $filtri."(STRCMP($filtro, '5a') = 1 OR STRCMP($filtro, '5a') = 0) AND ";
+                    }
+
                 }
 
                 // concateno il filtro di cui ho verificato che non sia nullo, quindi richiesto

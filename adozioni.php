@@ -82,7 +82,7 @@
         // caso senza filtri
         if ($no_filtri) {
             // preparo la query nel caso più semplice, cioè quello in cui non ci sono filtri
-            $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false GROUP BY nome;";
+            $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND cane.adottato = FALSE GROUP BY nome;";
 
             // eseguo la query
             try {
