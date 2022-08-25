@@ -71,75 +71,106 @@
         $head->close();
     } else {
         // caso in cui l'utente ha già visionato la pagina e fa "submit" del messaggio con
-        // il metodo POST
+        // il metodo POST oppure fa la richiesta di affido
         
         // quando il server S riceve una richiesta verso dettaglio-cane.php con il metodo 
         // post da parte del client C, S deve ricevere da C l'ID del cane di cui C sta 
-        // visualizzando i dettagli. In questo modo S sarà in grado di reindirizzare C alla
-        // pagina di dettaglio-cane relativa al cane con ID di cui sopra
+        // visualizzando i dettagli oppure per il quale vuole richiedere l'affido. In questo
+        // modo S sarà in grado di reindirizzare C alla pagina di dettaglio-cane relativa al 
+        // cane con ID di cui sopra
         
-        $param_name = 'id=';
-        // $param_value contiene l'id del cane
-        $param_value = $_POST['id'];
-        $messaggio = $_POST['message'];
-        $chip = get_chip_query($param_value);
+        // controlla se il client ha effettuato la richiesta di affido
+        if(isset($_POST['id_cane_affido']) && $_POST['id_cane_affido'] >= 1) {
+            // caso in cui il client effettua la richiesta di affido
 
-        // controlla che il messaggio non sia vuoto
-        if (!isset($messaggio) || strlen(trim($messaggio)) == 0)
-        {
-            // messaggio vuoto
-            header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
-            exit;
-        } else {
-            // messaggio non vuoto
-            $messaggio = trim($messaggio);
-            // controlla che il numero di caratteri del messaggio non superi il limite
-            if(strlen($messaggio) > $max_char_mex)
-            {
-                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&out_of_limit=1');
-                exit;
-            }
-        }
+            if(!isset($_SESSION['user_id'])) {
+                // caso in cui l'utente C non è loggato ==>non può effettuare la richiesta di
+                // affido. Pertanto C viene reindirizzato alla login
+                header("Location: login.php");
+                exit; 
+            } else {
+                $user_id = $_SESSION['user_id']; 
+                $id_cane = $_POST['id_cane_affido'];
+                // REMOVE
+                echo $id_cane;
+                $actual_date = date("Y/m/d");
 
-        if (!isset($_SESSION['user_id'])){
-            // utente non loggato ==> bisogna recuperare dalla form il nome e la email del
-            // client. Di conseguenza è anche necessario controllare la validità dell'email 
-            // inserita e che il campo del nome non sia nullo 
-            $email = $_POST['email'];
-            $nome = $_POST['name'];
-            $user_id = "NULL";
+                $affido = [$user_id, $id_cane, "'".$actual_date."'", "NULL"];
 
-            if (!isset($email) || strlen(trim($email)) == 0){
+                try {
+                    insert_query('richiesta_adozione', $affido);
+                    header("Location: operation-success.php?");
+                } catch (Exception $e){
 
-                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
-                exit;
-            }
-            
-            if (!isset($nome) || strlen(trim($nome)) == 0){
-                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
-                exit;
-            }
-
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&wrong_email=1');
-                exit;
+                }
             }
         } else {
-            // utente loggato ==> recuperiamo il nome e la email del client dal DB
-            $utente = get_user($_SESSION['user_id']); 
+            // caso in cui il client effettua la richiesta di informazione
+            if(isset($_POST['id_cane_info']) && $_POST['id_cane_info'] >= 1) {
+                // ?
+                $param_value = $_POST['id_cane_info'];
+                $param_name = 'id=';
+                
+                $messaggio = $_POST['message'];
+                $chip = get_chip_query($param_value);
+
+                // controlla che il messaggio non sia vuoto
+                if (!isset($messaggio) || strlen(trim($messaggio)) == 0)
+                {
+                    // messaggio vuoto
+                    header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
+                    exit;
+                } else {
+                    // messaggio non vuoto
+                    $messaggio = trim($messaggio);
+                    // controlla che il numero di caratteri del messaggio non superi il limite
+                    if(strlen($messaggio) > $max_char_mex)
+                    {
+                        header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&out_of_limit=1');
+                        exit;
+                    }
+                }
+
+                if (!isset($_SESSION['user_id'])){
+                    // utente non loggato ==> bisogna recuperare dalla form il nome e la email del
+                    // client. Di conseguenza è anche necessario controllare la validità dell'email 
+                    // inserita e che il campo del nome non sia nullo 
+                    $email = $_POST['email'];
+                    $nome = $_POST['name'];
+                    $user_id = "NULL";
+
+                    if (!isset($email) || strlen(trim($email)) == 0){
+                        header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
+                        exit;
+                    }
             
-            $user_id = $_SESSION['user_id'];
-            $email = $utente['email'];
-            $nome = $utente['nome'];
-        }
+                    if (!isset($nome) || strlen(trim($nome)) == 0){
+                        header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&empty_fields=1');
+                        exit;
+                    }
+
+                    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&wrong_email=1');
+                        exit;
+                    }
+                } else {
+                    // utente loggato ==> recuperiamo il nome e la email del client dal DB
+                    $utente = get_user($_SESSION['user_id']); 
+            
+                    $user_id = $_SESSION['user_id'];
+                    $email = $utente['email'];
+                    $nome = $utente['nome'];
+                }
         
-        $actual_date = date("Y/m/d");
-        $richiesta_info = [$user_id, "'".$nome."'", "'".$email."'", "'".$actual_date."'", "'".$chip."'", "'".$messaggio."'"];
-        try {
-            insert_query('richiesta_info', $richiesta_info);
-            header('Location: dettaglio-cane.php?' . $param_name . $param_value);
-        } catch (Exception $e){
-        
+                $actual_date = date("Y/m/d");
+                $richiesta_info = [$user_id, "'".$nome."'", "'".$email."'", "'".$actual_date."'", "'".$chip."'", "'".$messaggio."'"];
+                try {
+                    insert_query('richiesta_info', $richiesta_info);
+                    header('Location: dettaglio-cane.php?' . $param_name . $param_value);
+                } catch (Exception $e){
+                    echo $e;
+                }
+            }
         }
     }
 
