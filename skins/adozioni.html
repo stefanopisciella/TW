@@ -181,6 +181,8 @@
                                     title: "Preferito rimosso",
                                     text: "Hai rimosso " + dog_name + " dai tuoi preferiti",
                                     type: "success"
+                                }).then(function (){
+                                    $(heart).css("color", "rgb(127, 127, 127)");
                                 });
                             }
                         });
@@ -201,14 +203,12 @@
                                     title: "Preferito aggiunto",
                                     text: "Hai aggiunto " + dog_name + " ai tuoi preferiti",
                                     type: "success"
-                                });
+                                }).then(function (){
+                                    $(heart).css("color", "rgb(255, 0, 0)");
+                                });;
                             }
                         });
                     }
-
-                    $(heart).css("color",
-                        $(heart).css("color") == "rgb(255, 0, 0)" ?
-                            "rgb(127, 127, 127)" : "rgb(255, 0, 0)");
                 }
                 else
                 {
