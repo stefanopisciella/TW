@@ -30,6 +30,8 @@
         
         }
     } else {
+        $dettaglio_cane = new Template("skins/dettaglio-cane-a-distanza.html");
+
         // injection informazioni cane
         $id_cane = $_GET['id'];
         $query_info_cane = "SELECT nome, presentazione, sesso, eta, razza FROM cane WHERE ID = '{$id_cane}';";
