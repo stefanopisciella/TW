@@ -94,6 +94,7 @@ create table richiesta_info (
     ID_utente smallint,
 	nome varchar(50) not null,
 	email varchar(100) not null,
+    telefono char(10) not null,
     # CHECK
     `data` date not null,
     # 'chip char(15) not null' non deve essere "not null" perché si possono anche chiedere informazioni non necessariamente
@@ -421,6 +422,16 @@ INSERT INTO immagine(ID_cane, `path`, indice) VALUES
     # cane 17 
     (17, "immagini/17_1.jpeg", 1);
 
+# inserimento adozioni
+# Beatrice Tomassi adotta Calica
+INSERT INTO richiesta_adozione(ID_utente, ID_cane, `data`, documento) VALUES
+    (2, 2, "2022-06-12", "documenti_adozione/doc_adozione_1.pdf");
+
+# inserimento preferiti
+# Beatrice Tomassi ha tra i preferiti StarSky e Charly
+INSERT INTO preferiti(ID_utente, ID_cane) VALUES
+    (2, 11),
+    (2, 17);
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';

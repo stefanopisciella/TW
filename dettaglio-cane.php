@@ -27,7 +27,11 @@
         $dettaglio_cane->setContent("nome", $info_cane[0]["nome"]);
         $dettaglio_cane->setContent("presentazione", $info_cane[0]["presentazione"]);
         $dettaglio_cane->setContent("sesso", $info_cane[0]["sesso"]);
-        $dettaglio_cane->setContent("eta", $info_cane[0]["eta"]);
+        // sistemazione stringa età
+        $eta = $info_cane[0]["eta"];
+        if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+        else $eta = substr($eta, 0, -1)." mesi";
+        $dettaglio_cane->setContent("eta", $eta);
         $dettaglio_cane->setContent("razza", $info_cane[0]["razza"]);
         $dettaglio_cane->setContent("taglia", $info_cane[0]["taglia"]);
     }
