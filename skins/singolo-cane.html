@@ -1,11 +1,11 @@
 <[foreach]>
-<div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-6 anchestor">
     <div class="adoption-shop-item"> 
         <div class="adoption-shop-thumb">
             <img src="<[img]>" alt="">
             <a href="dettaglio-cane.php?id=<[id]>" class="btn">Adotta <img src="img/icon/w_pawprint.png" alt=""></a>
         </div>
-        <div class="adoption-shop-content padding-bottom-15">
+        <div class="dog_parent adoption-shop-content padding-bottom-15">
             <!-- DA COMPONENTIZZARE NOME -->
             <h4 class="title"><[nome]></h4>
             <div class="adoption-meta">
@@ -13,6 +13,9 @@
                     <!-- DA COMPONENTIZZARE RAZZA E ETà -->
                     <li><i class="fas fa-cog"></i><[razza]></li>
                     <li><i class="far fa-calendar-alt"></i> Età: <[eta]></li>
+
+                    <!-- HACKS -->
+                    <h6 class="CHIP" hidden><[CHIP]></h6>
                 </ul>
             </div>
             <div class="adoption-rating">

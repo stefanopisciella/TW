@@ -122,6 +122,69 @@
 
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script>
-     $(".cuore").each(function(){$(this).css("color", "rgb(127, 127, 127)")});
-    $(".cuore").each(function(){$(this).on("click", function(){$(this).css("color", $(this).css("color")=="rgb(255, 0, 0)"?"rgb(127, 127, 127)":"rgb(255, 0, 0)")})});
+
+
+    $.ajax({
+        url: 'include/ajax/find_favorites-ajax.php',
+        type: 'POST'
+    }).done(function (response) {
+        if (response == "")
+            $(".cuore").each( function(){
+                $(this).css("color", "rgb(127, 127, 127)");
+            });
+        else
+        {
+            let chips = JSON.parse(response);
+
+            $(".cuore").each( function(){
+                let chip = $(this).parents('.dog_parent').find('h6').text();
+
+                $(this).css("color", "rgb(127, 127, 127)");
+
+                var jthis = this;
+
+                chips.forEach(function (self, index){
+                    if (self == chip )
+                        $(jthis).css("color", "rgb(255, 0, 0)");
+                });
+            });
+        }
+    });
+
+    $(".cuore").each(function(){
+        var chip = $(this).parents('.dog_parent').find('h6').text();
+
+        $(this).on("click", function(){
+            if ($(this).css("color") == "rgb(255, 0, 0)")
+            {
+                $.ajax({
+                    url: 'include/ajax/set_favorites-ajax.php',
+                    type: 'POST',
+                    data: {
+                        setpref: "rem",
+                        IDD: chip
+                    }
+                }).done(function (response) {
+                    console.log(response);
+                });
+            }
+            else
+            {
+                $.ajax({
+                    url: 'include/ajax/set_favorites-ajax.php',
+                    type: 'POST',
+                    data: {
+                        setpref: "add",
+                        IDD: chip
+                    }
+                }).done(function (response) {
+                    console.log(response);
+                });
+            }
+
+
+        $(this).css("color",
+            $(this).css("color") == "rgb(255, 0, 0)" ? "rgb(127, 127, 127)" : "rgb(255, 0, 0)");
+        })
+    });
 </script>

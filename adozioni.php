@@ -82,7 +82,7 @@
         // caso senza filtri
         if ($no_filtri) {
             // preparo la query nel caso più semplice, cioè quello in cui non ci sono filtri
-            $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND cane.adottato = FALSE GROUP BY nome;";
+            $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, chip, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND cane.adottato = FALSE GROUP BY nome;";
 
             // eseguo la query
             try {
@@ -159,6 +159,7 @@
                 $singolo_cane->setContent("id", $cane['ID']);
                 $singolo_cane->setContent("nome", $cane['nome']);
                 $singolo_cane->setContent("razza", $cane['razza']);
+                $singolo_cane->setContent("CHIP", $cane['chip']);
 
                 // sistemazione stringa età
                 $eta = $cane['eta'];

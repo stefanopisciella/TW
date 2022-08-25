@@ -96,6 +96,31 @@
 
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script>
-     $(".cuore").each(function(){$(this).css("color", "rgb(127, 127, 127)")});
-    $(".cuore").each(function(){$(this).on("click", function(){$(this).css("color", $(this).css("color")=="rgb(255, 0, 0)"?"rgb(127, 127, 127)":"rgb(255, 0, 0)")})});
+     $(".cuore").each(function(){
+         $(this).css("color", "rgb(255, 0, 0)")
+     });
+
+
+     $(".cuore").each(function() {
+         var chip = $(this).parents('.dog_parent').find('h6').text();
+
+         var jthis = this;
+         $(this).on("click", function () {
+             if ($(this).css("color") == "rgb(255, 0, 0)") {
+                 $.ajax({
+                     url: 'include/ajax/set_favorites-ajax.php',
+                     type: 'POST',
+                     data: {
+                         setpref: "rem",
+                         IDD: chip
+                     }
+                 }).done(function (response) {
+                     if (response == "erased")
+                         $(jthis).parents('.anchestor').remove();
+                 });
+             }
+         })
+     });
+
+
 </script>

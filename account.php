@@ -61,7 +61,7 @@
 
     $singolo_cane = new Template("skins/singolo-cane.html");
 
-    $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane JOIN preferiti ON cane.ID = preferiti.ID_cane AND preferiti.ID_utente='{$user_id}' GROUP BY cane.ID;";
+    $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, chip, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane JOIN preferiti ON cane.ID = preferiti.ID_cane AND preferiti.ID_utente='{$user_id}' GROUP BY cane.ID;";
 
     // eseguo la query
     try {
@@ -77,6 +77,7 @@
         $singolo_cane->setContent("id", $row['ID']);
         $singolo_cane->setContent("nome", $row['nome']);
         $singolo_cane->setContent("razza", $row['razza']);
+        $singolo_cane->setContent("CHIP", $row['chip']);
 
         // sistemazione stringa età
         $eta = $row['eta'];
