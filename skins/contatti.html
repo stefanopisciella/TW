@@ -46,7 +46,7 @@
                                     <textarea name="message" id="message"></textarea>
                                 </div>
                                 <h6 style="color: red"><[error]></h6>
-                                <button class="width-70 login-btn btn-lg ">Invia<img src="img/icon/w_pawprint.png" alt=""></button>
+                                <button class="login-btn btn-lg" id="invioinformazione" style="margin-left: 37%;">Invia<img src="img/icon/w_pawprint.png" alt=""></button>
                                 <!-- <button type="button" class="btn rounded-btn">Invia</button> -->
                             </form>
                         </div>
@@ -95,3 +95,17 @@
 
 </main>
 <!-- main-area-end -->
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+
+<script>
+    $('#invioinformazione').on('click', function () {
+        swal({
+            text: "Messaggio inviato",
+            type: "success"
+        })
+        return false;
+        }
+    );
+</script>
