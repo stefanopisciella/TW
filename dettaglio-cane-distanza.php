@@ -22,7 +22,7 @@
     $dettaglio_cane->setContent("sesso", $info_cane[0]["sesso"]);
     $dettaglio_cane->setContent("eta", $info_cane[0]["eta"]);
     $dettaglio_cane->setContent("razza", $info_cane[0]["razza"]);
-
+    
     $head->setContent("contenuto", $dettaglio_cane->get());
     
     $head->close();
