@@ -11,7 +11,6 @@
     {
         // utente non amministratore loggato
         $head->setContent("label", "Profilo");
-        // non appena sarà pronto il file html del profilo, bisognerà modificare la riga sotto
         $head->setContent("url", "account.php");
     } else {
         // utente non loggato
