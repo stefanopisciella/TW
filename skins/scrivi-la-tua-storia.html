@@ -1,0 +1,56 @@
+<!-- main-area -->
+    <!-- blog-details-area -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-7">
+                <div class="container" style="padding-top: 70px;">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-7 col-lg-9">
+                            <div class="section-title text-center mb-65">
+                                <div class="section-icon"><img src="img/icon/pawprint.png" alt=""></div>
+                                <h5 class="sub-title">Raccontaci la tua storia</h5>
+                                <p>Qui puoi raccontare di come l'adozione di un cane ti abbia cambiato la vita.<br>
+                                Scegli una foto, scrivi il tuo articolo e la tua storia sarà pubblicata sul nostro blog!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="standard-blog-thumb" style="margin-top: 50px; margin-right: 25%;">
+                    <img src="img/blog/blog_thumb01.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card" style="margin-top: 50px; margin-right: 20%; margin-left: 20%;">
+                    <div id="editor">
+                        <p>Testo...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section" style="margin-left: 45%; margin-bottom: 50px; margin-top: 50px;">
+        <button class="login-btn btn-lg">Pubblica<img src="img/icon/w_pawprint.png" alt=""></button>
+    </section>
+    <!-- blog-details-area-end -->
+
+<!-- main-area-end -->
+
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script> -->
+<script src="js/ckeditor.min.js"></script>
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function (){
+        $(".ck.ck-toolbar__items").find("div.ck.ck-dropdown").each(function(){$(this).hide()})
+    });
+    ClassicEditor
+    .create(document.querySelector('#editor'))
+    .catch(error => {
+        console.error(error);
+    });
+</script>
