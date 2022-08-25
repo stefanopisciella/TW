@@ -20,7 +20,7 @@
             header("Location: login.php?wrong_credentials=1");
         } else {
             // cripta la password perché nel DB queste ultime non sono salvate in chiaro
-           // $password = md5(md5(md5(md5(md5($password)))));
+            $password = md5(md5(md5(md5(md5($password)))));
             $user_id = login_query($username, $password);
            
             if(isset($user_id) && $user_id >= 1) {

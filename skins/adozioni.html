@@ -120,6 +120,7 @@
     <!-- main-area-end -->
 </html>
 
+<script src="js/sweetalert.min.js"></script>
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script>
 
@@ -128,6 +129,7 @@
         url: 'include/ajax/find_favorites-ajax.php',
         type: 'POST'
     }).done(function (response) {
+        console.log(response + "ciao");
         if (response == "")
             $(".cuore").each( function(){
                 $(this).css("color", "rgb(127, 127, 127)");
@@ -153,6 +155,7 @@
 
     $(".cuore").each(function(){
         var chip = $(this).parents('.dog_parent').find('h6').text();
+        var chip = $(this).parents('.dog_parent').find('h4').text();
 
         $(this).on("click", function(){
             if ($(this).css("color") == "rgb(255, 0, 0)")
@@ -165,7 +168,14 @@
                         IDD: chip
                     }
                 }).done(function (response) {
-                    console.log(response);
+                    if (response == "erased")
+                    {
+                        swal({
+                            title: "Hai rimosso",
+                            text: "Messaggio inviato",
+                            type: "success"
+                        })
+                    }
                 });
             }
             else
