@@ -1,8 +1,17 @@
 <?php
+    require "frame-public.php";
 
-    include "include/template2.inc.php";
+    $nome_script = "account";
+    if(!isset($_SESSION['user_id']) ||
+    user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
+    {
+        // se il client non è loggato, viene reindirizzato alla home
+        header("Location: home.php");
+        exit;   
+    }
 
-    $head = new Template("skins/frame-public.html");
+    $user_id = $_SESSION['user_id'];
+
     $item = new Template("skins/account.html");
 
     $head->setContent("contenuto", $item->get());
