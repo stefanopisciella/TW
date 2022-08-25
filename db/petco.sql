@@ -94,7 +94,7 @@ create table richiesta_info (
     ID_utente smallint,
 	nome varchar(50) not null,
 	email varchar(100) not null,
-    telefono char(10) not null,
+    # telefono char(10) not null,
     # CHECK
     `data` date not null,
     # 'chip char(15) not null' non deve essere "not null" perché si possono anche chiedere informazioni non necessariamente
@@ -141,7 +141,7 @@ create table richiesta_adozione (
     ID_utente smallint not NULL,
     ID_cane smallint not null,
     `data` date not null,
-    documento varchar(400) not null,
+    documento varchar(400),
     constraint adozione_utente foreign key (ID_utente) references utente(ID) on update cascade on delete no action,
     constraint adozione_cane foreign key (ID_cane) references cane(ID) on update cascade on delete no action
 );
