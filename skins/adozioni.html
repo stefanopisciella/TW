@@ -45,7 +45,7 @@
                                     <form action="adozioni.php" method="POST" class="sidebar-find-pets">
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="sesso">sesso</label>
+                                                <label for="sesso">Sesso</label>
                                                 <div class="form-grp">
                                                     <i class="flaticon-sex" id="sesso"></i>
                                                     <select name="sesso" class="selected">
@@ -56,7 +56,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <label for="razza">razza</label>
+                                                <label for="razza">Razza</label>
                                                 <div class="form-grp">
                                                     <i class="flaticon-color-palette" id="razza"></i>
                                                     <select name="razza" class="selected">
@@ -67,7 +67,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <label for="taglia">taglia</label>
+                                                <label for="taglia">Taglia</label>
                                                 <div class="form-grp">
                                                     <i class="flaticon-sex" id="taglia"></i>
                                                     <select name="taglia" class="selected">
@@ -79,7 +79,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <label for="eta">età</label>
+                                                <label for="eta">Età</label>
                                                 <div class="form-grp">
                                                     <i class="flaticon-plus-18-movie" id="eta"></i>
                                                     <select name="eta" class="selected">
@@ -119,3 +119,9 @@
     </main>
     <!-- main-area-end -->
 </html>
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script>
+     $(".cuore").each(function(){$(this).css("color", "rgb(127, 127, 127)")});
+    $(".cuore").each(function(){$(this).on("click", function(){$(this).css("color", $(this).css("color")=="rgb(255, 0, 0)"?"rgb(127, 127, 127)":"rgb(255, 0, 0)")})});
+</script>
