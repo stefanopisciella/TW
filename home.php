@@ -12,7 +12,7 @@
     // inserimento 6 cani da adottare
 
     // query per ottenere 6 cani da mostrare in home (DATI E 1 IMMAGINE)
-    $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND distanza=false AND adottato=false GROUP BY nome ORDER BY RAND() LIMIT 6;";
+    $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, chip, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND distanza=false AND adottato=false GROUP BY nome ORDER BY RAND() LIMIT 6;";
 
     try {
         $oid = $mysqli->query($query_cani);
@@ -22,7 +22,8 @@
     }
 
     // preparo lo snippet di HTML che contiene i 6 cani
-    $cani_home = new Template("skins/cani-home.html");
+    //$cani_home = new Template("skins/cani-home.html");
+    $cani_home = new Template("skins/singolo-cane.html");
 
     // injection dati cani in cani_home.html
     while($row = mysqli_fetch_array($oid)) {
@@ -38,6 +39,7 @@
 
         $cani_home->setContent("sesso", $row['sesso']);
         $cani_home->setContent("razza", $row['razza']);
+        $cani_home->setContent("CHIP", $row['chip']);
         $cani_home->setContent("img", $row['img']);
     }
 
