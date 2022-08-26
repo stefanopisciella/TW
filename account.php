@@ -47,7 +47,7 @@
     catch (Exception $e) {
         throw new Exception("{$mysqli->errno}");
     }
-
+    
     while($row = mysqli_fetch_array($oid)) {
 
         $cani_adottati->setContent("nome", $row['nome']);

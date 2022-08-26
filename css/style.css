@@ -4341,6 +4341,26 @@ label {
     color: rgb(127, 127, 127);
 }
 
+.img-donazione {
+    background-image: url(../immagini/donazione.jpg);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40%;
+    height: 100%;
+}
+
+.h5-donazione {
+    font-size: 14px;
+    color: #6c6c6c;
+}
+
+.adozioni-over:hover {
+    color: #fff;
+}
+
 
 
 

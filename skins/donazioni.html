@@ -39,38 +39,36 @@
     <!-- end dperchè-->
 
     <!-- start donazione -->
-    <section class="faq-area faq-two-bg" style="background: border-box; margin: 0px 100px 100px 200px;">
-        <div class="faq-two-img"></div>
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-xl-7 col-lg-6">
-                    <div class="faq-wrapper">
-                        <div class="container" style="vertical-align: center;">
-                            <form action="donazioni.php" method="POST" class="sidebar-find-pets">
-                                <h3 for="importo" style="text-align: center;">Importo da donare:</h3>
-                                    <div class="row" style="margin-top: 25px;">
-                                        <div class="col-6" style="margin-left: 25%;">
-                                            <div class="form-grp">
-                                                <form action="donazioni.php" method="POST" class="contact-form">
-                                                    <div class="form-grp col-xl-9 col-lg-4">
-                                                        <input name="importo" type="number" id="name" style="text-align: center;">
-                                                        <input name="email" type="email" value="<[email]>" id="email" <[readonly]>>
-                                                        <button class="width-70 login-btn btn-lg ">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></button>
-                                                    </div>
-                                                </form>
+    <section style="margin-bottom: 100px;">
+        <div class="row">
+            <div class="col-lg-6 mt-2 d-none d-sm-block">
+                <img src="immagini/donazione.jpg" class="item-position-center2" style="margin-left: 100px; object-fit: cover;">
+            </div>
+            <div class="col-lg-6" style="margin-top: 100px;">
+                <div class="container" style="vertical-align: center;">
+                    <form action="donazioni.php" method="POST" class="sidebar-find-pets">
+                            <div class="row" style="margin-top: 25px;">
+                                <div class="col-lg-8">
+                                    <div class="form-grp">
+                                        <form action="donazioni.php" method="POST" class="contact-form">
+                                            <div class="form-grp col-xl-9 col-lg-4">
+                                                <h5 for="importo">Importo da donare:</h5>
+                                                <input name="importo" type="number" id="name" style="text-align: center;">
+                                                <h5 for="email" style="margin-top: 35px;">Email</h5>
+                                                <input name="email" type="email" value="<[email]>" id="email" <[readonly]>>
+                                                <button class="login-btn btn-lg" style="margin-top: 35px;">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></button>
                                             </div>
-                                        </div>
-                                        <div class="col-2" style="padding-top: 14px;">
-                                            <h5 style="text-align: left;">,00 €</h5>
-                                        </div>
+                                        </form>
                                     </div>
-                                    <div style="position: relative;">
-                                        <h5 style="color: red; margin-top: 10px; text-align: center;"><[error]></h5>
-                                        <!-- <button class="btn" style="margin-left: 29%; margin-top: 10px;">Prosegui con PayPal</button> -->
-                                    </div>
-                            </form>
-                        </div>
-                    </div>
+                                </div>
+                                <div class="col-lg-2" style="padding-top: 45px; margin-left: -17%;">
+                                    <h5 class="h5-donazione" style="text-align: left;">,00 €</h5>
+                                </div>
+                            </div>
+                            <div style="position: relative;">
+                                <h5 style="color: red; margin-top: 10px; text-align: center;"><[error]></h5>
+                            </div>
+                    </form>
                 </div>
             </div>
         </div>

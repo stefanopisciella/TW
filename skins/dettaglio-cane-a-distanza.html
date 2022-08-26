@@ -40,6 +40,9 @@
                             </div>
                         </div>
                         <!-- FINE --> 
+                        <div>                       
+                            <a class="btn" id="adotta">Adotta a distanza <img src="img/icon/w_pawprint.png" alt=""></a>
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -73,13 +76,13 @@
                                 </select>
                             </div>
                         </div>
-                    <button class="width-70 login-btn btn-lg ">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></button>
+                    <a class="width-70 login-btn btn-lg" id="paga" style="align-items: center; margin-top: 25px; margin-left: 18%;">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></a>
                     <!-- questo bottone non funziona
                     <a class="btn" id="paga" href="dettaglio-cane-distanza.php" style="align-items: center; margin-top: 25px;">Prosegui con PayPal</a>
                     -->
                     <!-- con questo input nascosto passo al server l'id del cane che il client sta visualizzando-->
                     <input id="input_with_dog_id" name="id" type="hidden" value="">
-                </form>
+            </form>
         </div>
     </section>
     <!-- end procedi alla donazione-->
@@ -87,7 +90,9 @@
 </main>
 <!-- main-area-end -->
 
-<!--<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+
 <script>
   $(document).ready(function () {
     $("#next-step").hide();  
@@ -96,15 +101,18 @@
   $("#adotta").on("click", function(e){
     e.preventDefault();
     $("#next-step").show();    
-    window.location.hash = 'adotta';
+    window.scrollTo(0, document.querySelector("#adotta").offsetTop);
   });
 
   $("#paga").on("click", function(e){
-    alert("Implementazione del pagamento");
+    swal({
+        title: "Pagamento effettuato",
+        type: "success"
+    })
   
   });
 
-</script>-->
+</script>
 
 <script>
     function set_dog_id() {
