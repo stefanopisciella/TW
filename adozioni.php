@@ -100,100 +100,109 @@
 
         // injection numero pagine: ceiling(num cani / num cani per pagina) (parte intera superiore)
         $num_cani = $oid2->num_rows;
-        // si fa visualizzare 9 cani per pagina
-        $num_pagine = ceil($num_cani/6);
 
-        $page_shifter = new Template("skins/page-shifter.html");
+        // se il numero dei cani è 0, cioè la ricerca non ha prodotto risultati, faccio visualizzare un messaggio carino
+        if ($num_cani == 0) {
+            $not_found = new Template("skins/not-found.html");
+            $adozioni->setContent("singolo_cane", $not_found->get());
+        }
 
-        // injection numero pagine
-        for ($i = 1; $i <= $num_pagine; ) {
+        else {
+            // si fa visualizzare 9 cani per pagina
+            $num_pagine = ceil($num_cani/6);
 
-            // se non ci sono filtri devo inserire nell'HTML dinamico solo l'informazione relativa al numero di pagina
-            if ($no_filtri) {
-                $page_shifter->setContent("page_no", $i++);
-                $page_shifter->setContent("filtri", "");
+            $page_shifter = new Template("skins/page-shifter.html");
+
+            // injection numero pagine
+            for ($i = 1; $i <= $num_pagine; ) {
+
+                // se non ci sono filtri devo inserire nell'HTML dinamico solo l'informazione relativa al numero di pagina
+                if ($no_filtri) {
+                    $page_shifter->setContent("page_no", $i++);
+                    $page_shifter->setContent("filtri", "");
+                }
+                // se invece ci sono i filtri, devo inserire anche l'informazione relativa
+                else {
+                    $page_shifter->setContent("page_no", $i++);
+                    global $arg;
+                    $url_filtri = "&";
+                    foreach ($arg as $curr => $val) {
+                        if ($val != null) {
+                            $url_filtri = $url_filtri."{$curr}={$val}&";
+                        }
+                    }
+                    $url_filtri = substr($url_filtri, 0, -1);
+                    $page_shifter->setContent("filtri", $url_filtri);
+                }
+                
             }
-            // se invece ci sono i filtri, devo inserire anche l'informazione relativa
-            else {
-                $page_shifter->setContent("page_no", $i++);
-                global $arg;
-                $url_filtri = "&";
-                foreach ($arg as $curr => $val) {
-                    if ($val != null) {
-                        $url_filtri = $url_filtri."{$curr}={$val}&";
+
+            $adozioni->setContent("page_shifter", $page_shifter->get());
+
+            // injection cani per pagina corrente
+            $singolo_cane = new Template("skins/singolo-cane.html");
+            // tengo memorizzati i cani (divisi per pagina) in un array: posizione 1 -> pagina 1, ..., posizione n -> pagina n
+
+            $cani_paginati = array();
+
+            // riempio l'array
+            for ($i = 0; $i < $num_pagine; $i++) {
+                $pag_corrente = array();
+                for ($j = 0; $j < 6; $j++) {
+                    $cane_corrente = $oid2->fetch_assoc();
+                    if ($cane_corrente != null) {
+                        array_push($pag_corrente, $cane_corrente);
                     }
                 }
-                $url_filtri = substr($url_filtri, 0, -1);
-                $page_shifter->setContent("filtri", $url_filtri);
+                array_push($cani_paginati, $pag_corrente);
             }
-            
-        }
 
-        $adozioni->setContent("page_shifter", $page_shifter->get());
+            // se la $_GET['page'] NON è settata, mostro i cani della prima pagina, altrimenti quelli della pagina selezionata
+            if (! isset($_GET['page'])) {
+                // mostra cani prima pagina
+                $cani_prima_pagina = $cani_paginati[0];
 
-        // injection cani per pagina corrente
-        $singolo_cane = new Template("skins/singolo-cane.html");
-        // tengo memorizzati i cani (divisi per pagina) in un array: posizione 1 -> pagina 1, ..., posizione n -> pagina n
+                foreach($cani_prima_pagina as $cane) {
+                    $singolo_cane->setContent("img", $cane['img']);
+                    $singolo_cane->setContent("id", $cane['ID']);
+                    $singolo_cane->setContent("nome", $cane['nome']);
+                    $singolo_cane->setContent("razza", $cane['razza']);
+                    $singolo_cane->setContent("CHIP", $cane['chip']);
 
-        $cani_paginati = array();
+                    // sistemazione stringa età
+                    $eta = $cane['eta'];
+                    if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+                    else $eta = substr($eta, 0, -1)." mesi";
+                    $singolo_cane->setContent("eta", $eta);
 
-        // riempio l'array
-        for ($i = 0; $i < $num_pagine; $i++) {
-            $pag_corrente = array();
-            for ($j = 0; $j < 6; $j++) {
-                $cane_corrente = $oid2->fetch_assoc();
-                if ($cane_corrente != null) {
-                    array_push($pag_corrente, $cane_corrente);
+                    $singolo_cane->setContent("sesso", $cane['sesso']);
                 }
-            }
-            array_push($cani_paginati, $pag_corrente);
-        }
 
-        // se la $_GET['page'] NON è settata, mostro i cani della prima pagina, altrimenti quelli della pagina selezionata
-        if (! isset($_GET['page'])) {
-            // mostra cani prima pagina
-            $cani_prima_pagina = $cani_paginati[0];
-
-            foreach($cani_prima_pagina as $cane) {
-                $singolo_cane->setContent("img", $cane['img']);
-                $singolo_cane->setContent("id", $cane['ID']);
-                $singolo_cane->setContent("nome", $cane['nome']);
-                $singolo_cane->setContent("razza", $cane['razza']);
-                $singolo_cane->setContent("CHIP", $cane['chip']);
-
-                // sistemazione stringa età
-                $eta = $cane['eta'];
-                if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
-                else $eta = substr($eta, 0, -1)." mesi";
-                $singolo_cane->setContent("eta", $eta);
-
-                $singolo_cane->setContent("sesso", $cane['sesso']);
+                $adozioni->setContent("singolo_cane", $singolo_cane->get());
             }
 
-            $adozioni->setContent("singolo_cane", $singolo_cane->get());
-        }
+            // mostra cani pagina selezionata
+            else {
+                
+                $cani_pagina_sel = $cani_paginati[$_GET['page']-1];
 
-        // mostra cani pagina selezionata
-        else {
-            
-            $cani_pagina_sel = $cani_paginati[$_GET['page']-1];
+                foreach($cani_pagina_sel as $cane) {
+                    $singolo_cane->setContent("img", $cane['img']);
+                    $singolo_cane->setContent("id", $cane['ID']);
+                    $singolo_cane->setContent("nome", $cane['nome']);
+                    $singolo_cane->setContent("razza", $cane['razza']);
 
-            foreach($cani_pagina_sel as $cane) {
-                $singolo_cane->setContent("img", $cane['img']);
-                $singolo_cane->setContent("id", $cane['ID']);
-                $singolo_cane->setContent("nome", $cane['nome']);
-                $singolo_cane->setContent("razza", $cane['razza']);
+                    // sistemazione stringa età
+                    $eta = $cane['eta'];
+                    if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
+                    else $eta = substr($eta, 0, -1)." mesi";
+                    $singolo_cane->setContent("eta", $eta);
 
-                // sistemazione stringa età
-                $eta = $cane['eta'];
-                if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
-                else $eta = substr($eta, 0, -1)." mesi";
-                $singolo_cane->setContent("eta", $eta);
+                    $singolo_cane->setContent("sesso", $cane['sesso']);
+                }
 
-                $singolo_cane->setContent("sesso", $cane['sesso']);
+                $adozioni->setContent("singolo_cane", $singolo_cane->get());
             }
-
-            $adozioni->setContent("singolo_cane", $singolo_cane->get());
         }
 
         // injection adozioni.html contenuto del frame-public
