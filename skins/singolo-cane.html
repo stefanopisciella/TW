@@ -33,3 +33,108 @@
     </div>
 </div>
 <[/foreach]>
+
+<script src="js/sweetalert.min.js"></script>
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script>
+
+
+    $.ajax({
+        url: 'include/ajax/find_favorites-ajax.php',
+        type: 'POST'
+    }).done(function (response) {
+        if (response == "null")
+            $(".cuore").each( function(){
+                $(this).css("color", "rgb(127, 127, 127)");
+            });
+        else
+        {
+            let chips = JSON.parse(response);
+
+            $(".cuore").each( function(){
+                let chip = $(this).parents('.dog_parent').find('h6').text();
+
+                $(this).css("color", "rgb(127, 127, 127)");
+
+                var jthis = this;
+
+                chips.forEach(function (self, index){
+                    if (self == chip )
+                        $(jthis).css("color", "rgb(255, 0, 0)");
+                });
+            });
+        }
+    });
+
+    $(".cuore").each(function(){
+        var chip     = $(this).parents('.dog_parent').find('h6').text();
+        var dog_name = $(this).parents('.dog_parent').find('h4').text();
+
+        $(this).on("click", function(){
+            let heart = this;
+
+            $.ajax({
+                url: 'include/ajax/check-if-user-is-logged-ajax.php',
+                type: 'POST'
+            }).done(function(response){
+                if (response == "1")
+                {
+                    if ($(heart).css("color") == "rgb(255, 0, 0)")
+                    {
+                        $.ajax({
+                            url: 'include/ajax/set_favorites-ajax.php',
+                            type: 'POST',
+                            data: {
+                                setpref: "rem",
+                                IDD: chip
+                            }
+                        }).done(function (response) {
+                            if (response == "erased")
+                            {
+                                swal({
+                                    title: "Preferito rimosso",
+                                    text: "Hai rimosso " + dog_name + " dai tuoi preferiti",
+                                    type: "success"
+                                }).then(function (){
+                                    $(heart).css("color", "rgb(127, 127, 127)");
+                                });
+                            }
+                        });
+                    }
+                    else
+                    {
+                        $.ajax({
+                            url: 'include/ajax/set_favorites-ajax.php',
+                            type: 'POST',
+                            data: {
+                                setpref: "add",
+                                IDD: chip
+                            }
+                        }).done(function (response) {
+                            if (response == "added")
+                            {
+                                swal({
+                                    title: "Preferito aggiunto",
+                                    text: "Hai aggiunto " + dog_name + " ai tuoi preferiti",
+                                    type: "success"
+                                }).then(function (){
+                                    $(heart).css("color", "rgb(255, 0, 0)");
+                                });;
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    swal({
+                        title: "Attenzione",
+                        text: "Devi effettuare il login per aggiungere un cane nei tuoi preferiti",
+                        type: "error"
+                    }).then(function (){
+                        window.location.href = "login.php";
+                    });
+                }
+            });
+        })
+    });
+</script>

@@ -108,7 +108,7 @@
         }
 
         else {
-            // si fa visualizzare 9 cani per pagina
+            // si fa visualizzare 6 cani per pagina
             $num_pagine = ceil($num_cani/6);
 
             $page_shifter = new Template("skins/page-shifter.html");
@@ -191,6 +191,7 @@
                     $singolo_cane->setContent("id", $cane['ID']);
                     $singolo_cane->setContent("nome", $cane['nome']);
                     $singolo_cane->setContent("razza", $cane['razza']);
+                    $singolo_cane->setContent("CHIP", $cane['chip']);
 
                     // sistemazione stringa età
                     $eta = $cane['eta'];
