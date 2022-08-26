@@ -128,7 +128,7 @@
         global $mysqli;
 
         // preparo la query in base ai filtri selezionati
-        $query_1 = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND adottato=false AND ";
+        $query_1 = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, chip, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND adottato=false AND ";
         $query_2 =  "GROUP BY nome;";
 
         $filtri = "";
