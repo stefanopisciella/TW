@@ -93,7 +93,7 @@ create table richiesta_info (
     # 'ID_utente smallint not null' non deve essere "not null" perché anche un utente non loggato può fare la richiesta info
     ID_utente smallint,
 	nome varchar(50) not null,
-    cognome varchar(50) not null,
+    # cognome varchar(50) not null,
 	email varchar(100) not null,
     # telefono char(10) not null,
     # CHECK
