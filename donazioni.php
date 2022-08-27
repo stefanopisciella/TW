@@ -87,7 +87,7 @@
         $donazione = [$importo, "'".$email."'", "'".$actual_date."'"];
         try {
             insert_query('donazione', $donazione);
-            header("Location: donazioni.php?");
+            header("Location: donazioni.php?success=1");
         } catch (Exception $e){
         
         }
