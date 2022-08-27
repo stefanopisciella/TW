@@ -120,14 +120,23 @@
         // estrae la query string dall'url che il client sta visitanto
         const params = new URLSearchParams(window.location.search);
         
-        if(params.has('success')) {
+        if(params.has('success_info')) {
             // caso in cui la richiesta d'informazione è stata inviata correttamente
             swal({
                 text: "Messaggio inviato",
                 type: "success"
             })
             return false;     
-        }   
+        }
+
+        if(params.has('success_affido')) {
+            // caso in cui la richiesta di affido è stata inviata correttamente
+            swal({
+                text: "Richiesta effettuata con successo",
+                type: "success"
+            })
+            return false;     
+        }
     } 
 
     function set_dog_id(input_id) {

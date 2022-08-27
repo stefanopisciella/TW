@@ -90,16 +90,15 @@
                 exit; 
             } else {
                 $user_id = $_SESSION['user_id']; 
-                $id_cane = $_POST['id_cane_affido'];
-                // REMOVE
-                echo $id_cane;
+                $param_value = $_POST['id_cane_affido'];
+                $param_name = 'id=';
                 $actual_date = date("Y/m/d");
 
-                $affido = [$user_id, $id_cane, "'".$actual_date."'", "NULL"];
+                $affido = [$user_id, $param_value, "'".$actual_date."'", "NULL"];
 
                 try {
                     insert_query('richiesta_adozione', $affido);
-                    header("Location: operation-success.php?");
+                    header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&success_affido=1');
                 } catch (Exception $e){
 
                 }
@@ -167,7 +166,7 @@
                 $richiesta_info = [$user_id, "'".$nome."'", "'".$email."'", "'".$actual_date."'", "'".$chip."'", "'".$messaggio."'"];
                 try {
                     insert_query('richiesta_info', $richiesta_info);
-                    header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&success=1');
+                    header('Location: dettaglio-cane.php?' . $param_name . $param_value . '&success_info=1');
                 } catch (Exception $e){
                     echo $e;
                 }
