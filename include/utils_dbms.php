@@ -86,7 +86,8 @@
     
         // crea la stringa che rappresenta la query, con nome della tabella e valori passati
         $query = "INSERT INTO {$nome_tabella} ({$colonne}) VALUES ({$_valori});";
-        echo $query;
+        // REMOVE
+        // echo $query;
 
         // mando la query
         global $mysqli;
