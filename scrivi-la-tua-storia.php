@@ -11,6 +11,7 @@ require "include/utils_dbms.php";
     }
 
     $max_char_title = 100; 
+    $max_img_size = 5000000;
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         // caso in cui il client carica la pagina con il metodo GET
         $item = new Template("skins/scrivi-la-tua-storia.html");
@@ -23,11 +24,27 @@ require "include/utils_dbms.php";
         }
 
         if(isset($_GET['title_out_of_limit']) && $_GET['title_out_of_limit'] == 1){
-            $item->setContent("error", "Il testo non può avere più di $max_char_content caratteri");
+            $item->setContent("error", "Il titolo non può avere più di $max_char_title caratteri");
             $head->setContent("contenuto", $item->get());
             $head->close();
             exit;
         } 
+
+        if(isset($_GET['img_size_error']) && $_GET['img_size_error'] == 1){
+            $readble_size = $max_img_size/1000000;
+            
+            $item->setContent("error", "L'immagine non può avere dimensioni maggiori di $readble_size" . "MB");
+            $head->setContent("contenuto", $item->get());
+            $head->close();
+            exit;
+        } 
+
+        if (isset ($_GET['img_upload_error']) && $_GET['img_upload_error'] == 1) {
+            $item->setContent("error", "Non è stato possibile caricare l'immagine");
+            $head->setContent("contenuto", $item->get());
+            $head->close();
+            exit; 
+        }
 
         $head->setContent("contenuto", $item->get());
         $head->close();
@@ -80,9 +97,16 @@ require "include/utils_dbms.php";
     }
 
     function upload_image() {
-        // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini con dimensione maggiore ai 20MB
-        if ($_FILES["image-input"]["size"] > 20000000) {
-            echo "Sorry, your file is too large.";
+        // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini con
+        // dimensione maggiore ai 5MB
+        if(isset($_FILES["image"]["tmp_name"])) {
+            if ($_FILES["image"]["size"] > $GLOBALS['max_img_size']) {
+            header("Location: scrivi-la-tua-storia.php?img_size_error=1");
+            exit;
+        } else {
+                // caso in cui l'utente non ha caricato alcuna immagine per l'articolo
+                return "img/blog/default_img.jpg"; // è il path dell'immagine di default
+            }
         }
   
         // fissa il vincolo per il quale è consentito caricare soltanto immagini con formato .png oppure .jpeg
@@ -96,16 +120,14 @@ require "include/utils_dbms.php";
             // estensione file non consentito ==> eccezione
         }
   
-        $images_dir = "uploads/";   
-        // si assegna all'immagine un nome casuale per garantire l'univocità dei nomi delle immagini (azione necessaria per evitare errori a 
-        // livello di filesystem)
-        $path_image = $images_dir . "img_" . random_int(1,10000) . "." . $imageFileType;
+        $images_dir = "immagini/";   
+        // si assegna all'immagine un nome casuale per garantire l'univocità dei nomi delle
+        //  immagini (azione necessaria per evitare errori a livello di filesystem)
+        $path_image = $images_dir . "img_" . random_int(1, 10000) . "." . $imageFileType;
   
-       
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $path_image)) {
-            echo "The file ". htmlspecialchars( basename( $_FILES["image"]["name"])). " has been uploaded.";
-        } else {
-                echo "Sorry, there was an error uploading your file.";
+        // "tmp_name" è il path dove il server salva temporaneamente il file caricato
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $path_image)) {
+            header("Location: scrivi-la-tua-storia.php?img_upload_error=1");            
         }
 
         return $path_image;
