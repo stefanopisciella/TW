@@ -2,55 +2,87 @@
     <!-- blog-details-area -->
 
     <section class="section">
-        <div class="row">
-            <div class="col-7">
-                <div class="container" style="padding-top: 70px;">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-7 col-lg-9">
-                            <div class="section-title text-center mb-65">
-                                <div class="section-icon"><img src="img/icon/pawprint.png" alt=""></div>
-                                <h5 class="sub-title">Raccontaci la tua storia</h5>
-                                <p>Qui puoi raccontare di come l'adozione di un cane ti abbia cambiato la vita.<br>
-                                Scegli una foto, scrivi il tuo articolo e la tua storia sarà pubblicata sul nostro blog!</p>
+        <form action="scrivi-la-tua-storia.php" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-7">
+                    <div class="container" style="padding-top: 70px;">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-7 col-lg-9">
+                                <div class="section-title text-center mb-65">
+                                    <div class="section-icon">
+                                        <img src="img/icon/pawprint.png" alt="">
+                                    </div>
+                                    <h5 class="sub-title">Raccontaci la tua storia</h5>
+                                    <p>Qui puoi raccontare di come l'adozione di un cane ti abbia cambiato la vita.<br>
+                                    Scegli una foto, scrivi il tuo articolo e la tua storia sarà pubblicata sul nostro blog!</p>
+                                </div>
+                                <div>
+                                    <!-- caricamento dell'immagine-->
+                                    <input type="file" name="image" id="image" accept="image/png, image/jpeg">
+                                </div>
+                                <!-- input del titol articolo-->
+                                <div>
+                                    <label for="sesso">Titolo</label>
+                                    <input name="titolo" type="text" value="" id="titolo">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-5">
-                <div class="standard-blog-thumb" style="margin-top: 50px; margin-right: 25%;">
-                    <img src="img/blog/blog_thumb01.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card" style="margin-top: 50px; margin-right: 20%; margin-left: 20%;">
-                    <div id="editor">
-                        <!--<p>Testo...</p>-->
+                <div class="col-5">
+                    <div class="standard-blog-thumb" style="margin-top: 50px; margin-right: 25%;">
+                        <!-- <img src="" alt="" id="display-image"> -->
+                        <div id="display-image"></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" style="margin-left: 45%; margin-bottom: 50px; margin-top: 50px;">
-        <button class="login-btn btn-lg">Pubblica<img src="img/icon/w_pawprint.png" alt=""></button>
+                <!-- text editor -->
+                <textarea id="editor" name="testo" value="">
+                    &lt;p&gt;This is some sample content.&lt;/p&gt;
+                </textarea>
+                <!-- label di errore -->
+                <h6 style="color: red"><[error]></h6>
+                <section class="section" style="margin-left: 45%; margin-bottom: 50px; margin-top: 50px;">
+                    <button class="login-btn btn-lg">Pubblica<img src="img/icon/w_pawprint.png" alt=""></button>
+                </section>
+        </form>
     </section>
     <!-- blog-details-area-end -->
 
 <!-- main-area-end -->
 
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script> -->
-<script src="js/ckeditor.min.js"></script>
-<script src="js/vendor/jquery-3.6.0.min.js"></script>
 
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 <script>
-    $(document).ready(function (){
-        $(".ck.ck-toolbar__items").find("div.ck.ck-dropdown").each(function(){$(this).hide()})
-    });
+    // implementazione dell'editor di testo per scrivere l'articolo
     ClassicEditor
-    .create(document.querySelector('#editor'))
-    .catch(error => {
-        console.error(error);
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+    // visualizzazione dell'immagine caricata
+    const image_input = document.querySelector("#image");
+    
+    image_input.addEventListener("change", function() {
+        console.log(image_input.value);
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            const uploaded_image = reader.result;
+            document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+        });
+        
+        reader.readAsDataURL(this.files[0]);
     });
 </script>
+
+<style>
+    #display-image{
+        width: 400px;
+        height: 225px;
+        border: 1px solid black;
+        background-position: center;
+        background-size: cover;
+    }
+</style>

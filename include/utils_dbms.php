@@ -86,14 +86,14 @@
     
         // crea la stringa che rappresenta la query, con nome della tabella e valori passati
         $query = "INSERT INTO {$nome_tabella} ({$colonne}) VALUES ({$_valori});";
-        // REMOVE
-        // echo $query;
 
         // mando la query
         global $mysqli;
 
         try {
             $mysqli->query($query);
+            $last_insert_id = $mysqli->insert_id;
+            return $last_insert_id;
         }
         catch (Exception $e) {
             
