@@ -3,6 +3,9 @@
     require "include/php-utils/varie.php";
     require "frame-public.php";
 
+    // per il redirect allo script "blog" una volta effettuato il login
+    $_SESSION['previous_page'] = 'blog';
+
     global $mysqli;
 
     $blog = new Template("skins/blog.html");
