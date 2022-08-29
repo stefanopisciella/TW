@@ -92,6 +92,8 @@
 
         try {
             $mysqli->query($query);
+            $last_insert_id = $mysqli->insert_id;
+            return $last_insert_id;
         }
         catch (Exception $e) {
             

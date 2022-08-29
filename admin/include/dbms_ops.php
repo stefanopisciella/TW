@@ -102,6 +102,126 @@
 
     }
 
-    
+    /**
+     * Funzione che restituisce le informazioni di un utente dato il suo ID
+     */
+    function get_user($id_utente) {
+        global $mysqli;
+        $query = "SELECT * FROM utente u WHERE u.ID='{$id_utente}';";
 
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            throw new Exception("errno: {$mysqli->errno}");
+        }
+
+        $rows = $oid->fetch_all(MYSQLI_ASSOC);
+
+        return $rows[0];
+    }
+
+    /**
+     * Funzione che restituisce i cani in base ai flitri selezionati
+     */
+    function get_dogs_filtered($arg) {
+        global $mysqli;
+
+        // preparo la query in base ai filtri selezionati
+        $query_1 = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, chip, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=false AND adottato=false AND ";
+        $query_2 =  "GROUP BY nome;";
+
+        $filtri = "";
+
+        foreach($arg as $filtro => $val) {
+            if ($val != null) {
+
+                // dato che per la razza mi viene passato l'id, devo cercarne il nome per riusicre a fare la query sulla tabella cane
+                // quindi estrapolo, dato l'id, il nome della razza richiesta
+                if ($filtro == "razza") {
+                    try {
+                        $res = mysqli_fetch_array($mysqli->query("SELECT nome FROM razza WHERE ID = '{$val}';"));
+                        $razza = $res['nome'];
+                    }
+                    catch (Exception $e) {
+                        throw new Exception("{$mysqli->errno}");
+                    }
+                    $filtri = $filtri."{$filtro}='{$razza}' AND ";
+                }
+
+                else if ($filtro == "eta") {
+
+                    // utilizzo l'ordinameto lessicografico
+
+                    // 6 mesi (escluso) o meno
+                    if ($val == 1) {
+                        $filtri = $filtri."STRCMP($filtro, '6m') = -1 AND $filtro LIKE '%m' AND ";
+                    }
+
+                    // 6-9 mesi  (6 incluso, 9 escluso)
+                    if ($val == 2) {
+                        $filtri = $filtri."( (STRCMP($filtro, '6m') = 1 OR STRCMP($filtro, '6m') = 0) AND STRCMP($filtro, '9m') = -1 ) AND $filtro LIKE '%m' AND ";
+                    }
+
+                    // 9 mesi-1 anno  (9 incluso, 1 escluso)
+                    if ($val == 3) {
+                        $filtri = $filtri."( (STRCMP($filtro, '9m') = 1 OR STRCMP($filtro, '9m') = 0) AND STRCMP($filtro, '1a') = -1 ) AND $filtro LIKE '%m' AND ";
+                    }
+
+                    // 1-2 anni  (1 incluso, 2 escluso)
+                    if ($val == 4) {
+                        //AND $filtro LIKE '%m'
+                        $filtri = $filtri."( (STRCMP($filtro, '1a') = 1 OR STRCMP($filtro, '1a') = 0) AND STRCMP($filtro, '2a') = -1 ) AND ";
+                    }
+
+                    // 2-5 anni (2 incluso, 5 escluso)
+                    if ($val == 5) {
+                        $filtri = $filtri."( (STRCMP($filtro, '2a') = 1 OR STRCMP($filtro, '2a') = 0) AND STRCMP($filtro, '5a') = -1 ) AND ";
+                    }
+
+                    // 5+ anni (5 incluso)
+                    if ($val == 6) {
+                        $filtri = $filtri."(STRCMP($filtro, '5a') = 1 OR STRCMP($filtro, '5a') = 0) AND ";
+                    }
+
+                }
+
+                // concateno il filtro di cui ho verificato che non sia nullo, quindi richiesto
+                else $filtri = $filtri."{$filtro}='{$val}' AND ";
+            }
+        }
+
+        // rimuovo l'ultimo 'AND' dalla striga $filtri
+        $filtri = substr($filtri, 0, -5);
+    
+        // compongo le stringhe a formare la stringha che rappresenta la query
+        $query_cani = $query_1.$filtri.$query_2;
+
+        // eseguo la query
+        try {
+            return $mysqli->query($query_cani);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+    }
+
+    /**
+     * Funzione che restituisce le informazioni di una categoria dato il suo ID
+     */
+    function get_categoria($id_categoria) {
+        global $mysqli;
+        $query = "SELECT * FROM categoria c WHERE c.ID='{$id_categoria}';";
+
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            throw new Exception("errno: {$mysqli->errno}");
+        }
+
+        $rows = $oid->fetch_all(MYSQLI_ASSOC);
+
+        return $rows[0];
+    }
 ?>
