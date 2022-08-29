@@ -3,9 +3,8 @@
     require "include/dbms_ops.php";
 
     $main = new Template("skins/frame-private.html");
-    $item = new Template("skins/lista-cani-admin.html");
+    $item = new Template("skins/listaprova.html");
 
     $main->setContent("contenuto", $item->get());
     $main->close(); 
 ?>
-
