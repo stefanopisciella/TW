@@ -2,6 +2,9 @@
     require "include/utils_dbms.php";
     require "frame-public.php";
 
+    // per il redirect allo script "donazioni" una volta effettuato il login
+    $_SESSION['previous_page'] = 'donazioni';
+
     $donazioni = new Template("skins/donazioni.html");
   
     if ($_SERVER["REQUEST_METHOD"] == "GET") {

@@ -2,6 +2,9 @@
     require "include/dbms.inc.php";
     require "frame-public.php";
 
+    // per il redirect allo script "faq" una volta effettuato il login
+    $_SESSION['previous_page'] = 'faq';
+
     global $mysqli;
 
     $faq = new Template("skins/faq.html");
