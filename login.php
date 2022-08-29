@@ -43,6 +43,14 @@
                     if(isset($_SESSION['previous_page'])) {
                         // caso in cui il client ha visitato un'altra pagina di petco prima di 
                         // visualizzare la pagina di login
+                        if(isset($_SESSION['query_string'])) {
+                            // caso in cui l'url della pagina visitata dal client prima di 
+                            // visitare la pagina di login non ha query string
+                            header('location:' . $_SESSION['previous_page'] . '.php?' . $_SESSION['query_string']);
+                            exit;
+                        }
+                        // caso in cui l'url della pagina visitata dal client prima di visitare 
+                        // la pagina di login non ha query string
                         header('location:' . $_SESSION['previous_page'] . '.php?');
                         exit;
                     }
