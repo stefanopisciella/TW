@@ -77,3 +77,27 @@
 
 </main>
 <!-- main-area-end -->
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+
+<script>
+    // per far comparire l'alert in seguito al pagamento
+    $( document ).ready(function() {
+        myFunc();
+    });
+
+    function myFunc() {
+        // estrae la query string dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        if(params.has('success')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "Donazione effettuata con successo",
+                type: "success"
+            })
+            return false;     
+        }   
+    } 
+</script>

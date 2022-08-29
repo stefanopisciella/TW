@@ -93,9 +93,9 @@
         $richiesta_info = [$user_id, "'".$nome."'", "'".$email."'", "'".$actual_date."'", "NULL", "'".$messaggio."'"];
         try {
             insert_query('richiesta_info', $richiesta_info);
-            header("Location: contatti.php?");
+            header("Location: contatti.php?success=1");
         } catch (Exception $e){
-        
+            
         }
     }
     

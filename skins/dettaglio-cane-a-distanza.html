@@ -76,7 +76,9 @@
                                 </select>
                             </div>
                         </div>
-                    <a class="width-70 login-btn btn-lg" id="paga" style="align-items: center; margin-top: 25px; margin-left: 18%;">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></a>
+                    
+                    <button class="width-70 login-btn btn-lg" id="paga" style="align-items: center; margin-top: 25px; margin-left: 18%;">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt="Prosegui con PayPal"></button>
+                    <!--<a class="width-70 login-btn btn-lg" id="paga" style="align-items: center; margin-top: 25px; margin-left: 18%;">Prosegui con PayPal<img src="img/icon/w_pawprint.png" alt=""></a> -->
                     <!-- questo bottone non funziona
                     <a class="btn" id="paga" href="dettaglio-cane-distanza.php" style="align-items: center; margin-top: 25px;">Prosegui con PayPal</a>
                     -->
@@ -94,41 +96,51 @@
 <script src="js/sweetalert.min.js"></script>
 
 <script>
-  $(document).ready(function () {
-    $("#next-step").hide();  
-  });
+    // per effettuare lo scroll della pagina una volta premuto il bottone "Adotta A Distanza"
+    $(document).ready(function () {
+        $("#next-step").hide();  
+    });
 
-  $("#adotta").on("click", function(e){
-    e.preventDefault();
-    $("#next-step").show();    
-    window.scrollTo(0, document.querySelector("#adotta").offsetTop);
-  });
+    $("#adotta").on("click", function(e){
+        e.preventDefault();
+        $("#next-step").show();    
+        window.scrollTo(0, document.querySelector("#adotta").offsetTop);
+    });
 
-  $("#paga").on("click", function(e){
-    swal({
-        title: "Pagamento effettuato",
-        type: "success"
-    })
-  
-  });
+    // per far comparire l'alert in seguito al pagamento
+    $( document ).ready(function() {
+        myFunc();
+    });
+
+    function myFunc() {
+        // estrae la query string dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        if(params.has('success')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "Pagamento effettuato",
+                type: "success"
+            })
+            return false;     
+        }   
+    } 
 
 </script>
 
 <script>
     function set_dog_id() {
-        // estrae l'url del sito che il client sta visitando
-        // let url = window.location.href; 
-        // cerca l'id del cane dall'URL della pagina che il client sta visitando
-        
-        // estrae la query string
+        // estrae la query string B dall'url che il client sta visitanto
         const params = new URLSearchParams(window.location.search);
         
         let param_value = null;
         if(params.has('id')) {
+            // estrae da B il valore dell'attributo "id" (l'attributo "id" contiene il valore
+            // dell'id del cane)
             param_value = params.get('id');
         }
         
-        // seleziono l'input A che avrà come valore l'id del cane
+        // seleziono l'input A che è nascosto all'utente
         let input  = document.querySelector('#input_with_dog_id');
         // setto il valore di A con l'id del cane
         input.setAttribute('value', param_value);

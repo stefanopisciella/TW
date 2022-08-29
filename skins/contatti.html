@@ -100,6 +100,7 @@
 <script src="js/sweetalert.min.js"></script>
 
 <script>
+    /*
     $('#invioinformazione').on('click', function () {
         swal({
             text: "Messaggio inviato",
@@ -107,5 +108,30 @@
         })
         return false;
         }
-    );
+    ); */
+
+    /*
+    $('#invioinformazione').on('click', function () {
+        myFunc();
+        }
+    );*/
+
+    $( document ).ready(function() {
+        myFunc();
+    });
+
+
+    function myFunc() {
+        // estrae la query string dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        if(params.has('success')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "Messaggio inviato",
+                type: "success"
+            })
+            return false;     
+        }   
+    } 
 </script>

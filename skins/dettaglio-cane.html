@@ -107,27 +107,37 @@
 </main>
 <!-- main-area-end -->
 
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+
 <script>
-    /*
-    function set_dog_id() {
-        // estrae l'url del sito che il client sta visitando
-        // let url = window.location.href; 
-        // cerca l'id del cane dall'URL della pagina che il client sta visitando
-        
-        // estrae la query string
+    // per far comparire l'alert in seguito al pagamento
+    $( document ).ready(function() {
+        myFunc();
+    });
+
+    function myFunc() {
+        // estrae la query string dall'url che il client sta visitanto
         const params = new URLSearchParams(window.location.search);
         
-        let param_value = null;
-        if(params.has('id')) {
-            param_value = params.get('id');
+        if(params.has('success_info')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "Messaggio inviato",
+                type: "success"
+            })
+            return false;     
         }
-        
-        // seleziono l'input A che avrà come valore l'id del cane
-        let input  = document.querySelector('#richiedi_affido');
-        //let input  = document.querySelector('#input_with_dog_id');
-        // setto il valore di A con l'id del cane
-        input.setAttribute('value', param_value);
-    } */
+
+        if(params.has('success_affido')) {
+            // caso in cui la richiesta di affido è stata inviata correttamente
+            swal({
+                text: "Richiesta effettuata con successo",
+                type: "success"
+            })
+            return false;     
+        }
+    } 
 
     function set_dog_id(input_id) {
         // estrae la query string B dall'url che il client sta visitanto

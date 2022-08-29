@@ -205,4 +205,23 @@
             throw new Exception("{$mysqli->errno}");
         }
     }
+
+    /**
+     * Funzione che restituisce le informazioni di una categoria dato il suo ID
+     */
+    function get_categoria($id_categoria) {
+        global $mysqli;
+        $query = "SELECT * FROM categoria c WHERE c.ID='{$id_categoria}';";
+
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            throw new Exception("errno: {$mysqli->errno}");
+        }
+
+        $rows = $oid->fetch_all(MYSQLI_ASSOC);
+
+        return $rows[0];
+    }
 ?>

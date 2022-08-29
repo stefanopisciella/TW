@@ -13,18 +13,21 @@
             } else {
                 // caso in cui l'utente è loggato
                 $user_id = $_SESSION['user_id']; 
-                $id_cane = $_POST['id'];
+                $param_name = 'id=';
+                // $param_value contiene l'ID del cane per il quale l'utente ha effettuato
+                // la donazione a distanza
+                $param_value = $_POST['id'];
                 $importo = $_POST['importo'];
                 $cadenza = $_POST['cadenza']; 
                 $actual_date = date("Y/m/d");
 
-                $adozione = [$user_id, $id_cane, $cadenza, "'".$actual_date."'", $importo];
+                $adozione = [$user_id, $param_value, $cadenza, "'".$actual_date."'", $importo];
 
                 try {
                     insert_query('adozione_distanza', $adozione);
-                    header("Location: operation-success.php?");
+                    header('Location: dettaglio-cane-distanza.php?' . $param_name . $param_value . '&success=1');
                 } catch (Exception $e){
-                    echo $e;
+                    
                 }
             }
         
