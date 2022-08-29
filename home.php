@@ -4,6 +4,9 @@
     require "include/php-utils/varie.php";
     require "frame-public.php";
 
+    // per il redirect allo script "home" una volta effettuato il login
+    $_SESSION['previous_page'] = 'home';
+
     $home = new Template("skins/home.html");
 
     global $mysqli;

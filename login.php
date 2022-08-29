@@ -39,6 +39,16 @@
                     // il client C è un utente normale ==> a C viene revocata l'autorizzazione
                     // di eseguire gli script della dashboard dedicata all'admin
                     $_SESSION['admin'] = false;
+                    
+                    if(isset($_SESSION['previous_page'])) {
+                        // caso in cui il client ha visitato un'altra pagina di petco prima di 
+                        // visualizzare la pagina di login
+                        header('location:' . $_SESSION['previous_page'] . '.php?');
+                        exit;
+                    }
+                    
+                    // caso in cui il client visita la pagina di login prima di qualsiasi 
+                    // altra pagina di petco
                     header("Location: home.php?");
                 }
             } else {
