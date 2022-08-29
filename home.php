@@ -4,6 +4,7 @@
     require "include/php-utils/varie.php";
     require "frame-public.php";
 
+    // forse potrebbe essere necessario mettere in sessione anche la query string
     // per il redirect allo script "home" una volta effettuato il login
     $_SESSION['previous_page'] = 'home';
 

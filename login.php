@@ -45,7 +45,7 @@
                         // visualizzare la pagina di login
                         if(isset($_SESSION['query_string'])) {
                             // caso in cui l'url della pagina visitata dal client prima di 
-                            // visitare la pagina di login non ha query string
+                            // visitare la pagina di login ha query string
                             header('location:' . $_SESSION['previous_page'] . '.php?' . $_SESSION['query_string']);
                             exit;
                         }
