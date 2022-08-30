@@ -3,6 +3,12 @@
     require "include/php-utils/varie.php";
     require "frame-public.php";
 
+    // per il redirect allo script "blog" una volta effettuato il login
+    $_SESSION['previous_page'] = 'blog';
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $_SESSION['query_string'] = $_SERVER['QUERY_STRING'];
+    }
+
     global $mysqli;
 
     $blog = new Template("skins/blog.html");

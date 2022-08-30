@@ -3,6 +3,12 @@
     require "frame-public.php";
     require "include/utils_dbms.php";
 
+    // per il redirect allo script "dettaglio-cane-distanza" una volta effettuato il login
+     $_SESSION['previous_page'] = 'dettaglio-cane-distanza';
+     if ($_SERVER["REQUEST_METHOD"] == "GET") {
+         $_SESSION['query_string'] = $_SERVER['QUERY_STRING'];
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(isset($_POST['importo']) && isset($_POST['cadenza'])) {
             if(!isset($_SESSION['user_id'])) {

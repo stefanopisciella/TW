@@ -5,8 +5,10 @@ require "frame-public.php";
 require "include/utils_dbms.php";
 
     if (!isset($_SESSION['user_id'])){
-        // se il client non è loggato, viene reindirizzato alla home
-        header("Location: home.php");
+        // per il redirect allo script "scrivi-la-tua-storia" una volta effettuato il login
+        $_SESSION['previous_page'] = 'scrivi-la-tua-storia';
+        // se il client non è loggato, viene reindirizzato alla login
+        header("Location: login.php");
         exit;  
     }
 

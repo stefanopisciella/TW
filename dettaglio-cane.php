@@ -3,6 +3,12 @@
     require "frame-public.php";
     require "include/utils_dbms.php";
 
+    // per il redirect allo script "dettaglio-cane" una volta effettuato il login
+    $_SESSION['previous_page'] = 'dettaglio-cane';
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $_SESSION['query_string'] = $_SERVER['QUERY_STRING'];
+    }
+    
     $dettaglio_cane = new Template("skins/dettaglio-cane.html");
 
     $max_char_mex = 1500; 

@@ -2,6 +2,9 @@
     require "include/utils_dbms.php";
     require "frame-public.php";
 
+    // per il redirect allo script "contatti" una volta effettuato il login
+    $_SESSION['previous_page'] = 'contatti';
+
     $contatti = new Template("skins/contatti.html");
   
     $max_char_mex = 1500; 

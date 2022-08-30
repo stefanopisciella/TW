@@ -3,6 +3,12 @@
     //require "include/dbms_ops.php";
     require "frame-public.php";
 
+    // per il redirect allo script "adozioni" una volta effettuato il login
+    $_SESSION['previous_page'] = 'adozioni';
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+       $_SESSION['query_string'] = $_SERVER['QUERY_STRING'];
+    }
+
     global $mysqli;
 
     $adozioni = new Template("skins/adozioni.html");

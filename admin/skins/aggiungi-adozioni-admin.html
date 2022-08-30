@@ -8,19 +8,19 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form">
+                            <form class="form" action="aggiungi-adozioni-admin.php" method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="first-name-column">Nome</label>
-                                            <input type="text" id="first-name-column" class="form-control"
+                                            <input name="nome" type="text" id="first-name-column" class="form-control"
                                                 placeholder="Nome" name="fname-column">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="last-name-column">Razza</label>
-                                                <select class="form-select" id="basicSelect">
+                                                <select name="razza" class="form-select" id="basicSelect">
+                                                    <option value="">-</option>
                                                     <option>IT</option>
                                                     <option>Blade Runner</option>
                                                     <option>Thor Ragnarok</option>
@@ -29,34 +29,33 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="city-column">Età</label>
-                                            <input type="text" id="city-column" class="form-control" placeholder="City"
-                                                name="Età">
+                                            <input name="eta" type="number" id="city-column" class="form-control" placeholder="Età">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="country-floating">Taglia</label>
-                                            <select class="form-select" id="basicSelect">
-                                                <option>Piccola</option>
-                                                <option>Media</option>
-                                                <option>Grande</option>
+                                            <select name="taglia" class="form-select" id="basicSelect">
+                                                <option value="">-</option>
+                                                <option value="piccola">Piccola</option>
+                                                <option value="media">Media</option>
+                                                <option value="grande">Grande</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="company-column">Sesso</label>
-                                            <select class="form-select" id="basicSelect">
-                                                <option>Maschio</option>
-                                                <option>Femmina</option>
+                                            <select name="sesso" class="form-select" id="basicSelect">
+                                                <option value="">-</option>
+                                                <option value="F">Femmina</option>
+                                                <option value="M">Maschio</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="email-id-column">Numero Chip</label>
-                                            <input type="email" id="email-id-column" class="form-control"
+                                            <input name="chip" type="text" id="email-id-column" class="form-control"
                                                 name="email-id-column" placeholder="Numero Chip">
                                         </div>
                                     </div>
@@ -66,8 +65,7 @@
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <div class="form-group mb-3">
-                                                            <label for="exampleFormControlTextarea1" class="form-label">Descrizione</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descrizione..."></textarea>
+                                                            <textarea name="descrizione" class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descrizione..."></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,8 +79,9 @@
                                                 <div class="card-content">
                                                     <div class="card-body">
                                                         <div class="input-group">
-                                                            <input type="file" class="form-control" id="inputGroupFile04"
-                                                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                                            <!--<input type="file" class="form-control" id="inputGroupFile04"
+                                                                aria-describedby="inputGroupFileAddon04" aria-label="Upload"> --> 
+                                                            <input type="file" name="image" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,13 +96,13 @@
                                                 Tipo di adozione
                                               </label>
                                               <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" data-parsley-required="true">
+                                                <input name="flexRadioDefault" value="0" class="form-check-input" type="radio" id="flexRadioDefault1" data-parsley-required="true">
                                                 <label class="form-check-label form-label" for="flexRadioDefault1">
                                                   Non a distanza
                                                 </label>
                                               </div>
                                               <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                                <input name="flexRadioDefault" value="1" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                                                 <label class="form-check-label form-label" for="flexRadioDefault2">
                                                   A distanza
                                                 </label>
@@ -125,3 +124,25 @@
     </section>
     <!-- // Basic multiple Column Form section end -->
 </div>
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        myFunc();
+    });
+
+    function myFunc() {
+        // estrae la query string dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        if(params.has('success')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "Adozione inserita",
+                type: "success"
+            })
+            return false;     
+        }   
+    } 
+</script>

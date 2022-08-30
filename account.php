@@ -9,8 +9,10 @@
     if(!isset($_SESSION['user_id']) ||
     user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
     {
-        // se il client non è loggato, viene reindirizzato alla home
-        header("Location: home.php");
+        // per il redirect allo script "account" una volta effettuato il login
+        $_SESSION['previous_page'] = $nome_script;
+        // se il client non è loggato, viene reindirizzato alla login
+        header("Location: login.php");
         exit;   
     }
 

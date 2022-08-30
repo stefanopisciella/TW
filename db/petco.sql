@@ -32,7 +32,7 @@ create table cane (
     chip char(15) not null unique,
     # bit è utilizzato come booleano: se a 1, allora il cane è adottabile a distanza
     distanza bit not null,
-    adottato bit not null
+    adottato bit
     # constraint articolo_razza foreign key (ID_razza) references razza(ID) on update cascade on delete cascade
 );
 
@@ -231,14 +231,16 @@ INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES
 INSERT INTO `service`(ID, script, descrizione) VALUES
 	(1, "admin/index", "home della dashboard dedicata all'Admin"),
 	(2, "admin/faq", "gestisce l'inserimento delle faq"),
-    (3, "account", "pagina dedicata al profilo dell'utente non amministratore");
+    (3, "account", "pagina dedicata al profilo dell'utente non amministratore"),
+	(4, "admin/aggiungi-adozioni-admin", "gestisce l'inserimento nel sistema dei cani da adottare");
 
-    
 # popolamento tabella ugroup_has_service 
 INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 	(1, 1, 1),
     (2, 2, 1),
-    (3, 3, 2);
+    (3, 3, 2),
+	(4, 4, 1);
+
     
 # popolamento tabella categoria
 insert into categoria(tipo, nome) values

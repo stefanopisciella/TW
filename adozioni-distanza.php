@@ -2,6 +2,12 @@
     require "include/dbms.inc.php";
     require "frame-public.php";
 
+    // per il redirect allo script "adozioni-distanza" una volta effettuato il login
+    $_SESSION['previous_page'] = 'adozioni-distanza';
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $_SESSION['query_string'] = $_SERVER['QUERY_STRING'];
+    }
+
     $adozioni_distanza = new Template("skins/adozioni-a-distanza.html");
 
     $query_cani = "SELECT DISTINCT cane.ID, nome, eta, sesso, razza, `path` AS img FROM cane JOIN immagine ON cane.ID = ID_cane AND cane.distanza=true GROUP BY nome;";
