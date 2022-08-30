@@ -46,7 +46,7 @@
     } else {
         // caso in cui l'utente ha già visionato la pagina e fa "submit" del messaggio
 
- 
+
     }
 
     $main->setContent("contenuto", $item->get());
