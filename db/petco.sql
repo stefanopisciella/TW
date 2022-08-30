@@ -32,7 +32,7 @@ create table cane (
     chip char(15) not null unique,
     # bit è utilizzato come booleano: se a 1, allora il cane è adottabile a distanza
     distanza bit not null,
-    adottato bit not null
+    adottato bit
     # constraint articolo_razza foreign key (ID_razza) references razza(ID) on update cascade on delete cascade
 );
 
