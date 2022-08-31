@@ -186,5 +186,6 @@
 
         return $path_imgs;
     }
+    
 ?>
 
