@@ -37,7 +37,7 @@
  
     }
  
-    $main->setContent("opzioni_razza", $opzioni_razza->get());
+    $item->setContent("opzioni_razza", $opzioni_razza->get());
     
     
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
