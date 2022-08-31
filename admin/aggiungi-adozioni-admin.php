@@ -41,9 +41,62 @@
     
     
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        // caso in cui il client carica la pagina con il metodo GET
 
+        if (isset ($_GET['empty_fields']) && $_GET['empty_fields'] == 1) {
+            $item->setContent("error", "Non tutti i campi sono stanti compilati");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
 
+        if (isset ($_GET['empty_select']) && $_GET['empty_select'] == 1) {
+            $item->setContent("error", "Non tutte le opzioni sono state selezionate");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
 
+        if (isset ($_GET['invalid_chip']) && $_GET['invalid_chip'] == 1) {
+            $item->setContent("error", "Il numero chip può avere al massimo 15 cifre");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
+        if (isset ($_GET['no_img']) && $_GET['no_img'] == 1) {
+            $item->setContent("error", "Deve essere caricata almeno una foto relativa all'adozione");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
+        if (isset ($_GET['img_size_error']) && $_GET['img_size_error'] == 1) {
+            $readble_size = $max_img_size/1000000; 
+            
+            $item->setContent("error", "Ciascuna foto non può avere dimensioni maggiori di " . $readble_size . "MB");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
+        if (isset ($_GET['wrong_format']) && $_GET['wrong_format'] == 1) {
+            $item->setContent("error", "Ciascuna foto deve avere formato '.png' oppure '.jpg'");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
+        if (isset ($_GET['img_upload_error']) && $_GET['img_upload_error'] == 1) {
+            $item->setContent("error", "Si è verificato un errore durante il caricamento dell'immagine/immagini");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
 
     } else {
         // caso in cui l'utente ha già visionato la pagina e fa "submit" del messaggio
@@ -64,19 +117,19 @@
         }
 
         if (!isset($razza)){
-            header("Location: aggiungi-adozioni-admin.php?empty_fields=1");
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
             exit;
         }
 
         // controllo correttezza età
 
         if (!isset($taglia)){
-            header("Location: aggiungi-adozioni-admin.php?empty_fields=1");
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
             exit;
         }
 
         if (!isset($sesso)){
-            header("Location: aggiungi-adozioni-admin.php?empty_fields=1");
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
             exit;
         }
 
@@ -97,7 +150,7 @@
         }
 
         if (!isset($a_distanza)){
-            header("Location: aggiungi-adozioni-admin.php?empty_fields=1");
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
             exit;
         }
 
@@ -115,11 +168,6 @@
             echo $e;
         }
 
-
-
-
-
-        
     }
 
     $main->setContent("contenuto", $item->get());
@@ -186,6 +234,6 @@
 
         return $path_imgs;
     }
-    
+
 ?>
 
