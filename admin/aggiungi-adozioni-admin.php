@@ -12,6 +12,7 @@
         exit;   
     }
 
+    $max_img_size = 5000000;
     global $mysqli;
 
     $main = new Template("skins/frame-private.html");
@@ -100,10 +101,12 @@
             exit;
         }
 
+        $imgs_path = upload_images();
+
         $cane = ["'".$nome."'", "'".$sesso."'", $eta, "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, "NULL"];
         
         try {
-            insert_query('cane', $cane);
+            $id_cane = insert_query('cane', $cane);
             header("Location: aggiungi-adozioni-admin.php?success=1");
             // REMOVE
             echo "query ereguita";
@@ -122,41 +125,66 @@
     $main->setContent("contenuto", $item->get());
     $main->close(); 
 
-    function upload_image() {
-        // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini con
-        // dimensione maggiore ai 5MB
-        if(isset($_FILES["image"]["tmp_name"])) {
-            if ($_FILES["image"]["size"] > $GLOBALS['max_img_size']) {
-            header("Location: aggiungi-adozioni.admin.php?img_size_error=1");
-            exit;
-        } else {
-                // caso in cui l'utente non ha caricato alcuna immagine per l'articolo
-                return "img/blog/default_img.jpg"; // è il path dell'immagine di default
-            }
-        }
-  
-        // fissa il vincolo per il quale è consentito caricare soltanto immagini con formato .png oppure .jpeg
-        $imageFileType = $_FILES["image"]["type"];
-        if($imageFileType == "image/jpeg") {
-            $imageFileType = "jpeg";
-        } else {
-            if($imageFileType == "image/png") {
-                $imageFileType = "png";
-            }
-            // estensione file non consentito ==> eccezione
-        }
-  
+    function upload_images() {
         $images_dir = "immagini/";   
-        // si assegna all'immagine un nome casuale per garantire l'univocità dei nomi delle
-        //  immagini (azione necessaria per evitare errori a livello di filesystem)
-        $path_image = $images_dir . "img_" . random_int(1, 10000) . "." . $imageFileType;
-  
-        // "tmp_name" è il path dove il server salva temporaneamente il file caricato
-        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $path_image)) {
-            header("Location: aggiungi-adozioni-admin.php?img_upload_error=1");            
+
+        if(!isset($_FILES["image"]["tmp_name"])) {
+            // caso in cui l'utente non ha caricato alcuna immagine per l'articolo
+            return null;
+            header("Location: aggiungi-adozioni-admin.php?no_img=1");
+            exit; 
+        }
+        
+        // controlla quante immagini il client ha caricato
+        $imgs = array();
+        $imgs = $_FILES['image']['name'];
+        $num_img = sizeof( (array) $imgs);
+        
+        $path_imgs = array();
+        for($i=0;$i<$num_img;$i++){
+            // scorre le immagini caricate dal client
+            
+            // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini
+            // con dimensione maggiore ai 5MB
+            if ($_FILES["image"]["size"][$i] > $GLOBALS['max_img_size']) {
+                // caso in cui una delle immagini caricate dal client supera il limite
+                // di dimensioni
+                header("Location: aggiungi-adozioni-admin.php?img_size_error=1");
+                exit;  
+            }
+                
+            // fissa il vincolo per il quale è consentito caricare soltanto immagini con
+            // formato .png oppure .jpeg
+            $type_img = $_FILES["image"]["type"][$i]; 
+            if($type_img == "image/jpeg" || $type_img == "image/jpg" ) {
+                // si assegna all'immagine un nome casuale per garantire l'univocità dei 
+                // nomi delle immagini (azione necessaria per evitare errori a livello di 
+                // filesystem)
+                $path_img = $images_dir . "img_" . random_int(1, 10000) . "." . 'jpeg';
+                array_push($path_imgs, $path_img);
+            } else {
+                if($type_img == "image/png") {
+                    // si assegna all'immagine un nome casuale per garantire l'univocità 
+                    // dei nomi delle immagini (azione necessaria per evitare errori a 
+                    // livello di filesystem)
+                    $path_img = $images_dir . "img_" . random_int(1, 10000) . "." . 'png';
+                    array_push($path_imgs, $path_img);
+                } else {
+                    // caso in cui una delle immagini ha un formato non consentito
+                    header("Location: aggiungi-adozioni-admin.php?wrong_format=1");
+                    exit;  
+                }
+            }
+        }  
+        
+        for($i=0;$i<$num_img;$i++){
+            // "tmp_name" è il path dove il server salva temporaneamente il file caricato
+            if (!move_uploaded_file($_FILES["image"]["tmp_name"][$i], $path_imgs[$i])) {
+                header("Location: aggiungi-adozioni-admin.php?img_upload_error=1");            
+            }
         }
 
-        return $path_image;
+        return $path_imgs;
     }
 ?>
 
