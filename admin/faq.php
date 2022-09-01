@@ -14,19 +14,22 @@
 
     $main = new Template("skins/frame-private.html");
     $page = new Template("skins/faq.html");
+
     $max_char_domanda = 300;
-    $max_char_risposta = 500;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // caso in cui l'admin ha già visionato la pagina e fa "submit" della faq
         $domanda = $_POST['domanda'];
         $risposta = $_POST['risposta'];
+        $categoria = $_POST['categoria'];
 
         // controlla che la domanda e la risposta non siano vuote
         if (!isset($domanda) || 
             !isset($risposta) ||
+            !isset($categoria) ||
             strlen(trim($domanda)) == 0 ||
-            strlen(trim($risposta)) == 0)
+            strlen(trim($risposta)) == 0 ||
+            strlen(trim($categoria)) == 0)
         {
             // faq non valida
             header("Location: faq.php?empty_faq=1");
@@ -34,36 +37,36 @@
         } else {
             $t_domanda = trim($domanda);
             $t_risposta = trim($risposta);
-            // controlla il numero di caratteri della domanda e della risposta:
-            if(strlen($t_domanda) > $max_char_domanda ||
-               strlen($t_risposta) > $max_char_risposta)
+            $categoria = trim($categoria);
+
+            // controlla il numero di caratteri della domanda
+            if(strlen($t_domanda) > $max_char_domanda)
             {
                 header("Location: faq.php?out_of_limit=1");
                 exit;
             }
 
-            $faq = ["'".$t_domanda."'", "'".$t_risposta."'"];
+            $faq = ["'".$t_domanda."'", "'".$t_risposta."'", "'".$categoria."'"];
 
             try {
                 insert_query('faq', $faq);
-                header("Location: faq.php?");
-                exit;
+                header("Location: faq.php?success=1");
             } catch (Exception $e){
-                // ...
+                echo $e;
             }
         }
     } else {
         // caso in cui il client carica la pagina con il metodo GET
         if(isset($_GET['empty_faq']) && $_GET['empty_faq'] == 1){
-            $page->setContent("faq_error", "Domanda e Risposta devono avere almeno un carattere");
+            $page->setContent("faq_error", "Domanda, Risposta e Categoria devono avere almeno un carattere");
         } 
 
         if(isset($_GET['out_of_limit']) && $_GET['out_of_limit'] == 1){
-            $page->setContent("faq_error", "Domanda e Risposta non possono avere più di 
-                                $max_char_domanda e $max_char_risposta caratteri rispettivamente");
+            $page->setContent("faq_error", "La domanda non può avere più di $max_char_domanda caratteri");
         } 
-
-        $page->close();
+        
+        $main->setContent("contenuto", $page->get());
+        $main->close();
     } 
     
 ?>

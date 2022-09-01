@@ -7,6 +7,16 @@
 
   <form method="POST" action="faq.php" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;">
     <div class="row">
+      <div class="col">
+          <div class="card-body">
+              <div class="form-group mb-3">
+                  <label for="risposta" class="form-label">Categoria</label>
+                  <input type="text" class="form-control" id="categoria" name="categoria" maxlength="50"></input>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
         <div class="col">
             <div class="card-body">
                 <div class="form-group mb-3">
@@ -25,7 +35,7 @@
               </div>
           </div>
       </div>
-  </div>
+    </div>
     <!--
     <label for="fname">Domanda</label><br>
     <input type="text" id="domanda" name="domanda"><br>
@@ -33,7 +43,8 @@
     <input type="text" id="risposta" name="risposta"><br><br>
     <input type="submit" value="Submit">
     -->
-    <a href="#" class="badge bg-success">Aggiungi</a>
+    <button type="submit" class="btn btn-primary me-1 mb-1">Aggiungi</button>
+    <!-- <a href="faq.php" class="badge bg-success">Aggiungi</a> -->
   </form>
 
   <label>
@@ -89,3 +100,26 @@
     </div>
   </div>
 </div>
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script>
+  $( document ).ready(function() {
+    myFunc();
+  });
+
+
+  function myFunc() {
+    // estrae la query string dall'url che il client sta visitanto
+    const params = new URLSearchParams(window.location.search);
+        
+    if(params.has('success')) {
+      // caso in cui la richiesta d'informazione è stata inviata correttamente
+      swal({
+        text: "FAQ aggiunta con successo",
+        type: "success"
+      })
+      return false;     
+    }   
+  } 
+</script>
