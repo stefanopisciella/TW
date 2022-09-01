@@ -32,6 +32,7 @@ require "include/utils_dbms.php";
             exit;
         } 
 
+        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
         if(isset($_GET['img_size_error']) && $_GET['img_size_error'] == 1){
             $readble_size = $max_img_size/1000000;
             
@@ -48,11 +49,18 @@ require "include/utils_dbms.php";
             exit; 
         }
 
+        if (isset ($_GET['wrong_format']) && $_GET['wrong_format'] == 1) {
+            $item->setContent("error", "La foto deve avere formato '.png' oppure '.jpg'");
+            $head->setContent("contenuto", $item->get());
+            $head->close();
+            exit; 
+        }
+
         $head->setContent("contenuto", $item->get());
         $head->close();
     } else {
-        // caso in cui l'utente ha già visionato la pagina e fa "submit" dell'articolo e dell'
-        // immagine dell'articolo
+        // caso in cui l'utente ha già visionato la pagina e fa "submit" dell'articolo ed
+        // eventualmente anche dell'immagine dell'articolo
 
         $contenuto = $_POST['testo'];
         $id_utente = $_SESSION['user_id'];
@@ -99,33 +107,40 @@ require "include/utils_dbms.php";
     }
 
     function upload_image() {
-        // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini con
-        // dimensione maggiore ai 5MB
-        if(isset($_FILES["image"]["tmp_name"])) {
+        // controlla se il client ha caricato o meno un'immagine
+        if(is_uploaded_file($_FILES['image']['tmp_name']) && file_exists($_FILES['image']['tmp_name'])) {
+            // caso in cui l'utente ha caricato un immagine per l'articolo
+
+            // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini con
+            // dimensione maggiore ai 5MB
             if ($_FILES["image"]["size"] > $GLOBALS['max_img_size']) {
-            header("Location: scrivi-la-tua-storia.php?img_size_error=1");
-            exit;
-        } else {
-                // caso in cui l'utente non ha caricato alcuna immagine per l'articolo
-                return "img/blog/default_img.jpg"; // è il path dell'immagine di default
+                header("Location: scrivi-la-tua-storia.php?img_size_error=1");
+                exit;
             }
+        } else {
+            // caso in cui l'utente non ha caricato alcuna immagine per l'articolo
+            return "img/blog/default_img.jpg"; // è il path dell'immagine di default
         }
   
-        // fissa il vincolo per il quale è consentito caricare soltanto immagini con formato .png oppure .jpeg
+        // fissa il vincolo per il quale è consentito caricare soltanto immagini con formato 
+        // .png oppure .jpeg
         $imageFileType = $_FILES["image"]["type"];
         if($imageFileType == "image/jpeg") {
-            $imageFileType = "jpeg";
+            $extension = "jpeg";
         } else {
             if($imageFileType == "image/png") {
-                $imageFileType = "png";
+                $extension = "png";
+            } else {
+                // caso in cui una delle immagini ha un formato non consentito
+                header("Location: scrivi-la-tua-storia.php?wrong_format=1");
+                exit;  
             }
-            // estensione file non consentito ==> eccezione
         }
   
         $images_dir = "immagini/";   
         // si assegna all'immagine un nome casuale per garantire l'univocità dei nomi delle
         //  immagini (azione necessaria per evitare errori a livello di filesystem)
-        $path_image = $images_dir . "img_" . random_int(1, 10000) . "." . $imageFileType;
+        $path_image = $images_dir . "img_" . random_int(1, 10000) . "." . $extension;
   
         // "tmp_name" è il path dove il server salva temporaneamente il file caricato
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $path_image)) {
