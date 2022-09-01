@@ -57,6 +57,26 @@
         }
     } else {
         // caso in cui il client carica la pagina con il metodo GET
+        
+        // injection opzioni razze nel relativo filtro di ricerca
+        $categorie_faq = new Template("skins/categorie-faq.html");
+
+        $query = "SELECT ID, nome FROM categoria WHERE tipo='faq';";
+ 
+        try {
+             $oid = $mysqli->query($query);
+        } catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+ 
+        while($row = mysqli_fetch_array($oid)) {
+            $categorie_faq->setContent("nome_categoria", $row['nome']);
+            $categorie_faq->setContent("ID_categoria", $row['ID']);
+        }
+ 
+        $page->setContent("categorie-faq", $categorie_faq->get());
+        
+
         if(isset($_GET['empty_faq']) && $_GET['empty_faq'] == 1){
             $page->setContent("faq_error", "Domanda, Risposta e Categoria devono avere almeno un carattere");
         } 
