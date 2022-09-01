@@ -78,13 +78,8 @@
                                         <div class="card">
                                           <div class="card-body">
                                             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                              <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                  <img src="assets/images/samples/banana.jpg" class="d-block w-100" alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                  <img src="assets/images/samples/bg-mountain.jpg" class="d-block w-100" alt="...">
-                                                </div>
+                                              <div class="carousel-inner" id="div_imgs">
+                                                <!--qui saranno iniettate le immagini caricate dal client tramite javascript-->
                                               </div>
                                               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -108,7 +103,7 @@
                                                         <div class="input-group">
                                                             <!--<input type="file" class="form-control" id="inputGroupFile04"
                                                                 aria-describedby="inputGroupFileAddon04" aria-label="Upload"> --> 
-                                                            <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
+                                                            <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" onchange="showPreview(event);" multiple>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -157,11 +152,45 @@
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script src="js/sweetalert.min.js"></script>
 <script>
+    function showPreview(event){
+        // seleziona il div A nel quale dovranno essere inettati i nuovi elementi "img"
+        const div_imgs = document.querySelector('#div_imgs');
+        
+        num_imgs = event.target.files.length;
+
+        if(div_imgs.childNodes != null) {
+            // se sono già presenti delle immagini all'interno dello slider, le rimuoviamo
+            // per dare spazio alle nuove immagini
+            div_imgs.innerHTML = ""; // per rimuovere le immagini
+        }
+
+        for(var i=0;i<num_imgs;i++) {
+            var src = URL.createObjectURL(event.target.files[i]);
+
+            // crea un vuovo "div" B che dovrà essere inettato in A
+            const new_div = document.createElement('div');
+            new_div.setAttribute('class', 'carousel-item active');
+
+            // crea un vuovo "img" C che dovrà essere inettato nel rispettivo B
+            const new_img = document.createElement('img');
+
+            // setta i valori degli attributi dell'immagine
+            new_img.setAttribute('src', src);
+            new_img.setAttribute('alt', 'immagine_cane');
+            new_img.setAttribute('class', 'd-block w-100');
+
+            // iniezione di C in B
+            new_div.appendChild(new_img);
+            // iniezione di B in A
+            div_imgs.appendChild(new_div); 
+        }   
+    }
+
     $( document ).ready(function() {
-        myFunc();
+        set_alert();
     });
 
-    function myFunc() {
+    function set_alert() {
         // estrae la query string dall'url che il client sta visitanto
         const params = new URLSearchParams(window.location.search);
         
@@ -174,5 +203,4 @@
             return false;     
         }   
     } 
-    
 </script>
