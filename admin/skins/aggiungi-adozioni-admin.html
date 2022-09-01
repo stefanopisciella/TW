@@ -157,6 +157,13 @@
         const div_imgs = document.querySelector('#div_imgs');
         
         num_imgs = event.target.files.length;
+
+        if(div_imgs.childNodes != null) {
+            // se sono già presenti delle immagini all'interno dello slider, le rimuoviamo
+            // per dare spazio alle nuove immagini
+            div_imgs.innerHTML = ""; // per rimuovere le immagini
+        }
+
         for(var i=0;i<num_imgs;i++) {
             var src = URL.createObjectURL(event.target.files[i]);
 
