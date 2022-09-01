@@ -115,8 +115,9 @@ create table faq (
     ID smallint primary key auto_increment,
     domanda varchar(300) not null,
     risposta text not null,
-    ID_categoria smallint not null,
-	constraint faq_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete no action
+    categoria varchar(50)
+    # ID_categoria smallint not null,
+	# constraint faq_categoria foreign key (ID_categoria) references categoria(ID) on update cascade on delete no action
 );
 
 # 10) tabella donazione
