@@ -1,17 +1,91 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h2>FAQ</h2>
+  <h3>FAQ</h3>
 
-<form method="POST" action="faq.php">
-  <label for="fname">Domanda</label><br>
-  <input type="text" id="domanda" name="domanda"><br>
-  <label for="lname">Risposta</label><br>
-  <input type="text" id="risposta" name="risposta"><br><br>
-  <input type="submit" value="Submit">
-</form> 
+  <form method="POST" action="faq.php" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;">
+    <div class="row">
+        <div class="col">
+            <div class="card-body">
+                <div class="form-group mb-3">
+                    <label for="domanda" class="form-label">Domanda</label>
+                    <textarea class="form-control" id="domanda" rows="4" name="domanda"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col">
+          <div class="card-body">
+              <div class="form-group mb-3">
+                  <label for="risposta" class="form-label">Risposta</label>
+                  <textarea class="form-control" id="risposta" rows="7" name="risposta"></textarea>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!--
+    <label for="fname">Domanda</label><br>
+    <input type="text" id="domanda" name="domanda"><br>
+    <label for="lname">Risposta</label><br>
+    <input type="text" id="risposta" name="risposta"><br><br>
+    <input type="submit" value="Submit">
+    -->
+    <a href="#" class="badge bg-success">Aggiungi</a>
+  </form>
 
-<label><[faq_error]></label>
+  <label>
+    <[faq_error]>
+  </label>
 </body>
+
 </html>
+
+
+<div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Lista delle FAQ</h4>
+    </div>
+    <div class="card-content">
+      <div class="card-body">
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <!-- PER LA DOMANDA SI DEVE ANDARE A CAPO OGNI MASSIMO 60 CARATTERI -->
+              <h5 class="mb-1">wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</h5>
+            </div>
+            <!-- PER LA RISPOSTA VA A CAPO DA SOLO -->
+            <p>
+              wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+             <small>
+                <!-- <a href="#" class="badge bg-primary">Modifica</a> -->
+                <a href="#" class="badge bg-danger">Elimina</a>
+              </small> 
+            </p>
+          </a>
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <!-- PER LA DOMANDA SI DEVE ANDARE A CAPO OGNI MASSIMO 60 CARATTERI -->
+              <h5 class="mb-1">wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</h5>
+            </div>
+            <!-- PER LA RISPOSTA VA A CAPO DA SOLO -->
+            <p>
+              wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+             <small>
+                <!-- <a href="#" class="badge bg-primary">Modifica</a> -->
+                <a href="#" class="badge bg-danger">Elimina</a>
+              </small> 
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

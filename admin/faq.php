@@ -12,6 +12,7 @@
         exit;   
     }
 
+    $main = new Template("skins/frame-private.html");
     $page = new Template("skins/faq.html");
     $max_char_domanda = 300;
     $max_char_risposta = 500;
@@ -64,4 +65,5 @@
 
         $page->close();
     } 
+    
 ?>
