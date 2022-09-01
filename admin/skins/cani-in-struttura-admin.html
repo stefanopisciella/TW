@@ -186,12 +186,15 @@
 <script src="assets/js/pages/simple-datatables.js"></script>
 
 <script>
-    $(document).ready(function(){
+    
+    function init(){
         $(".dataTable-selector.form-select").css("max-width","10%");
         $(".dataTable-input").css("margin-top","15px");
         $(".dataTable-input").css("margin-bottom","20px");
         $(".dataTable-pagination-list.pagination.pagination-primary").css("margin-top","20px");
-    })
+    }
+
+    setTimeout(init, 100);
 </script>
 
 
