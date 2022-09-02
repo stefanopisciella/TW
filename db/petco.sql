@@ -115,7 +115,7 @@ create table faq (
     ID smallint primary key auto_increment,
     domanda varchar(300) not null,
     risposta text not null,
-    categoria varchar(50)
+    categoria varchar(50) not null
 );
 
 # 10) tabella donazione
