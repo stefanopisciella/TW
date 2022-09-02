@@ -1,5 +1,6 @@
 <?php
     require "frame-public.php";
+    require "include/utils_dbms.php";
    
     // non è possibile effettuare la registrazione se non si effettua prima il logout
     if (isset($_SESSION['user_id']) && $_SESSION['user_id'] >= 1) {
