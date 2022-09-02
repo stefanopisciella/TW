@@ -23,18 +23,6 @@
         $risposta = $_POST['risposta'];
         $categoria = (string) $_POST['categoria'];
 
-        
-        // header('Location: faq.php?' . $categoria);
-        /*
-        // REMOVE
-        if(isset($categoria)) {
-            header("Location: faq.php?non_vuoto");
-            exit;
-        } else {
-            header("Location: faq.php?vuoto");
-            exit;
-        }*/
-
         // controlla che la domanda e la risposta non siano vuote
         if (!isset($domanda) || 
             !isset($risposta) ||
@@ -63,7 +51,7 @@
                 insert_query('faq', $faq);
                 header("Location: faq.php?success=1");
             } catch (Exception $e){
-                echo $e;
+                
             }
         }
     } else {
@@ -98,20 +86,4 @@
         $main->setContent("contenuto", $page->get());
         $main->close();
     } 
-
-    function get_category_name($id_categoria) {
-        global $mysqli;
-        $query = "SELECT nome FROM categoria c WHERE c.ID = '{$id_categoria}';";
-
-        try {
-            $oid = $mysqli->query($query);
-        }
-        catch (Exception $e) {
-            throw new Exception("errno: {$mysqli->errno}");
-        }
-
-        $rows = $oid->fetch_all(MYSQLI_ASSOC);
-    
-        return $rows[0]['nome'];
-    }
 ?>
