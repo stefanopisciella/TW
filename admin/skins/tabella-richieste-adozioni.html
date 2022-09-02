@@ -1,0 +1,16 @@
+<[foreach]>
+<tr>
+    <td><[nome_cane]></td>
+    <td><[chip]></td>
+    <td><[nome_richiedente]> <[cognome_richiedente]></td>
+    <td><[telefono]></td>
+    <td><[email]></td>
+    <td><[data]></td>
+    <td>
+        <!---pulsante per rifiutare-->
+        <a href="lista-richieste-admin.php?decline=1" class="btn icon btn-danger"><i class="bi bi-x"></i></a>
+        <!---pulsante per accettare-->
+        <a href="lista-richieste-admin.php?accept=1" class="btn icon btn-success"><i class="bi bi-check"></i></a>
+    </td>
+</tr>
+<[/foreach]>
