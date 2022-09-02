@@ -1,0 +1,126 @@
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last" style="margin-bottom: 3%;">
+            <h3>Entrate</h3>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="list-group list-group-horizontal-sm mb-1 text-center" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="adozioni-a-distanza"
+                        data-bs-toggle="list" href="#list-sunday" role="tab">Adozioni a distanza</a>
+                    <a class="list-group-item list-group-item-action" id="donazioni"
+                        data-bs-toggle="list" href="#list-monday" role="tab">Donazioni</a>
+                </div>
+                <div class="tab-content text-justify" style="margin-top: 3%;">
+                    <div class="tab-pane fade show active" id="list-sunday" role="tabpanel"
+                        aria-labelledby="adozioni-a-distanza">
+                        <table class="table table-striped" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>Importo</th>
+                                    <th>Cadenza</th>
+                                    <th>Cane</th>
+                                    <th>Chip</th>
+                                    <th>Donatore</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>2 mesi</td>
+                                    <td>Lupin</td>
+                                    <td>3658193</td>
+                                    <td>Beatrice Tomassi</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>2 mesi</td>
+                                    <td>Lupin</td>
+                                    <td>3658193</td>
+                                    <td>Beatrice Tomassi</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>2 mesi</td>
+                                    <td>Lupin</td>
+                                    <td>3658193</td>
+                                    <td>Beatrice Tomassi</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>2 mesi</td>
+                                    <td>Lupin</td>
+                                    <td>3658193</td>
+                                    <td>Beatrice Tomassi</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                </tr>                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="list-monday" role="tabpanel"
+                        aria-labelledby="donazioni">
+                        <table class="table table-striped" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>Importo</th>
+                                    <th>Email donatore</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                    <td>10/08/2022</td>
+                                </tr>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                    <td>10/08/2022</td>
+                                </tr>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                    <td>10/08/2022</td>
+                                </tr>
+                                <tr>
+                                    <td>10 €</td>
+                                    <td>beatomassi00@gmail.com</td>
+                                    <td>10/08/2022</td>
+                                </tr>                                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+<script src="assets/js/pages/simple-datatables.js"></script>
+
+<script>
+    
+    function init(){
+        $(".dataTable-selector.form-select").css("max-width","10%");
+        $(".dataTable-input").css("margin-top","15px");
+        $(".dataTable-input").css("margin-bottom","20px");
+        $(".dataTable-pagination-list.pagination.pagination-primary").css("margin-top","20px");
+    }
+
+    setTimeout(init, 100);
+</script>
