@@ -234,14 +234,18 @@ INSERT INTO `service`(ID, script, descrizione) VALUES
 	(1, "admin/index", "home della dashboard dedicata all'Admin"),
 	(2, "admin/faq", "gestisce l'inserimento delle faq"),
     (3, "account", "pagina dedicata al profilo dell'utente non amministratore"),
-	(4, "admin/aggiungi-adozioni-admin", "gestisce l'inserimento nel sistema dei cani da adottare");
+	(4, "admin/aggiungi-adozioni-admin", "gestisce l'inserimento nel sistema dei cani da adottare"),
+	(5, "admin/dettaglio-cane", "per visualizzare i dettagli e le foto del cane (lato admin)");
+
 
 # popolamento tabella ugroup_has_service 
 INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 	(1, 1, 1),
     (2, 2, 1),
     (3, 3, 2),
-	(4, 4, 1);
+	(4, 4, 1),
+	(5, 5, 1);
+
 
     
 # popolamento tabella categoria
