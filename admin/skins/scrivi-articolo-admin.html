@@ -1,0 +1,84 @@
+<h3>Scrivi un articolo</h3>
+
+<form method="POST" action="" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;">
+    <div class="col-md-6 col-12">
+        <div class="form-group">
+            <label for="last-name-column">Categoria</label>
+            <select name="categoria" class="form-select" id="basicSelect">
+                <option value="">-</option>
+                <[categorie-articolo]>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <div class="card-body">
+                <div class="form-group mb-3">
+                    <label for="titolo" class="form-label">Titolo</label>
+                    <textarea class="form-control" id="titolo" rows="1" name="titolo"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <label class="form-label">Articolo</label>
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="editor">
+                            <p>Scrivi qui il tuo articolo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row">
+        <div class="col">
+            <div class="card-body">
+                <div class="form-group mb-3">
+                    <label for="titolo" class="form-label">Tags</label>
+                    <textarea class="form-control" id="titolo" rows="1" name="titolo"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
+        <img class="card-img-top img-fluid" src="assets/images/samples/origami.jpg" alt="Card image cap"
+                            style="height: 20rem; margin-bottom: 2%;" />
+        <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+    </div>
+
+    <button type="submit" class="btn btn-primary me-1 mb-1">Pubblica</button>
+</form>
+
+<label>
+    <[articolo_error]>
+</label>
+
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+
+<script>
+    ClassicEditor
+    .create(document.querySelector('#editor'))
+    .catch(error => {
+        console.error(error);
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $(".ck.ck-button.ck-off.ck-button_with-text.ck-dropdown__button").hide();
+        $(".ck.ck-button.ck-off.ck-dropdown__button").hide();
+        $(".ck.ck-toolbar__separator").hide();
+        for(i=11; i<12; i++)
+            $(".ck.ck-toolbar__items :nth-child("+i+")").hide()
+
+    })
+</script>
