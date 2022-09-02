@@ -21,7 +21,7 @@
         // caso in cui l'admin ha già visionato la pagina e fa "submit" della faq
         $domanda = $_POST['domanda'];
         $risposta = $_POST['risposta'];
-        $categoria = $_POST['categoria'];
+        $categoria = (string) $_POST['categoria'];
 
         // controlla che la domanda e la risposta non siano vuote
         if (!isset($domanda) || 
@@ -37,7 +37,6 @@
         } else {
             $t_domanda = trim($domanda);
             $t_risposta = trim($risposta);
-            $categoria = trim($categoria);
 
             // controlla il numero di caratteri della domanda
             if(strlen($t_domanda) > $max_char_domanda)
@@ -52,16 +51,16 @@
                 insert_query('faq', $faq);
                 header("Location: faq.php?success=1");
             } catch (Exception $e){
-                echo $e;
+                
             }
         }
     } else {
         // caso in cui il client carica la pagina con il metodo GET
         
-        // injection opzioni razze nel relativo filtro di ricerca
+        // injection delle categorie delle faq nella select
         $categorie_faq = new Template("skins/categorie-faq.html");
 
-        $query = "SELECT ID, nome FROM categoria WHERE tipo='faq';";
+        $query = "SELECT nome FROM categoria WHERE tipo='faq';";
  
         try {
              $oid = $mysqli->query($query);
@@ -71,14 +70,13 @@
  
         while($row = mysqli_fetch_array($oid)) {
             $categorie_faq->setContent("nome_categoria", $row['nome']);
-            $categorie_faq->setContent("ID_categoria", $row['ID']);
         }
  
         $page->setContent("categorie-faq", $categorie_faq->get());
         
 
         if(isset($_GET['empty_faq']) && $_GET['empty_faq'] == 1){
-            $page->setContent("faq_error", "Domanda, Risposta e Categoria devono avere almeno un carattere");
+            $page->setContent("faq_error", "Tutti i campi devono essere compilati");
         } 
 
         if(isset($_GET['out_of_limit']) && $_GET['out_of_limit'] == 1){
@@ -88,5 +86,4 @@
         $main->setContent("contenuto", $page->get());
         $main->close();
     } 
-    
 ?>
