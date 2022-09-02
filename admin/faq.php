@@ -14,6 +14,8 @@
 
     $main = new Template("skins/frame-private.html");
     $page = new Template("skins/faq.html");
+    $faq_list = new Template("skins/faq-list.html");
+
 
     $max_char_domanda = 300;
 
@@ -57,7 +59,7 @@
     } else {
         // caso in cui il client carica la pagina con il metodo GET
         
-        // injection delle categorie delle faq nella select
+        // INIZIO injection delle categorie delle faq nella select
         $categorie_faq = new Template("skins/categorie-faq.html");
 
         $query = "SELECT nome FROM categoria WHERE tipo='faq';";
@@ -73,8 +75,43 @@
         }
  
         $page->setContent("categorie-faq", $categorie_faq->get());
-        
+        // FINE injection delle categorie
 
+        // INIZIO injection delle faq
+        
+        // query che restituisce tutte le FAQ presenti nel sistema
+        $query_domande_risposte = "SELECT ID, domanda, risposta FROM faq;";
+
+        try {
+            $oid2 = $mysqli->query($query_domande_risposte);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+
+        while($row = mysqli_fetch_array($oid2)) {
+    
+            $faq_list->setContent("domanda", $row['domanda']);
+            $faq_list->setContent("risposta", $row['risposta']);
+            $faq_list->setContent("id", $row['ID']);
+        }
+        $page->setContent("faq_list", $faq_list->get());
+        // FINE injection delle faq
+
+        // INIZIO gestione eliminazione di una FAQ
+        if(isset($_GET['delete_faq']) && is_numeric($_GET['delete_faq']) && $_GET['delete_faq'] > 0 ){
+            $id_faq = $_GET['delete_faq'];
+
+            try {
+                delete_query('faq', $id_faq);
+                header("Location: faq.php");
+            } catch (Exception $e){
+            
+            }
+        }
+        // FINE gestione eliminazione di una FAQ
+
+        //  INIZIO gestione dei messaggi di errore in caso di compilazione non corretta della form
         if(isset($_GET['empty_faq']) && $_GET['empty_faq'] == 1){
             $page->setContent("faq_error", "Tutti i campi devono essere compilati");
         } 
@@ -82,7 +119,8 @@
         if(isset($_GET['out_of_limit']) && $_GET['out_of_limit'] == 1){
             $page->setContent("faq_error", "La domanda non può avere più di $max_char_domanda caratteri");
         } 
-        
+        // FINE gestione dei messaggi di errore in caso di compilazione non corretta della form
+
         $main->setContent("contenuto", $page->get());
         $main->close();
     } 

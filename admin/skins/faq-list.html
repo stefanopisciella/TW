@@ -1,0 +1,16 @@
+<[foreach]>
+<a class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <!-- PER LA DOMANDA SI DEVE ANDARE A CAPO OGNI MASSIMO 60 CARATTERI -->
+      <h5 class="mb-1"><[domanda]></h5>
+    </div>
+    <!-- PER LA RISPOSTA VA A CAPO DA SOLO -->
+    <p>
+      <[risposta]>
+     <small>
+        <!-- <a href="#" class="badge bg-primary">Modifica</a> -->
+        <a href="faq.php?delete_faq=<[id]>" class="badge bg-danger">Elimina</a>
+      </small> 
+    </p>
+  </a>
+  <[/foreach]>
