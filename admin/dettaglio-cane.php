@@ -16,6 +16,8 @@
    
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/dettaglio-cane.html"); 
+    $slides = new Template("skins/slide-cane.html"); 
+
 
     global $mysqli;
 
@@ -59,25 +61,26 @@
             $item->setContent("chip", $info_cane[0]["chip"]);
             $item->setContent("taglia", $info_cane[0]["taglia"]);
             $item->setContent("descrizione", $info_cane[0]["presentazione"]);
+
+            // caricamento delle immagini del cane
+            
+            // query per trovare le immagini del cane in questione
+            $oid = $mysqli->query("SELECT `path` as img FROM immagine WHERE ID_cane = '{$id_cane}';");
+
+            if (!$oid) {
+                echo "Error {$mysqli->errno}: {$mysqli->error}"; exit;
+            }
+
+            while($row = mysqli_fetch_array($oid)) {
+                $slides->setContent("path", $row['img']);
+            }
+
+            $item->setContent("slides", $slides->get());
         } else {
             exit;
         }
-       
 
-        
-        
-        
-        
-       
-
-
-
-
-
+        $main->setContent("contenuto", $item->get());
+        $main->close();
     }
-
-    $main->setContent("contenuto", $item->get());
-    $main->close();
-
-    
 ?>
