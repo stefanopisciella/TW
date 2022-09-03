@@ -437,7 +437,10 @@ INSERT INTO immagine(ID_cane, `path`, indice) VALUES
 # inserimento adozioni
 # Beatrice Tomassi adotta Calica
 INSERT INTO richiesta_adozione(ID_utente, ID_cane, `data`, documento) VALUES
-    (2, 2, "2022-06-12", "documenti_adozione/doc_adozione_1.pdf");
+    (2, 2, "2022-06-12", "documenti_adozione/doc_adozione_1.pdf"),
+	(3, 5, "2022-09-01", null),
+    (1, 4, "2022-09-03", null);
+
 
 # inserimento preferiti
 # Beatrice Tomassi ha tra i preferiti StarSky e Charly
