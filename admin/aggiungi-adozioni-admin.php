@@ -165,10 +165,10 @@
         } else {
             if($anni_mesi == 'a') {
                 // caso in cui si vuole esprimere l'eta in anni
-                $eta = $eta . 'a';
+                $eta = (string) $eta . 'a';
             } else {
                 // caso in cui si vuole esprimere l'eta in mesi
-                $eta = $eta . 'm';
+                $eta = (string) $eta . 'm';
             }
         }
         // FINE controllo validità età
@@ -196,16 +196,16 @@
         $imgs_path = upload_images();
 
         $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, "NULL"];
+        // REMOVE
+        print_r($cane);
         
         try {
-            // REMOVE
-            echo "ci arrivo";
             if(isset($imgs_path)) {
                 // caso in cui il client carica almeno un immagine valida ==> aggiunge la nuova adozione ed i path path delle immagini nel DB 
                 $id_cane = insert_query('cane', $cane);
 
                 for($i=0;$i<sizeof($imgs_path);$i++) {
-                    $immagine = [$id_cane, "'".$imgs_path[$i]."'", "NULL"];
+                    $immagine = [$id_cane, "'".$imgs_path[$i]."'", 1];
                     insert_query('immagine', $immagine);
                 }
                 header("Location: aggiungi-adozioni-admin.php?success=1");

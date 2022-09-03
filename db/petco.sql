@@ -279,7 +279,7 @@ INSERT INTO razza(nome) VALUES
     ("Border Collie"),
     ("Corso"),
     ("Terrier");
-    
+   
 # popolamento tabella cane
 INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
 	(1, "Mafalda", "F", "2a", "Bulldog Inglese", "piccola", "Mafalda è una bulldog inglese nata sfortunata; più piccina dei fratelli, troppo chiara per lo standard di razza e, soprattutto, con un grave problema congenito al cuore. È stata operata da una equipe specializzata che le ha creato una nuova valvola cardiaca e ed è intervenuta anche su palato e alle narici, in modo da poter respirare meglio.  
@@ -325,7 +325,6 @@ Un percorso insieme ai nostri educatori saprà aiutarvi a trovare la giusta sine
     (17, "Charly", "M", "3a", "Meticcio", "media", "Un amore vero e proprio, un carattere solare, un po’ timido con le persone. Giocherellone e comunicatore, curioso e intelligente questo incrocio di maremmano saprà certamente farsi amare.
 
 Un piccolo percorso con i nostri educatori sapranno inserirlo al meglio in famiglia, con una piccola attenzione solo verso il momento della pappa.", "048692648884783", false, false);
-
     
 
 # inserimento articoli prova
