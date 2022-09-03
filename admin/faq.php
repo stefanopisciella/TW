@@ -100,7 +100,7 @@
 
         // INIZIO gestione eliminazione di una FAQ
         if(isset($_GET['delete_faq']) && is_numeric($_GET['delete_faq']) && $_GET['delete_faq'] > 0 ){
-            $id_faq = $_GET['delete_faq'];
+            $id_faq = (int) $_GET['delete_faq'];
 
             try {
                 delete_query('faq', $id_faq);

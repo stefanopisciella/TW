@@ -1,6 +1,7 @@
 <?php
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
+    require "include/utils_dbms.php";
 
     session_start();
     $nome_script = "admin/lista-richieste";
@@ -19,8 +20,8 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-        // INIZIO query
-        $query = "SELECT c.nome as c_n, c.chip as c_c, u.nome as u_n, u.cognome as u_c, u.telefono as u_t, u.email as u_e, r.`data` as r_d
+        // INIZIO injection delle richieste nella tabella delle richieste
+        $query = "SELECT c.nome as c_n, c.chip as c_c, u.nome as u_n, u.cognome as u_c, u.telefono as u_t, u.email as u_e, r.`data` as r_d, r.ID as r_i
                   FROM richiesta_adozione r JOIN utente u JOIN cane c on(r.ID_utente=u.ID AND r.ID_cane=c.ID)
                   WHERE r.documento is null
                   GROUP BY r.ID;";
@@ -41,9 +42,23 @@
             $request_tab->setContent("telefono", $row['u_t']);
             $request_tab->setContent("email", $row['u_e']);
             $request_tab->setContent("data", $row['r_d']);
+            $request_tab->setContent("id_richiesta", $row['r_i']);
         }
-        // FINE query
         $item->setContent("richieste", $request_tab->get());
+        // FINE injection delle richieste nella tabella delle richieste
+
+        if(isset($_GET['decline']) && is_numeric($_GET['decline']) && $_GET['decline'] > 0) {
+            $id_richiesta = (int) $_GET['decline']; 
+            
+            try {
+                delete_query('richiesta_adozione', $id_richiesta);  
+                header("Location: lista-richieste-admin.php");
+            }
+            catch (Exception $e) {
+                echo $e;
+            }
+        }
+
     
         $main->setContent("contenuto", $item->get());
         $main->close(); 
