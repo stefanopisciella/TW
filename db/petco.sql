@@ -234,7 +234,7 @@ INSERT INTO `service`(ID, script, descrizione) VALUES
 	(1, "admin/index", "home della dashboard dedicata all'Admin"),
 	(2, "admin/faq", "gestisce l'inserimento delle faq"),
     (3, "account", "pagina dedicata al profilo dell'utente non amministratore"),
-	(4, "admin/aggiungi-adozioni-admin", "gestisce l'inserimento nel sistema dei cani da adottare"),
+	(4, "admin/aggiungi-adozioni", "gestisce l'inserimento nel sistema dei cani da adottare"),
 	(5, "admin/dettaglio-cane", "per visualizzare i dettagli e le foto del cane (lato admin)"),
 	(6, "admin/lista-richieste", "per visualizzare e gestire le richieste di adozione (lato admin)");
 

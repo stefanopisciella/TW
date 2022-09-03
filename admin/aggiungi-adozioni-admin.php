@@ -4,7 +4,7 @@
     require "include/utils_dbms.php";
 
     session_start();
-    $nome_script = "admin/aggiungi-adozioni-admin";
+    $nome_script = "admin/aggiungi-adozioni";
     if(!isset($_SESSION['user_id']) ||
        user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
     {
