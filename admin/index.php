@@ -11,6 +11,9 @@
         exit;   
     }
 
-    $main = new Template("skins/index.html");
+    $main = new Template("skins/frame-private.html");
+    $item = new Template("skins/index.html");
+
+    $main->setContent("contenuto", $item->get());
     $main->close(); 
 ?>
