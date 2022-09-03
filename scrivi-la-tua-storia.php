@@ -108,7 +108,7 @@ require "include/utils_dbms.php";
 
     function upload_image() {
         // controlla se il client ha caricato o meno un'immagine
-        if(is_uploaded_file($_FILES['image']['tmp_name']) && file_exists($_FILES['image']['tmp_name'])) {
+        if(isset($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name']) && file_exists($_FILES['image']['tmp_name'])) {
             // caso in cui l'utente ha caricato un immagine per l'articolo
 
             // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini con

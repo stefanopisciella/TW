@@ -83,7 +83,7 @@ create table immagine (
     ID_cane smallint,
     `path` varchar(400) not null,
     # indice di visualizzazione dell'immagine
-    indice smallint not null,
+    indice smallint,
     constraint immagine_cane foreign key (ID_cane) references cane(ID) on update cascade on delete cascade
 );
 
