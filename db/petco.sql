@@ -234,8 +234,10 @@ INSERT INTO `service`(ID, script, descrizione) VALUES
 	(1, "admin/index", "home della dashboard dedicata all'Admin"),
 	(2, "admin/faq", "gestisce l'inserimento delle faq"),
     (3, "account", "pagina dedicata al profilo dell'utente non amministratore"),
-	(4, "admin/aggiungi-adozioni-admin", "gestisce l'inserimento nel sistema dei cani da adottare"),
-	(5, "admin/dettaglio-cane", "per visualizzare i dettagli e le foto del cane (lato admin)");
+	(4, "admin/aggiungi-adozioni", "gestisce l'inserimento nel sistema dei cani da adottare"),
+	(5, "admin/dettaglio-cane", "per visualizzare i dettagli e le foto del cane (lato admin)"),
+	(6, "admin/lista-richieste", "per visualizzare e gestire le richieste di adozione (lato admin)");
+
 
 
 # popolamento tabella ugroup_has_service 
@@ -244,7 +246,9 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
     (2, 2, 1),
     (3, 3, 2),
 	(4, 4, 1),
-	(5, 5, 1);
+	(5, 5, 1),
+	(6, 6, 1);
+
 
 
     
@@ -433,7 +437,10 @@ INSERT INTO immagine(ID_cane, `path`, indice) VALUES
 # inserimento adozioni
 # Beatrice Tomassi adotta Calica
 INSERT INTO richiesta_adozione(ID_utente, ID_cane, `data`, documento) VALUES
-    (2, 2, "2022-06-12", "documenti_adozione/doc_adozione_1.pdf");
+    (2, 2, "2022-06-12", "documenti_adozione/doc_adozione_1.pdf"),
+	(3, 5, "2022-09-01", null),
+    (1, 4, "2022-09-03", null);
+
 
 # inserimento preferiti
 # Beatrice Tomassi ha tra i preferiti StarSky e Charly
