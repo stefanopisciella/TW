@@ -18,30 +18,31 @@
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/aggiungi-adozioni-admin.html");
 
-    // injection opzioni razze nel relativo filtro di ricerca
-    $opzioni_razza = new Template("skins/opzioni-razza.html");
-
-    $query = "SELECT ID, nome FROM razza";
- 
-    try {
-         $oid = $mysqli->query($query);
-    }
-    catch (Exception $e) {
-        throw new Exception("{$mysqli->errno}");
-    }
- 
-    while($row = mysqli_fetch_array($oid)) {
-         
-        $opzioni_razza->setContent("nome_razza", $row['nome']);
-        $opzioni_razza->setContent("id", $row['ID']);
- 
-    }
- 
-    $item->setContent("opzioni_razza", $opzioni_razza->get());
-    
-    
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         // caso in cui il client carica la pagina con il metodo GET
+
+        // INIZIO injection opzioni razza
+        $opzioni_razza = new Template("skins/opzioni-razza.html");
+
+        $query = "SELECT ID, nome FROM razza";
+ 
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+ 
+        while($row = mysqli_fetch_array($oid)) {
+         
+            $opzioni_razza->setContent("nome_razza", $row['nome']);
+            $opzioni_razza->setContent("id", $row['ID']);
+ 
+        }
+ 
+        $item->setContent("opzioni_razza", $opzioni_razza->get());
+        // FINE injection opzioni razza
+
 
         if (isset ($_GET['empty_fields']) && $_GET['empty_fields'] == 1) {
             $item->setContent("error", "Non tutti i campi sono stanti compilati");
@@ -64,7 +65,14 @@
             exit; 
         }
 
-        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
+        if (isset ($_GET['wrong_age']) && $_GET['wrong_age'] == 1) {
+            $item->setContent("error", "L'età inerita non è valida");
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        // INIZIO gestione visualizzazione di messaggi di errore relativi al caricamento delle immagini
         if (isset ($_GET['no_img']) && $_GET['no_img'] == 1) {
             $item->setContent("error", "Deve essere caricata almeno una foto relativa all'adozione");
             $main->setContent("contenuto", $item->get());
@@ -72,7 +80,6 @@
             exit; 
         }
 
-        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
         if (isset ($_GET['img_size_error']) && $_GET['img_size_error'] == 1) {
             $readble_size = $max_img_size/1000000; 
             
@@ -82,7 +89,6 @@
             exit; 
         }
 
-        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
         if (isset ($_GET['wrong_format']) && $_GET['wrong_format'] == 1) {
             $item->setContent("error", "Ciascuna foto deve avere formato '.png' oppure '.jpg'");
             $main->setContent("contenuto", $item->get());
@@ -90,19 +96,19 @@
             exit; 
         }
 
-        // visualizzzione di messaggi di errore relativi al caricamento delle immagini
         if (isset ($_GET['img_upload_error']) && $_GET['img_upload_error'] == 1) {
-            $item->setContent("error", "Si è verificato un errore durante il caricamento dell'immagine/immagini");
+            $item->setContent("error", "Si è verificato un errore durante il caricamento di un'immagine");
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
         }
-
+        // FINE gestione visualizzazione di messaggi di errore relativi al caricamento delle immagini
     } else {
         // caso in cui l'utente ha già visionato la pagina e fa "submit" del messaggio
         $nome = $_POST['nome'];
         $razza = $_POST['razza'];
         $eta = $_POST['eta'];
+        $anni_mesi = $_POST['anni_mesi'];
         $taglia = $_POST['taglia'];
         $sesso = $_POST['sesso'];
         $chip = $_POST['chip'];
@@ -113,23 +119,6 @@
         if (!isset($nome) || strlen(trim($nome)) == 0) {
             // nome vuoto
             header("Location: aggiungi-adozioni-admin.php?empty_fields=1");
-            exit;
-        }
-
-        if (!isset($razza)){
-            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
-            exit;
-        }
-
-        // controllo correttezza età
-
-        if (!isset($taglia)){
-            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
-            exit;
-        }
-
-        if (!isset($sesso)){
-            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
             exit;
         }
 
@@ -149,6 +138,56 @@
             exit;
         }
 
+        // INIZIO controllo validità età
+        if (!isset($eta) || strlen(trim($eta)) == 0)
+        {
+            // età vuota
+            header("Location: aggiungi-adozioni-admin.php?empty_fields=1");
+            exit;
+        } else {
+            // età non vuota
+            $eta = trim($eta);
+              
+            // controlla che l'età sia numerica, intera e non negativa
+            if(is_numeric($eta) && (int) $eta > 0) {
+                // età valida
+                $eta = (int) $eta;
+            } else {
+                // età non valida
+                header("Location: aggiungi-adozioni-admin.php?wrong_age=1");
+                exit;  
+            }
+        }
+        
+        if (empty($anni_mesi)){
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
+            exit;
+        } else {
+            if($anni_mesi == 'a') {
+                // caso in cui si vuole esprimere l'eta in anni
+                $eta = $eta . 'a';
+            } else {
+                // caso in cui si vuole esprimere l'eta in mesi
+                $eta = $eta . 'm';
+            }
+        }
+        // FINE controllo validità età
+
+        if (empty($razza)){
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
+            exit;
+        }
+
+        if (empty($taglia)){
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
+            exit;
+        }
+
+        if (empty($sesso)){
+            header("Location: aggiungi-adozioni-admin.php?empty_select=1");
+            exit;
+        }
+
         if (!isset($a_distanza)){
             header("Location: aggiungi-adozioni-admin.php?empty_select=1");
             exit;
@@ -156,13 +195,22 @@
 
         $imgs_path = upload_images();
 
-        $cane = ["'".$nome."'", "'".$sesso."'", $eta, "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, "NULL"];
+        $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, "NULL"];
         
         try {
-            $id_cane = insert_query('cane', $cane);
-            header("Location: aggiungi-adozioni-admin.php?success=1");
             // REMOVE
-            echo "query ereguita";
+            echo "ci arrivo";
+            if(isset($imgs_path)) {
+                // caso in cui il client carica almeno un immagine valida ==> aggiunge la nuova adozione ed i path path delle immagini nel DB 
+                $id_cane = insert_query('cane', $cane);
+
+                for($i=0;$i<sizeof($imgs_path);$i++) {
+                    $immagine = [$id_cane, "'".$imgs_path[$i]."'", "NULL"];
+                    insert_query('immagine', $immagine);
+                }
+                header("Location: aggiungi-adozioni-admin.php?success=1");
+            }
+
         } catch (Exception $e){
             // REMOVE
             echo $e;
@@ -176,11 +224,11 @@
     function upload_images() {
         $images_dir = "immagini/";   
 
-        if(!isset($_FILES["image"]["tmp_name"])) {
-            // caso in cui l'utente non ha caricato alcuna immagine per l'articolo
-            return null;
+        // controlla che almeno un immagine sia stata caricata dal client
+        if(!isset($_FILES['image']['tmp_name'][0]) || !is_uploaded_file($_FILES['image']['tmp_name'][0]) || !file_exists($_FILES['image']['tmp_name'][0])) {
+            // caso in cui l'utente non ha caricato alcuna immagine per l'adozione
             header("Location: aggiungi-adozioni-admin.php?no_img=1");
-            exit; 
+            return null;
         }
         
         // controlla quante immagini il client ha caricato
@@ -208,9 +256,6 @@
                 // si assegna all'immagine un nome casuale per garantire l'univocità dei 
                 // nomi delle immagini (azione necessaria per evitare errori a livello di 
                 // filesystem)
-                $path_img = $images_dir . "img_" . random_int(1, 10000) . "." . 'jpeg';
-                array_push($path_imgs, $path_img);
-            } else {
                 if($type_img == "image/png") {
                     // si assegna all'immagine un nome casuale per garantire l'univocità 
                     // dei nomi delle immagini (azione necessaria per evitare errori a 
@@ -218,13 +263,19 @@
                     $path_img = $images_dir . "img_" . random_int(1, 10000) . "." . 'png';
                     array_push($path_imgs, $path_img);
                 } else {
-                    // caso in cui una delle immagini ha un formato non consentito
-                    header("Location: aggiungi-adozioni-admin.php?wrong_format=1");
-                    exit;  
+                    // si assegna all'immagine un nome casuale per garantire l'univocità 
+                    // dei nomi delle immagini (azione necessaria per evitare errori a 
+                    // livello di filesystem)
+                    $path_img = $images_dir . "img_" . random_int(1, 10000) . "." . 'jpeg';
+                    array_push($path_imgs, $path_img); 
                 }
+            } else {
+                // caso in cui una delle immagini ha un formato non consentito
+                header("Location: aggiungi-adozioni-admin.php?wrong_format=1");
+                exit;  
             }
-        }  
-        
+        }
+          
         for($i=0;$i<$num_img;$i++){
             // "tmp_name" è il path dove il server salva temporaneamente il file caricato
             if (!move_uploaded_file($_FILES["image"]["tmp_name"][$i], $path_imgs[$i])) {
