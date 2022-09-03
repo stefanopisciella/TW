@@ -2,6 +2,15 @@
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
 
+    session_start();
+    $nome_script = "admin/lista-richieste";
+    if(!isset($_SESSION['user_id']) ||
+       user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
+    {
+        echo "Unauthorized";
+        exit;   
+    }
+    
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/lista-richieste-admin.html");
     $request_tab = new Template("skins/tabella-richieste-adozioni.html"); 
