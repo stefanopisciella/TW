@@ -238,8 +238,8 @@ INSERT INTO `service`(ID, script, descrizione) VALUES
 	(5, "admin/dettaglio-cane", "per visualizzare i dettagli e le foto del cane (lato admin)"),
 	(6, "admin/lista-richieste", "per visualizzare e gestire le richieste di adozione (lato admin)"),
 	(7, "admin/cani-in-struttura", "per visualizzare la tabella dei cani (lato admin)"),
-	(8, "admin/donazioni", "per visualizzare la tabella delle donazioni e delle adozioni a distanza (lato admin)");
-
+	(8, "admin/donazioni", "per visualizzare la tabella delle donazioni e delle adozioni a distanza (lato admin)"),
+	(9, "admin/storico-adottati", "per visualizzare la tabella dei cani già adottati (lato admin)");
 
 # popolamento tabella ugroup_has_service 
 INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
@@ -250,8 +250,8 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 	(5, 5, 1),
 	(6, 6, 1),
 	(7, 7, 1),
-	(8, 8, 1);
-
+	(8, 8, 1),
+	(9, 9, 1);
 
 # popolamento tabella categoria
 insert into categoria(tipo, nome) values
