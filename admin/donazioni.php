@@ -53,6 +53,25 @@
         $item->setContent("tab-ado", $tab_ado->get());
         // FINE injection delle informazioni delle adozioni a distanza
 
+        // INIZIO injection delle informazioni delle donazioni
+        $query = "SELECT importo, email, `data` as d FROM donazione;"; 
+
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            // REMOVE
+            echo $e;
+            throw new Exception("errno: {$mysqli->errno}");
+        }
+
+        while($row = mysqli_fetch_array($oid)) {
+            $tab_don->setContent("importo", $row['importo']);
+            $tab_don->setContent("email", $row['email']);
+            $tab_don->setContent("data", $row['d']);
+        }
+        $item->setContent("tab-don", $tab_don->get());
+        // FINE injection delle informazioni delle donazioni
     }
     
     $main->setContent("contenuto", $item->get());

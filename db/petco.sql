@@ -454,6 +454,13 @@ INSERT INTO adozione_distanza(ID_utente, ID_cane, cadenza, `data`, importo) VALU
     (1, 4, 3, "2022-09-01", 50),
 	(2, 9, 1, "2022-08-27", 10),
     (3, 1, 6, "2022-08-30", 20);
+    
+# inserimento donazioni
+INSERT INTO donazione(importo, email, `data`) VALUES
+	(35, "stefano@gmail.com", "2022-09-04"), 
+    (3, "nicola@gmail.com", "2022-09-03"), 
+    (40, "beatrice@gmail.com", "2022-09-01"),
+    (5, "charlie.brown@gmail.com", "2022-09-04"); 
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
