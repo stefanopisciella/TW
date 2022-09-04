@@ -4,51 +4,50 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Dettaglio</h4>
+                        <h4 class="card-title" id="scheda-dettaglio">Dettaglio</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
                             <form class="form">
-                                <div class="row">
+                                <div class="row" id="dettagli">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="name-column-disabled">Nome</label>
-                                            <input type="text" class="form-control" id="name-column-disabled" readonly="readonly"
+                                            <input type="text" class="form-control" id="name-column-disabled" name="nome"
                                                 value="<[nome]>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="razza-column-disabled">Razza</label>
-                                            <input type="text" class="form-control" id="razza-column-disabled" readonly="readonly"
+                                            <input type="text" class="form-control" id="razza-column-disabled" name="razza"
                                                 value="<[razza]>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="eta-column-disabled">Età</label>
-                                            <input type="text" id="eta-column-disabled" class="form-control" readonly="readonly"
-                                            value="<[eta]>">
+                                            <input type="text" id="eta-column-disabled" class="form-control" name="eta"                                         value="<[eta]>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="taglia-column-disabled">Taglia</label>
-                                            <input type="text" id="taglia-column-disabled" class="form-control" readonly="readonly"
+                                            <input type="text" id="taglia-column-disabled" class="form-control" name="taglia"
                                             value="<[taglia]>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="sesso-column-disabled">Sesso</label>
-                                            <input type="text" id="sesso-column-disabled" class="form-control" readonly="readonly"
+                                            <input type="text" id="sesso-column-disabled" class="form-control" name="sesso"
                                             value="<[sesso]>">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="chip-column-disabled">Numero Chip</label>
-                                            <input type="email" id="chip-column-disabled" class="form-control" readonly="readonly" 
+                                            <input type="email" id="chip-column-disabled" class="form-control" name="numero-chip"
                                                 value="<[chip]>">
                                         </div>
                                     </div>
@@ -59,7 +58,7 @@
                                                     <div class="card-body">
                                                         <div class="form-group mb-3">
                                                             <label for="exampleFormControlTextarea1" class="form-label">Descrizione</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" readonly="readonly" value="Descrizione..." placeholder="<[descrizione]>"></textarea>
+                                                            <textarea class="form-control" name="descrizione" id="exampleFormControlTextarea1" rows="5" value="Descrizione"><[descrizione]></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,7 +93,7 @@
                                               </label>
                                               <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" disabled>
-                                                <label class="form-check-label form-label" for="flexRadioDefault2">
+                                                <label for="flexRadioDefault2">
                                                   <[distanza]>
                                                 </label>
                                               </div>
@@ -102,7 +101,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Modifica</button>
+                                        <a class="btn btn-primary me-1 mb-1" id="modifica">Modifica</a>
+                                        <button type="submit" class="btn btn-success me-1 mb-1" id="salva">Salva</button>
                                         <!-- IN TEORIA QUANDO CLICCHI SU MODIFICA TI ABILITA TUTTO -->
                                     </div>
                                 </div>
@@ -115,3 +115,24 @@
     </section>
     <!-- // Basic multiple Column Form section end -->
 </div>
+
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#dettagli").find("input").each(function(){
+            $(this).prop("readonly", true);
+        });
+        $("#exampleFormControlTextarea1").prop("readonly", true);
+        $("#salva").hide();
+    });
+
+    $("#modifica").on("click", function(){
+        $("#dettagli").find("input").each(function(){
+            $(this).prop("readonly", false);
+        });
+        $("#exampleFormControlTextarea1").prop("readonly", false);
+        $("#salva").show();
+        window.location.href = "#scheda-dettaglio";
+    });
+
+</script>
