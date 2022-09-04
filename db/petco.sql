@@ -238,8 +238,8 @@ INSERT INTO `service`(ID, script, descrizione) VALUES
 	(5, "admin/dettaglio-cane", "per visualizzare i dettagli e le foto del cane (lato admin)"),
 	(6, "admin/lista-richieste", "per visualizzare e gestire le richieste di adozione (lato admin)"),
 	(7, "admin/cani-in-struttura", "per visualizzare la tabella dei cani (lato admin)"),
-	(8, "admin/donazioni", "per visualizzare la tabella delle donazioni e delle adozioni a distanza (lato admin)");
-
+	(8, "admin/donazioni", "per visualizzare la tabella delle donazioni e delle adozioni a distanza (lato admin)"),
+	(9, "admin/storico-adottati", "per visualizzare la tabella dei cani già adottati (lato admin)");
 
 # popolamento tabella ugroup_has_service 
 INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
@@ -250,8 +250,8 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 	(5, 5, 1),
 	(6, 6, 1),
 	(7, 7, 1),
-	(8, 8, 1);
-
+	(8, 8, 1),
+	(9, 9, 1);
 
 # popolamento tabella categoria
 insert into categoria(tipo, nome) values
@@ -286,7 +286,7 @@ INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, dista
 	(1, "Mafalda", "F", "2a", "Bulldog Inglese", "piccola", "Mafalda è una bulldog inglese nata sfortunata; più piccina dei fratelli, troppo chiara per lo standard di razza e, soprattutto, con un grave problema congenito al cuore. È stata operata da una equipe specializzata che le ha creato una nuova valvola cardiaca e ed è intervenuta anche su palato e alle narici, in modo da poter respirare meglio.  
 La sua qualità di vita è nello standard di qualunque bulldog anche se dovrà fare controlli cardiologici periodici e continuare per il momento con la terapia e potrà essere sterilizzata tra circa un anno.
 Nonostante i suoi problemi di salute è una cagnolina allegra e gioiosa, che cerca molto il contatto fisico e le coccole.", "04837264869", true, false),
-	(2, "Calica", "F", "5a", "Meticcio", "media", "Una ragazza speciale, dall’olfatto strepitoso, che ama la campagna, correre e passeggiare. Sempre in cerca di novità è super socievole con tutti. Taglia media saprà riempire le vostre giornate di gioia.", "04837264869478", false, false),
+	(2, "Calica", "F", "5a", "Meticcio", "media", "Una ragazza speciale, dall’olfatto strepitoso, che ama la campagna, correre e passeggiare. Sempre in cerca di novità è super socievole con tutti. Taglia media saprà riempire le vostre giornate di gioia.", "04837264869478", false, true),
 	(3, "Miriam", "F", "4a", "Meticcio", "grande", "Miriam è una cagnolina che ama interagire con i suoi simili ma è insicura con le persone. 
 Ha bisogno di stabilità e di una routine quotidiana che le permetta di instaurare un legame di fiducia duraturo con chi farà parte della sua vita.", "048372648696778", false, false),
 	(4, "Ettore", "M", "5a", "Meticcio", "media", "Un bellissimo incrocio di pastore tedesco, socievole e dolce con le persone, curioso, possessivo e qualche volta un po’ testardo e arrogante con gli altri maschi.
