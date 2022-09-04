@@ -7,8 +7,8 @@
     if(!isset($_SESSION['user_id']) ||
        user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
     {
-        echo "Unauthorized";
-        exit;   
+        header("Location: error.php");
+        exit;  
     }
     
     $main = new Template("skins/frame-private.html");

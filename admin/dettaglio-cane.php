@@ -10,7 +10,7 @@
     if(!isset($_SESSION['user_id']) ||
        user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
     {
-        echo "Unauthorized";
+        header("Location: error.php");
         exit;   
     }
    
