@@ -10,9 +10,9 @@
                         </div>
                     </div>
                     <div class="col-6" style="margin-top: 2%;">
-                        <div class="row">
-                            <input type="file" name="image[]" class="form-control" style="width: 52%;" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                            <a href="#" class="btn btn-primary" style="max-width: 50%">Documento di adozione</a>
+                        <div class="row" style="display: -webkit-inline-box;">
+                            <input type="file" name="image[]" class="form-control" style="width: 56%;" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            <a href="#" class="btn btn-primary" style="max-width: 45%">Documento di adozione</a>
                         </div>
                     </div>
                 </div>
@@ -36,9 +36,12 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="eta-column-disabled">Età</label>
-                                        <input type="text" id="eta-column-disabled" class="form-control"
-                                            readonly="readonly" value="Età">
+                                        <label for="name-column-disabled">Età</label>
+                                        <div style="display: flex">
+                                            <input name="eta" type="number" id="city-column" class="form-control" placeholder="Età">
+                                            <select name="anni_mesi" class="form-control" id="basicSelect">
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
