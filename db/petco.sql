@@ -237,9 +237,8 @@ INSERT INTO `service`(ID, script, descrizione) VALUES
 	(4, "admin/aggiungi-adozioni", "gestisce l'inserimento nel sistema dei cani da adottare"),
 	(5, "admin/dettaglio-cane", "per visualizzare i dettagli e le foto del cane (lato admin)"),
 	(6, "admin/lista-richieste", "per visualizzare e gestire le richieste di adozione (lato admin)"),
-	(7, "admin/cani-in-struttura", "per visualizzare la tabella dei cani (lato admin)");
-
-
+	(7, "admin/cani-in-struttura", "per visualizzare la tabella dei cani (lato admin)"),
+	(8, "admin/donazioni", "per visualizzare la tabella delle donazioni e delle adozioni a distanza (lato admin)");
 
 
 # popolamento tabella ugroup_has_service 
@@ -250,12 +249,10 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
 	(4, 4, 1),
 	(5, 5, 1),
 	(6, 6, 1),
-	(7, 7, 1);
+	(7, 7, 1),
+	(8, 8, 1);
 
 
-
-
-    
 # popolamento tabella categoria
 insert into categoria(tipo, nome) values
     ("articolo", "Salute&Benessere"),
@@ -450,6 +447,13 @@ INSERT INTO richiesta_adozione(ID_utente, ID_cane, `data`, documento) VALUES
 INSERT INTO preferiti(ID_utente, ID_cane) VALUES
     (2, 11),
     (2, 17);
+    
+# inserimento adozioni a distanza
+INSERT INTO adozione_distanza(ID_utente, ID_cane, cadenza, `data`, importo) VALUES
+	(2, 7, 2, "2022-09-04", 20),
+    (1, 4, 3, "2022-09-01", 50),
+	(2, 9, 1, "2022-08-27", 10),
+    (3, 1, 6, "2022-08-30", 20);
 
 # GESTIONE UTENZA
 drop user if exists 'user'@'localhost';
