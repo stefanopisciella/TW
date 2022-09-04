@@ -18,30 +18,58 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
-                                        <div class="form-group">
+                                        <div class="form-group" id="razza-disabled">
                                             <label for="razza-column-disabled">Razza</label>
-                                            <input type="text" class="form-control" id="razza-column-disabled" name="razza"
+                                            <input type="text" class="form-select" id="razza-column-disabled" name="razza"
                                                 value="<[razza]>">
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="eta-column-disabled">Età</label>
-                                            <input type="text" id="eta-column-disabled" class="form-control" name="eta"                                         value="<[eta]>">
+                                        <div class="form-group" id="razza-enabled">
+                                            <label for="last-name-column">Razza</label>
+                                                <select name="razza" class="form-select" id="basicSelect" aria-placeholder="<[razza]>">
+                                                    <[opzioni_razza]>
+                                                </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
+                                            <label for="name-column-disabled">Età</label>
+                                            <div style="display: flex">
+                                                <input name="eta" type="number" id="eta" class="form-control" placeholder="Età" value="<[eta]>">
+                                                <input name="anni_mesi" class="form-select" id="anni-mesi-disabled">
+                                                <select name="anni_mesi" class="form-select" id="anni-mesi-enabled">
+                                                    <option value="a">Anni</option>
+                                                    <option value="m">Mesi</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group" id="taglia-disabled">
                                             <label for="taglia-column-disabled">Taglia</label>
-                                            <input type="text" id="taglia-column-disabled" class="form-control" name="taglia"
+                                            <input type="text" id="taglia-column-disabled" class="form-select" name="taglia"
                                             value="<[taglia]>">
                                         </div>
+                                        <div class="form-group" id="taglia-enabled">
+                                            <label for="country-floating">Taglia</label>
+                                            <select name="taglia" class="form-select" id="basicSelect" aria-placeholder="<[taglia]>">
+                                                <option value="piccola">Piccola</option>
+                                                <option value="media">Media</option>
+                                                <option value="grande">Grande</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-6 col-12">
-                                        <div class="form-group">
+                                        <div class="form-group" id="sesso-disabled">
                                             <label for="sesso-column-disabled">Sesso</label>
-                                            <input type="text" id="sesso-column-disabled" class="form-control" name="sesso"
+                                            <input type="text" id="sesso-column-disabled" class="form-select" name="sesso"
                                             value="<[sesso]>">
+                                        </div>
+                                        <div class="form-group" id="sesso-enabled">
+                                            <label for="company-column">Sesso</label>
+                                            <select name="sesso" class="form-select" id="basicSelect" aria-placeholder="<[sesso]>">
+                                                <option value="F">Femmina</option>
+                                                <option value="M">Maschio</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -124,12 +152,24 @@
         });
         $("#exampleFormControlTextarea1").prop("readonly", true);
         $("#salva").hide();
+        $("#razza-enabled").hide();
+        $("#taglia-enabled").hide();
+        $("#sesso-enabled").hide();
+        $("#anni-mesi-enabled").hide();
     });
 
     $("#modifica").on("click", function(){
         $("#dettagli").find("input").each(function(){
             $(this).prop("readonly", false);
         });
+        $("#razza-disabled").hide();
+        $("#razza-enabled").show();
+        $("#taglia-disabled").hide();
+        $("#taglia-enabled").show();
+        $("#sesso-disabled").hide();
+        $("#sesso-enabled").show();
+        $("#anni-mesi-disabled").hide();
+        $("#anni-mesi-enabled").show();
         $("#exampleFormControlTextarea1").prop("readonly", false);
         $("#salva").show();
         $("#modifica").hide();

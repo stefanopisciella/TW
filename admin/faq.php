@@ -17,7 +17,7 @@
     $faq_list = new Template("skins/faq-list.html");
 
 
-    $max_char_domanda = 300;
+    $max_char_domanda = 75;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // caso in cui l'admin ha già visionato la pagina e fa "submit" della faq

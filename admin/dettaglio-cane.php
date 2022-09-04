@@ -23,6 +23,28 @@
 
     
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+        // INIZIO injection opzioni razza
+        $opzioni_razza = new Template("skins/opzioni-razza.html");
+
+        $query = "SELECT ID, nome FROM razza";
+ 
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+ 
+        while($row = mysqli_fetch_array($oid)) {
+         
+            $opzioni_razza->setContent("nome_razza", $row['nome']);
+            $opzioni_razza->setContent("id", $row['ID']);
+ 
+        }
+ 
+        $item->setContent("opzioni_razza", $opzioni_razza->get());
+        // FINE injection opzioni razza
         
         if(isset($_GET['id'])) {
             $id_cane = $_GET['id']; 
