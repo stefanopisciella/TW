@@ -20,10 +20,12 @@
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         
         if(isset($_GET['id'])) {
-            $id_cane = $_GET['id']; 
+            $id_adozione = $_GET['id']; 
 
             // inizio query
-            $query_info_cane = "SELECT * FROM cane WHERE ID = '{$id_cane}';";
+            $query_info_cane = "SELECT c.nome as c_n, c.sesso as c_s, c.eta as c_e, c.razza as c_r, c.taglia as c_t, c.presentazione as c_p, c.chip as c_c, c.distanza as c_d, c.adottato as c_a, c.ID as c_i 
+                                FROM richiesta_adozione r join cane c on(r.ID_cane=c.ID) 
+                                WHERE r.ID = '{$id_adozione}';";
 
             try {
                 $oid = $mysqli->query($query_info_cane);
@@ -35,21 +37,21 @@
             $info_cane = $oid->fetch_all(MYSQLI_ASSOC);
             // fine query
       
-            $item->setContent("nome", $info_cane[0]["nome"]);
-        
-            $item->setContent("sesso", $info_cane[0]["sesso"]);
+            $id_cane = $info_cane[0]["c_i"];
+            $item->setContent("nome", $info_cane[0]["c_n"]);
+            $item->setContent("sesso", $info_cane[0]["c_s"]);
       
             // sistemazione stringa età
-            $eta = $info_cane[0]['eta'];
+            $eta = $info_cane[0]['c_e'];
             if (substr($eta, -1) == 'a') 
                 $eta = substr($eta, 0, -1)." anni";
             else 
                 $eta = substr($eta, 0, -1)." mesi";
 
             $item->setContent("eta", $eta);
-            $item->setContent("razza", $info_cane[0]["razza"]);
-            $item->setContent("chip", $info_cane[0]["chip"]);
-            $item->setContent("taglia", $info_cane[0]["taglia"]);
+            $item->setContent("razza", $info_cane[0]["c_r"]);
+            $item->setContent("chip", $info_cane[0]["c_c"]);
+            $item->setContent("taglia", $info_cane[0]["c_t"]);
 
             // caricamento delle immagini del cane
             

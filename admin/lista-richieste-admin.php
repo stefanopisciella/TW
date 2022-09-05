@@ -44,7 +44,7 @@
             $request_tab->setContent("telefono", $row['u_t']);
             $request_tab->setContent("email", $row['u_e']);
             $request_tab->setContent("data", $row['r_d']);
-            $request_tab->setContent("id_richiesta", $row['r_i']);
+            $request_tab->setContent("id_adozione", $row['r_i']);
         }
         $item->setContent("richieste", $request_tab->get());
         // FINE injection delle richieste nella tabella delle richieste
