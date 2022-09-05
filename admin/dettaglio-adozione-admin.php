@@ -74,7 +74,7 @@
 
             } else {
                 // caso in cui il client arriva in questa pagina dalla schermata 'lista-richieste' ==> bisogna far comparire il pulsante che permette l'upload del certificato di adozione
-                $item->setContent("pick-file", '<input type="file" name="certificate" class="form-control" style="width: 56%;" id="inputGroupFile04"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept=".doc,.docx,.pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                $item->setContent("pick-file", '<input type="file" name="certificate" class="form-control" style="width: 56%;" id="inputGroupFile04"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept=".pdf">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Carica</button>');
 
             }
@@ -123,13 +123,9 @@
     } else {
         // caso in cui l'admin ha fatto la submit del certificato di adozione
 
-        // REMOVE
-        echo "NEIN";
         if(isset($_POST['id'])) {
             // "$id" contiene l'id del cane per il quale si vuole fare l'upload del certificato
             $id = $_POST['id'];
-            // REMOVE
-            echo "NEIN";
             $cert_path = upload_certificate($id); 
         }
 
@@ -145,9 +141,6 @@
     $main->close(); 
 
     function upload_certificate($param_value) {
-        // REMOVE
-        echo "OK";
-        
         $param_name = 'id=';
         
         // controlla se il client ha caricato o meno il certificato
@@ -167,10 +160,8 @@
   
         // fissa il vincolo per il quale è consentito caricare soltanto certificati con formato .pdf
         $imageFileType = $_FILES["certificate"]["type"];
-        // REMOVE
-        echo "CAZZO" . $imageFileType;
 
-        if($imageFileType == ".pdf") {
+        if($imageFileType == "application/pdf") {
             $extension = "pdf";
         } else {
             header('Location: dettaglio-adozione-admin.php?' . $param_name . $param_value . '&' . 'wrong_format=1');
