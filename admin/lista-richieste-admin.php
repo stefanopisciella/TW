@@ -11,6 +11,8 @@
         header("Location: error.php");
         exit;   
     }
+
+    $_SESSION['previous_page'] = 'lista-richieste';
     
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/lista-richieste-admin.html");

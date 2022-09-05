@@ -11,7 +11,9 @@
         header("Location: error.php");
         exit;   
     }
-    
+
+    $_SESSION['previous_page'] = 'storico-adottati';
+
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/storico-adottati-admin.html");
     $tab_adottati = new Template("skins/tabella-adottati.html"); 

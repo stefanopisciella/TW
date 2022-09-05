@@ -68,8 +68,10 @@
             
             // sistemazione stringa età
             $eta = $info_cane[0]['eta'];
-            if (substr($eta, -1) == 'a') $eta = substr($eta, 0, -1)." anni";
-            else $eta = substr($eta, 0, -1)." mesi";
+            if (substr($eta, -1) == 'a')   
+                $eta = substr($eta, 0, -1)." anni";
+            else 
+                $eta = substr($eta, 0, -1)." mesi";
 
             // sistemazione tipologia di adozione
             if($info_cane[0]["distanza"] == true) {
