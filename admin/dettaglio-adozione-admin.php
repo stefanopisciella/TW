@@ -24,7 +24,7 @@
             $id_adozione = $_GET['id']; 
 
             // inizio query
-            $query_info_cane = "SELECT c.nome as c_n, c.sesso as c_s, c.eta as c_e, c.razza as c_r, c.taglia as c_t, c.presentazione as c_p, c.chip as c_c, c.distanza as c_d, c.adottato as c_a, c.ID as c_i 
+            $query_info_cane = "SELECT c.nome as c_n, c.sesso as c_s, c.eta as c_e, c.razza as c_r, c.taglia as c_t, c.presentazione as c_p, c.chip as c_c, c.distanza as c_d, c.adottato as c_a, c.ID as c_i, r.documento as r_d
                                 FROM richiesta_adozione r join cane c on(r.ID_cane=c.ID) 
                                 WHERE r.ID = '{$id_adozione}';";
 
@@ -53,6 +53,12 @@
             $item->setContent("razza", $info_cane[0]["c_r"]);
             $item->setContent("chip", $info_cane[0]["c_c"]);
             $item->setContent("taglia", $info_cane[0]["c_t"]);
+            // per settare il link di download al certificato di adozione
+            $item->setContent("documento", $info_cane[0]["r_d"]);
+
+            // REMOVE
+            echo $info_cane[0]["r_d"];
+
 
             // caricamento delle immagini del cane
             
@@ -69,15 +75,17 @@
 
             $item->setContent("slides", $slides->get());
 
-            if(isset($_SESSION['previous_page']) && $_SESSION['previous_page'] == 'storico-adottati') {
-                // caso in cui il client arriva in questa pagina dalla schermata 'storico-adottati' ==> bisogna far comparire il pulsante per scaricare il certificato di adozione
-                $item->setContent("download-file", '<a href="#" class="btn btn-primary" style="max-width: 45%">Documento di adozione</a>');
-
-            } else {
-                // caso in cui il client arriva in questa pagina dalla schermata 'lista-richieste' ==> bisogna far comparire il pulsante che permette l'upload del certificato di adozione
+            if(isset($_SESSION['previous_page']) && $_SESSION['previous_page'] == 'lista-richieste') {
+                // caso in cui il client arriva in questa pagina dalla schermata 'lista-richieste' ==> il client visualizza il pulsante che permette l'upload del certificato di adozione
+                                                                                                    // ma non il bottone del download del certificato
                 $item->setContent("pick-file", '<input type="file" name="certificate" class="form-control" style="width: 56%;" id="inputGroupFile04"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept=".pdf">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Carica</button>');
+                                                                    
+                // per nascondere il bottone che permette il download del certificato
+                $item->setContent("hide-download", 'hidden');
 
+            } else {
+                // caso in cui il client arriva in questa pagina dalla schermata 'storico-adottati' ==> il client visualizza il pulsante per scaricare il certificato di adozione
             }
 
             // visualizzzione di messaggi di errore relativi al caricamento delle immagini
@@ -113,13 +121,6 @@
         } else {
             exit;
         }
-
-
-
-
-
-
-
 
     } else {
         // caso in cui l'admin ha fatto la submit del certificato di adozione
@@ -167,12 +168,6 @@
             header('Location: lista-richieste-admin.php?success=1');
         }
     }
-    
-    
-    
-    
-    $main->setContent("contenuto", $item->get());
-    $main->close(); 
 
     function upload_certificate($param_value) {
         $param_name = 'id=';
@@ -213,5 +208,8 @@
 
         return $path_cert;
     }
+
+    $main->setContent("contenuto", $item->get());
+    $main->close();
 ?>
 
