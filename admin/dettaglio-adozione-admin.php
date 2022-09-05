@@ -1,6 +1,7 @@
 <?php
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
+    require "include/utils_dbms.php";
 
     session_start();
     $nome_script = "admin/dettaglio-adozione";
@@ -124,14 +125,45 @@
         // caso in cui l'admin ha fatto la submit del certificato di adozione
 
         if(isset($_POST['id'])) {
-            // "$id" contiene l'id del cane per il quale si vuole fare l'upload del certificato
-            $id = $_POST['id'];
-            $cert_path = upload_certificate($id); 
+            $id_adozione = $_POST['id'];
+            $cert_path = upload_certificate($id_adozione); 
+
+            try{
+                // si aggiunge nel DB il path che punta al certificato di adozione e lo si associta all'adozione in questione
+                update_query('richiesta_adozione', ['documento'], [$cert_path], $id_adozione); 
+            }catch (Exception $e) {
+            
+            }
+            
+            // INIZIO query per esrarre l'ID del cane
+            $query = "SELECT r.ID_cane as r_i 
+                      FROM richiesta_adozione r
+                      WHERE r.ID = {$id_adozione};";
+
+            try {
+                $oid = $mysqli->query($query);
+            }catch (Exception $e) {
+                throw new Exception("errno: {$mysqli->errno}");
+            }
+            $rows = $oid->fetch_all(MYSQLI_ASSOC);
+            $id_cane = $rows[0]["r_i"];
+            // FINE query per esrarre l'ID del cane
+            
+            // INIZIO query
+            $query = "UPDATE cane SET adottato = true WHERE ID = {$id_cane};";
+
+            // mando la query
+            global $mysqli;
+    
+            try {
+                $mysqli->query($query);
+            }
+            catch (Exception $e) {
+                
+                throw new Exception("{$mysqli->errno}");
+            }
+            // FINE query
         }
-
-
-
-
     }
     
     
