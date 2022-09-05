@@ -105,6 +105,8 @@
 <!-- // Basic multiple Column Form section end -->
 </div>
 
+<script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
 <script>
     function set_dog_id() {
         // estrae la query string B dall'url che il client sta visitanto
@@ -122,4 +124,23 @@
         // setto il valore di A con l'id del cane
         input.setAttribute('value', param_value);
     }
+
+    $( document ).ready(function() {
+        myFunc();
+    });
+
+
+    function myFunc() {
+        // estrae la query string dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        if(params.has('success')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "Caricamento del certificato di adozione avvenuto con successo",
+                type: "success"
+            })
+            return false;     
+        }   
+    } 
 </script>

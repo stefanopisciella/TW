@@ -163,6 +163,8 @@
                 throw new Exception("{$mysqli->errno}");
             }
             // FINE query
+
+            header('Location: lista-richieste-admin.php?success=1');
         }
     }
     

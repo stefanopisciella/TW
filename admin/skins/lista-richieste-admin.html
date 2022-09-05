@@ -31,7 +31,7 @@
 </div>
 
 <script src="assets/js/jquery-3.6.0.min.js"></script>
-
+<script src="js/sweetalert.min.js"></script>
 <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
 <script src="assets/js/pages/simple-datatables.js"></script>
 
@@ -44,5 +44,24 @@
     }
 
     setTimeout(init, 100);
+
+    
+    $( document ).ready(function() {
+        myFunc();
+    });
+
+    function myFunc() {
+        // estrae la query string dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        if(params.has('success')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "Caricamento del certificato di adozione avvenuto con successo",
+                type: "success"
+            })
+            return false;     
+        }   
+    } 
 </script>
 
