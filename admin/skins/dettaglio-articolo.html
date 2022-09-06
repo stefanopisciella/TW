@@ -18,7 +18,8 @@
         </div>
     </div>
     <label class="form-label">Articolo</label>
-    <section class="section">
+    <textarea class="form-control" id="articolo-disabled" rows="8" name="articolo"></textarea>
+    <section class="section" id="articolo-enabled">
         <div class="row">
             <div class="col-12">
                 <div class="card-body">
@@ -77,6 +78,8 @@
         $("#titolo").prop("readonly", true);
         $("#tags").prop("readonly", true);
         $("#inputGroupFile04").hide();
-
+        $("#articolo").prop("readonly", true);
+        $("#articolo-enabled").hide();
+        $("#articolo-disabled").prop("readonly", true);
     })
 </script>
