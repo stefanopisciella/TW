@@ -24,7 +24,10 @@
      
         $articoli->setContent("img", $row['img']);
         $articoli->setContent("titolo", $row['titolo']);
-        $articoli->setContent("contenuto", $row['contenuto']);
+
+        $anteprima_testo = substr($row['contenuto'], 0, 280)." ...";
+        $articoli->setContent("testo", $anteprima_testo);
+
         $articoli->setContent("data", formatta_data_stringhe($row['data']));
         $articoli->setContent("categoria", $row['categoria']);
         $articoli->setContent("id", $row['ID']);
