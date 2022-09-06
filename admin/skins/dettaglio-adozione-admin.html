@@ -10,16 +10,6 @@
                             <h4 class="card-title">Dettaglio</h4>
                         </div>
                     </div>
-                    <div class="col-6" style="margin-top: 2%;">
-                        <div class="row" style="display: -webkit-inline-box;">
-                            <[pick-file]>
-                            <a href="<[documento]>" class="btn btn-primary" style="max-width: 45%" <[hide-download]>>Documento di adozione</a>
-                            <!-- <[download-file]> -->
-                            <h6 style="color: red"><[error]></h6>
-                        <!-- con questo input nascosto passo al server l'id del cane che il client sta visualizzando-->
-                        <input id="input_with_dog_id" name="id" type="hidden" value="">
-                        </div>
-                    </div>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -93,6 +83,17 @@
                                                 </a>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-12" style="margin-top: 2%;">
+                                    <label style="margin-bottom: 2%;">Documento di adozione</label>
+                                    <div class="row">
+                                        <[pick-file]>
+                                        <a href="<[documento]>" class="btn btn-primary" style="max-width: 30%; margin-left: 1%;" <[hide-download]>>Documento di adozione</a>
+                                        <!-- <[download-file]> -->
+                                        <h6 style="color: red"><[error]></h6>
+                                    <!-- con questo input nascosto passo al server l'id del cane che il client sta visualizzando-->
+                                    <input id="input_with_dog_id" name="id" type="hidden" value="">
                                     </div>
                                 </div>
                             </div>

@@ -78,8 +78,8 @@
             if(isset($_SESSION['previous_page']) && $_SESSION['previous_page'] == 'lista-richieste') {
                 // caso in cui il client arriva in questa pagina dalla schermata 'lista-richieste' ==> il client visualizza il pulsante che permette l'upload del certificato di adozione
                                                                                                     // ma non il bottone del download del certificato
-                $item->setContent("pick-file", '<input type="file" name="certificate" class="form-control" style="width: 56%;" id="inputGroupFile04"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept=".pdf">
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">Carica</button>');
+                $item->setContent("pick-file", '<input type="file" name="certificate" class="form-control" style="width: 30%; max-height: 38px; margin-left: 1%;" id="inputGroupFile04"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept=".pdf">
+                                                <button type="submit" class="btn btn-primary me-1 mb-1" style="width: 16%; margin-left: 1%;">Carica</button>');
                                                                     
                 // per nascondere il bottone che permette il download del certificato
                 $item->setContent("hide-download", 'hidden');
