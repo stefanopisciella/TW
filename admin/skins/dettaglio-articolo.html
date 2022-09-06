@@ -1,10 +1,13 @@
-<h3>Dettaglio</h3>
+<h3 id="cima">Dettaglio</h3>
 
-<form method="POST" action="" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;" id="dettagli">
+<form method="POST" action="" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;">
     <div class="col-md-6 col-12">
         <div class="form-group">
             <label for="last-name-column">Categoria</label>
-            <input type="text" name="categoria" class="form-select" id="categoria" value="<[cateegoria]>">
+            <input type="text" name="categoria" class="form-select" id="categoria-disabled" value="<[categoria]>">
+            <select name="categoria" class="form-select" id="categoria-enabled" aria-placeholder="<[categoria]>">
+                <[opzioni_razza]>
+            </select>
         </div>
     </div>
     <div class="row">
@@ -36,19 +39,20 @@
             <div class="card-body">
                 <div class="form-group mb-3" style="margin-top: 2%;">
                     <label for="titolo" class="form-label">Tags</label>
-                    <textarea class="form-control" id="tags" rows="1" name="titolo"></textarea>
+                    <textarea class="form-control" id="tags" rows="1" name="tags"></textarea>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;" >
+    <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
         <img class="card-img-top img-fluid" src="assets/images/samples/origami.jpg" alt="Card image cap"
                             style="height: 20rem; margin-bottom: 2%;" />
         <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
     </div>
 
-    <button type="submit" class="btn btn-primary me-1 mb-1" id="modifica">Modifica</button>
+    <a class="btn btn-primary me-1 mb-1" id="modifica">Modifica</a>
+    <button type="submit" class="btn btn-primary me-1 mb-1" id="salva">Salva</button>
 </form>
 
 <label>
@@ -74,12 +78,28 @@
         for(i=11; i<13; i++){
             $(".ck.ck-toolbar__items :nth-child("+i+")").hide()
         }
-        $("#categoria").prop("readonly", true);
+        $("#categoria-disabled").prop("readonly", true);
+        $("#categoria-enabled").hide();
         $("#titolo").prop("readonly", true);
         $("#tags").prop("readonly", true);
         $("#inputGroupFile04").hide();
         $("#articolo").prop("readonly", true);
         $("#articolo-enabled").hide();
         $("#articolo-disabled").prop("readonly", true);
+        $("#salva").hide();
     })
+
+    $("#modifica").on("click", function(){
+        $("#salva").show();
+        $("#modifica").hide();
+        $("#categoria-disabled").hide();
+        $("#categoria-enabled").show();
+        $("#titolo").prop("readonly", false);
+        $("#tags").prop("readonly", false);
+        $("#inputGroupFile04").show();
+        $("#articolo-enabled").show();
+        $("#articolo-disabled").hide();
+        window.location.href = "#cima";
+    });
+
 </script>
