@@ -127,7 +127,12 @@
 
         if(isset($_POST['id'])) {
             $id_adozione = $_POST['id'];
-            $cert_path = upload_certificate($id_adozione); 
+            $cert_path = upload_certificate($id_adozione);
+            
+            if(!isset($cert_path)) {
+                // caso in cui l'admin fa la submit senza aver caricato il certificato
+                exit;
+            } 
 
             try{
                 // si aggiunge nel DB il path che punta al certificato di adozione e lo si associta all'adozione in questione
@@ -173,20 +178,18 @@
         $param_name = 'id=';
         
         // controlla se il client ha caricato o meno il certificato
-        if(isset($_FILES['certificate']['tmp_name']) && is_uploaded_file($_FILES['certificate']['tmp_name']) && file_exists($_FILES['certificate']['tmp_name'])) {
-            // caso in cui l'utente ha caricato il certificato
-
-            // fissa il vincolo di dimensioni per il quale non è possibile caricare un certifiicato con dimensione maggiore ai 5MB
-            if ($_FILES["certificate"]["size"] > 5000000) {
-                header('Location: dettaglio-adozione-admin.php?' . $param_name . $param_value . '&' . 'cert_size_error=1');
-                exit;
-            }
-        } else {
+        if(!isset($_FILES['certificate']['tmp_name']) || !is_uploaded_file($_FILES['certificate']['tmp_name']) || !file_exists($_FILES['certificate']['tmp_name'])) {
             // caso in cui l'utente non ha caricato il certificato
             header('Location: dettaglio-adozione-admin.php?' . $param_name . $param_value . '&' . 'no_cert=1');
             return null;
         }
-  
+        
+        // fissa il vincolo di dimensioni per il quale non è possibile caricare un certifiicato con dimensione maggiore ai 5MB
+        if ($_FILES["certificate"]["size"] > 5000000) {
+            header('Location: dettaglio-adozione-admin.php?' . $param_name . $param_value . '&' . 'cert_size_error=1');
+            exit;
+        }
+          
         // fissa il vincolo per il quale è consentito caricare soltanto certificati con formato .pdf
         $imageFileType = $_FILES["certificate"]["type"];
 
