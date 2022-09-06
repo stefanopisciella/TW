@@ -118,7 +118,7 @@
 
         // NOTA: si assume che, negli array, in valori[i] ci sia il valore da modificare nella colonna i
         for($i = 0; $i < $len; $i++) {
-            $curr = $colonne[$i]."='".$valori[$i]."'";
+            $curr = $colonne[$i]."=\"".$valori[$i]."\"";
             array_push($colonne_valori, $curr);
         }
 
@@ -127,6 +127,8 @@
         
         // creo la stringa per la query
         $query = "UPDATE {$nome_tabella} SET {$updates} WHERE ID = {$id_condizione};";
+
+        echo $query;
 
         // mando la query
         global $mysqli;

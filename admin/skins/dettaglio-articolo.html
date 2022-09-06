@@ -22,12 +22,13 @@
     </div>
     <label class="form-label">Articolo</label>
     <textarea class="form-control" id="articolo-disabled" rows="8" name="articolo"><[contenuto]></textarea>
+    
     <section class="section" id="articolo-enabled">
         <div class="row">
             <div class="col-12">
                 <div class="card-body">
                     <div id="editor">
-                        <p></p>
+                        <textarea class="form-control" rows="8" name="articolo2"><[contenuto]></textarea>
                     </div>
                 </div>
             </div>
@@ -45,7 +46,7 @@
         </div>
     </div>
 
-    <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
+    <div class="col-xl-12" id="immagine-articolo" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
         <img class="card-img-top img-fluid" src="../<[img]>" alt="Card image cap"
                             style="height: 20rem; margin-bottom: 2%;" />
         <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -53,7 +54,7 @@
 
     <a class="btn btn-primary me-1 mb-1" id="modifica">Modifica</a>
     <a class="btn btn-danger me-1 mb-1" id="elimina">Elimina</a>
-    <button type="submit" class="btn btn-primary me-1 mb-1" id="salva">Salva</button>
+    <button type="submit" method="POST" class="btn btn-primary me-1 mb-1" id="salva">Salva</button>
 </form>
 
 <label>
@@ -102,7 +103,9 @@
         $("#inputGroupFile04").show();
         $("#articolo-enabled").show();
         $("#articolo-disabled").hide();
+        $("#immagine-articolo").hide();
+        
         window.location.href = "#&mod=1";
-    });
+    })
 
 </script>

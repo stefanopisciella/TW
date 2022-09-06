@@ -1,14 +1,15 @@
 <?php
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
+    require "include/utils_dbms.php";
 
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/dettaglio-articolo.html");
 
+    $modifica = isset($_GET['mod']);
+
     // injection informazioni articolo selezionato
     $id_articolo = $_GET['art'];
-
-    echo $id_articolo;
 
     $query = "SELECT titolo, contenuto, categoria, `path` AS img FROM articolo WHERE ID='{$id_articolo}';";
 
@@ -49,14 +50,6 @@
     $tags = substr($tags, 0, -1);
 
     $item->setContent("tags", $tags);
-
-    // check che sia richiesta la modifica dell'articolo
-    if (isset($_GET['mod']) && $_GET['mod'] == 1) {
-
-        // si vuole modificare l'articolo
-        // injection contenuto
-        $item->setContent("contenuto", $contenuto);
-    }
     
     $main->setContent("contenuto", $item->get());
     $main->close(); 
