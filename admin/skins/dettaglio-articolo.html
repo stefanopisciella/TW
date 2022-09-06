@@ -52,6 +52,7 @@
     </div>
 
     <a class="btn btn-primary me-1 mb-1" id="modifica">Modifica</a>
+    <a class="btn btn-danger me-1 mb-1" id="elimina">Elimina</a>
     <button type="submit" class="btn btn-primary me-1 mb-1" id="salva">Salva</button>
 </form>
 
@@ -90,8 +91,9 @@
     })
 
     $("#modifica").on("click", function(){
-        $("#salva").show();
         $("#modifica").hide();
+        $("#elimina").hide();
+        $("#salva").show();
         $("#categoria-disabled").hide();
         $("#categoria-enabled").show();
         $("#titolo").prop("readonly", false);
