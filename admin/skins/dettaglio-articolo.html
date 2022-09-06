@@ -1,17 +1,11 @@
-<h3 id="scheda-dettaglio">Scrivi un articolo</h3>
+<h3>Dettaglio</h3>
 
-<form method="POST" action="" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;">
+<form method="POST" action="" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;" id="dettagli">
     <div class="col-md-6 col-12">
         <div class="form-group">
             <label for="last-name-column">Categoria</label>
-            <select name="categoria" class="form-select" id="categoria-disabled" disabled>
-            </select>
-            <select name="categoria" class="form-select" id="categoria-enabled">
-                <option value="">-</option>
-                <[categorie_articolo]>
-            </select>
+            <input type="text" name="categoria" class="form-select" id="categoria" value="<[cateegoria]>">
         </div>
-        
     </div>
     <div class="row">
         <div>
@@ -27,11 +21,9 @@
     <section class="section">
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div id="editor">
-                            <p>Scrivi qui il tuo articolo</p>
-                        </div>
+                <div class="card-body">
+                    <div id="editor">
+                        <p></p>
                     </div>
                 </div>
             </div>
@@ -41,7 +33,7 @@
     <div class="row">
         <div class="col">
             <div class="card-body">
-                <div class="form-group mb-3">
+                <div class="form-group mb-3" style="margin-top: 2%;">
                     <label for="titolo" class="form-label">Tags</label>
                     <textarea class="form-control" id="tags" rows="1" name="titolo"></textarea>
                 </div>
@@ -49,14 +41,13 @@
         </div>
     </div>
 
-    <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
+    <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;" >
         <img class="card-img-top img-fluid" src="assets/images/samples/origami.jpg" alt="Card image cap"
                             style="height: 20rem; margin-bottom: 2%;" />
         <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
     </div>
 
-    <button type="submit" id="modifica" class="btn btn-primary me-1 mb-1">Modifica</button>
-    <button type="submit" id="pubblica" class="btn btn-primary me-1 mb-1">Pubblica</button>
+    <button type="submit" class="btn btn-primary me-1 mb-1" id="modifica">Modifica</button>
 </form>
 
 <label>
@@ -80,23 +71,12 @@
         $(".ck.ck-button.ck-off.ck-dropdown__button").hide();
         $(".ck.ck-toolbar__separator").hide();
         for(i=11; i<13; i++){
-            $(".ck.ck-toolbar__items :nth-child("+i+")").hide();
+            $(".ck.ck-toolbar__items :nth-child("+i+")").hide()
         }
+        $("#categoria").prop("readonly", true);
         $("#titolo").prop("readonly", true);
         $("#tags").prop("readonly", true);
-        $("#categoria-enabled").hide();
-        $("#pubblica").hide();
-    });
+        $("#inputGroupFile04").hide();
 
-    $("#modifica").on("click", function(){
-        $("#titolo").prop("readonly", false);
-        $("#tags").prop("readonly", false);
-        $("#categoria-disabled").hide();
-        $("#categoria-enabled").show();
-        $("#modifica").hide();
-        $("#pubblica").show();
-        window.location.href = "#scheda-dettaglio";
-    });
-
-
+    })
 </script>
