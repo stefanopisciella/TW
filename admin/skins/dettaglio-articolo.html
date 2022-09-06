@@ -3,7 +3,7 @@
 <form method="POST" action="" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;">
     <div class="col-md-6 col-12">
         <div class="form-group">
-            <label for="last-name-column">Categoria</label>
+            <label for="last-name-column" id="categoria-label">Categoria</label>
             <input type="text" name="categoria" class="form-select" id="categoria-disabled" value="<[categoria]>">
             <select name="categoria" class="form-select" id="categoria-enabled" aria-placeholder="<[categoria]>">
                 <[opzioni_razza]>
@@ -15,13 +15,13 @@
             <div class="card-body">
                 <div class="form-group mb-3">
                     <label for="titolo" class="form-label">Titolo</label>
-                    <textarea class="form-control" id="titolo" rows="1" name="titolo"></textarea>
+                    <textarea class="form-control" id="titolo" rows="1" name="titolo"><[titolo]></textarea>
                 </div>
             </div>
         </div>
     </div>
     <label class="form-label">Articolo</label>
-    <textarea class="form-control" id="articolo-disabled" rows="8" name="articolo"></textarea>
+    <textarea class="form-control" id="articolo-disabled" rows="8" name="articolo"><[contenuto]></textarea>
     <section class="section" id="articolo-enabled">
         <div class="row">
             <div class="col-12">
@@ -39,14 +39,14 @@
             <div class="card-body">
                 <div class="form-group mb-3" style="margin-top: 2%;">
                     <label for="titolo" class="form-label">Tags</label>
-                    <textarea class="form-control" id="tags" rows="1" name="tags"></textarea>
+                    <textarea class="form-control" id="tags" rows="1" name="tags"><[tags]></textarea>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
-        <img class="card-img-top img-fluid" src="assets/images/samples/origami.jpg" alt="Card image cap"
+        <img class="card-img-top img-fluid" src="../<[img]>" alt="Card image cap"
                             style="height: 20rem; margin-bottom: 2%;" />
         <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
     </div>
@@ -95,13 +95,14 @@
         $("#elimina").hide();
         $("#salva").show();
         $("#categoria-disabled").hide();
-        $("#categoria-enabled").show();
+        $("#categoria-enabled").hide();
+        $("#categoria-label").hide();
         $("#titolo").prop("readonly", false);
         $("#tags").prop("readonly", false);
         $("#inputGroupFile04").show();
         $("#articolo-enabled").show();
         $("#articolo-disabled").hide();
-        window.location.href = "#cima";
+        window.location.href = "#&mod=1";
     });
 
 </script>
