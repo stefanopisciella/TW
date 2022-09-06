@@ -1,14 +1,17 @@
-<h3>Scrivi un articolo</h3>
+<h3 id="scheda-dettaglio">Scrivi un articolo</h3>
 
 <form method="POST" action="" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;">
     <div class="col-md-6 col-12">
         <div class="form-group">
             <label for="last-name-column">Categoria</label>
-            <select name="categoria" class="form-select" id="basicSelect">
+            <select name="categoria" class="form-select" id="categoria-disabled" disabled>
+            </select>
+            <select name="categoria" class="form-select" id="categoria-enabled">
                 <option value="">-</option>
                 <[categorie_articolo]>
             </select>
         </div>
+        
     </div>
     <div class="row">
         <div>
@@ -40,7 +43,7 @@
             <div class="card-body">
                 <div class="form-group mb-3">
                     <label for="titolo" class="form-label">Tags</label>
-                    <textarea class="form-control" id="titolo" rows="1" name="titolo"></textarea>
+                    <textarea class="form-control" id="tags" rows="1" name="titolo"></textarea>
                 </div>
             </div>
         </div>
@@ -52,7 +55,8 @@
         <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
     </div>
 
-    <button type="submit" class="btn btn-primary me-1 mb-1">Pubblica</button>
+    <button type="submit" id="modifica" class="btn btn-primary me-1 mb-1">Modifica</button>
+    <button type="submit" id="pubblica" class="btn btn-primary me-1 mb-1">Pubblica</button>
 </form>
 
 <label>
@@ -75,8 +79,24 @@
         $(".ck.ck-button.ck-off.ck-button_with-text.ck-dropdown__button").hide();
         $(".ck.ck-button.ck-off.ck-dropdown__button").hide();
         $(".ck.ck-toolbar__separator").hide();
-        for(i=11; i<13; i++)
-            $(".ck.ck-toolbar__items :nth-child("+i+")").hide()
+        for(i=11; i<13; i++){
+            $(".ck.ck-toolbar__items :nth-child("+i+")").hide();
+        }
+        $("#titolo").prop("readonly", true);
+        $("#tags").prop("readonly", true);
+        $("#categoria-enabled").hide();
+        $("#pubblica").hide();
+    });
 
-    })
+    $("#modifica").on("click", function(){
+        $("#titolo").prop("readonly", false);
+        $("#tags").prop("readonly", false);
+        $("#categoria-disabled").hide();
+        $("#categoria-enabled").show();
+        $("#modifica").hide();
+        $("#pubblica").show();
+        window.location.href = "#scheda-dettaglio";
+    });
+
+
 </script>
