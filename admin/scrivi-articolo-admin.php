@@ -7,7 +7,7 @@
     $item = new Template("skins/scrivi-articolo-admin.html");
 
             // INIZIO injection categorie articolo
-            $categorie_articolo = new Template("skins/categorie_blog.html");
+            $categorie_articolo = new Template("skins/categorie-blog.html");
 
             $query = "SELECT nome FROM categoria WHERE tipo='articolo';";
      
