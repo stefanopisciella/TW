@@ -128,15 +128,6 @@ create table donazione (
     `data` date not null
 );
 
-# 11) tabella info_struttura
-create table info_struttura (
-    ID smallint primary key auto_increment,
-    telefono char(10) not null,
-    orario_apertura time not null,
-    orario_chiusura time not null,
-    descrizione text not null
-);
-
 # 14) tabella adozione
 create table richiesta_adozione (
     ID smallint primary key auto_increment,
@@ -220,7 +211,7 @@ INSERT INTO utente (ID, nickname, nome, cognome, passwrd, email, telefono) VALUE
 	(1, "stefano23", "Stefano", "Pisciella", md5(md5(md5(md5(md5("stefano"))))), "stefano@gmail.com", "3880581680"),
     (2, "beatrice2", "Beatrice", "Tomassi", md5(md5(md5(md5(md5("beatrice"))))), "beatrice@gmail.com", "3880581681"),
     (3, "nicola3", "Nicola", "Rossi", md5(md5(md5(md5(md5("nicola"))))), "nicola@gmail.com", "3880581682"),
-    (4, "admin", "nome_admin", "cognome_admin", md5(md5(md5(md5(md5("admin"))))), "admin@mail.com", "3880581683");
+    (4, "admin", "Mario", "Bianchi", md5(md5(md5(md5(md5("admin"))))), "admin@mail.com", "3880581683");
 
 # popolamento tabella user_has_ugroup
 INSERT INTO user_has_group(ID_utente, ID_gruppo) VALUES 

@@ -2,6 +2,7 @@
     require "include/template2.inc.php";
     require 'include/utils_dbms.php';
     require "include/dbms_ops.php";
+    require "frame-private.php";
 
     session_start();
     $nome_script = "admin/faq";
@@ -121,6 +122,18 @@
         } 
         // FINE gestione dei messaggi di errore in caso di compilazione non corretta della form
 
+        $main->setContent("nome_cognome", initialize_frame());
+
+        $not = new Template("skins/notifiche.html");
+
+        $notifiche = notifiche();
+
+        foreach($notifiche as $notifica) {
+            $not->setContent("nome", $notifica['nome']);
+            $not->setContent("anteprima", $notifica['anteprima']);
+        }
+
+        $main->setContent("notifiche", $not->get());
         $main->setContent("contenuto", $page->get());
         $main->close();
     } 

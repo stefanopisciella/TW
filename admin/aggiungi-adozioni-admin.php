@@ -2,6 +2,7 @@
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
     require "include/utils_dbms.php";
+    require "frame-private.php";
 
     session_start();
     $nome_script = "admin/aggiungi-adozioni";
@@ -46,6 +47,19 @@
 
         if (isset ($_GET['empty_fields']) && $_GET['empty_fields'] == 1) {
             $item->setContent("error", "Non tutti i campi sono stanti compilati");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -53,6 +67,19 @@
 
         if (isset ($_GET['empty_select']) && $_GET['empty_select'] == 1) {
             $item->setContent("error", "Non tutte le opzioni sono state selezionate");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -60,6 +87,19 @@
 
         if (isset ($_GET['invalid_chip']) && $_GET['invalid_chip'] == 1) {
             $item->setContent("error", "Il numero chip può avere al massimo 15 cifre");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -67,6 +107,19 @@
 
         if (isset ($_GET['wrong_age']) && $_GET['wrong_age'] == 1) {
             $item->setContent("error", "L'età inerita non è valida");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -75,6 +128,19 @@
         // INIZIO gestione visualizzazione di messaggi di errore relativi al caricamento delle immagini
         if (isset ($_GET['no_img']) && $_GET['no_img'] == 1) {
             $item->setContent("error", "Deve essere caricata almeno una foto relativa all'adozione");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -84,6 +150,19 @@
             $readble_size = $max_img_size/1000000; 
             
             $item->setContent("error", "Ciascuna foto non può avere dimensioni maggiori di " . $readble_size . "MB");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -91,6 +170,19 @@
 
         if (isset ($_GET['wrong_format']) && $_GET['wrong_format'] == 1) {
             $item->setContent("error", "Ciascuna foto deve avere formato '.png' oppure '.jpg'");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -98,6 +190,19 @@
 
         if (isset ($_GET['img_upload_error']) && $_GET['img_upload_error'] == 1) {
             $item->setContent("error", "Si è verificato un errore durante il caricamento di un'immagine");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
             $main->setContent("contenuto", $item->get());
             $main->close();
             exit; 
@@ -217,6 +322,19 @@
         }
 
     }
+
+    $main->setContent("nome_cognome", initialize_frame());
+
+    $not = new Template("skins/notifiche.html");
+
+    $notifiche = notifiche();
+
+    foreach($notifiche as $notifica) {
+        $not->setContent("nome", $notifica['nome']);
+        $not->setContent("anteprima", $notifica['anteprima']);
+    }
+
+    $main->setContent("notifiche", $not->get());
 
     $main->setContent("contenuto", $item->get());
     $main->close(); 

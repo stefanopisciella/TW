@@ -2,6 +2,9 @@
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
     require "include/php-utils/varie.php";
+    require "frame-private.php";
+
+    session_start();
 
     global $mysqli;
 
@@ -35,6 +38,19 @@
     }
 
     $item->setContent("articoli", $articoli->get());
+
+    $main->setContent("nome_cognome", initialize_frame());
+
+    $not = new Template("skins/notifiche.html");
+
+    $notifiche = notifiche();
+
+    foreach($notifiche as $notifica) {
+        $not->setContent("nome", $notifica['nome']);
+        $not->setContent("anteprima", $notifica['anteprima']);
+    }
+
+    $main->setContent("notifiche", $not->get());
 
     $main->setContent("contenuto", $item->get());
     $main->close(); 

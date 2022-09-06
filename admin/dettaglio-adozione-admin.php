@@ -2,6 +2,7 @@
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
     require "include/utils_dbms.php";
+    require "frame-private.php";
 
     session_start();
     $nome_script = "admin/dettaglio-adozione";
@@ -92,6 +93,19 @@
             if(isset($_GET['cert_size_error']) && $_GET['cert_size_error'] == 1){
             
                 $item->setContent("error", "Il certificato non può avere dimensioni maggiori 5 MB");
+
+                $not = new Template("skins/notifiche.html");
+
+                $notifiche = notifiche();
+
+                foreach($notifiche as $notifica) {
+                    $not->setContent("nome", $notifica['nome']);
+                    $not->setContent("anteprima", $notifica['anteprima']);
+                }
+
+                $main->setContent("notifiche", $not->get());
+
+                $main->setContent("nome_cognome", initialize_frame());
                 $main->setContent("contenuto", $item->get());
                 $main->close();
                 exit;
@@ -99,6 +113,19 @@
 
             if (isset ($_GET['cert_upload_error']) && $_GET['cert_upload_error'] == 1) {
                 $item->setContent("error", "Non è stato possibile caricare il certificato");
+
+                $not = new Template("skins/notifiche.html");
+
+                $notifiche = notifiche();
+
+                foreach($notifiche as $notifica) {
+                    $not->setContent("nome", $notifica['nome']);
+                    $not->setContent("anteprima", $notifica['anteprima']);
+                }
+
+                $main->setContent("notifiche", $not->get());
+
+                $main->setContent("nome_cognome", initialize_frame());
                 $main->setContent("contenuto", $item->get());
                 $main->close();
                 exit; 
@@ -106,6 +133,19 @@
 
             if (isset ($_GET['wrong_format']) && $_GET['wrong_format'] == 1) {
                 $item->setContent("error", "Il certificato deve essere in formato '.pdf'");
+
+                $not = new Template("skins/notifiche.html");
+
+                $notifiche = notifiche();
+
+                foreach($notifiche as $notifica) {
+                    $not->setContent("nome", $notifica['nome']);
+                    $not->setContent("anteprima", $notifica['anteprima']);
+                }
+
+                $main->setContent("notifiche", $not->get());
+
+                $main->setContent("nome_cognome", initialize_frame());
                 $main->setContent("contenuto", $item->get());
                 $main->close();
                 exit; 
@@ -113,6 +153,19 @@
 
             if (isset ($_GET['no_cert']) && $_GET['no_cert'] == 1) {
                 $item->setContent("error", "Non è stato caricato alcun certificato");
+
+                $not = new Template("skins/notifiche.html");
+
+                $notifiche = notifiche();
+
+                foreach($notifiche as $notifica) {
+                    $not->setContent("nome", $notifica['nome']);
+                    $not->setContent("anteprima", $notifica['anteprima']);
+                }
+
+                $main->setContent("notifiche", $not->get());
+
+                $main->setContent("nome_cognome", initialize_frame());
                 $main->setContent("contenuto", $item->get());
                 $main->close();
                 exit; 
@@ -211,6 +264,19 @@
 
         return $path_cert;
     }
+
+    $main->setContent("nome_cognome", initialize_frame());
+    
+    $not = new Template("skins/notifiche.html");
+
+    $notifiche = notifiche();
+
+    foreach($notifiche as $notifica) {
+        $not->setContent("nome", $notifica['nome']);
+        $not->setContent("anteprima", $notifica['anteprima']);
+    }
+
+    $main->setContent("notifiche", $not->get());
 
     $main->setContent("contenuto", $item->get());
     $main->close();
