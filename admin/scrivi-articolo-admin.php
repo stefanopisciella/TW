@@ -23,6 +23,8 @@
                 $categorie_articolo->setContent("nome_categoria", $row['nome']);
      
             }
+
+            // query inserimento articolo
         
             $item->setContent("categorie_articolo", $categorie_articolo->get());
             // FINE injection categorie articolo
