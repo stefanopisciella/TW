@@ -35,7 +35,6 @@
         while($row = mysqli_fetch_array($oid)) {
             $categorie_articolo->setContent("nome_categoria", $row['nome']);
             $categorie_articolo->setContent("ID_categoria", $row['ID']);
-
         }
 
         $item->setContent("categorie_articolo", $categorie_articolo->get());
@@ -136,7 +135,7 @@
         $path_img = upload_image();
 
         // INIZIO query per estrarre il nome della categoria dato il suo ID
-        $query = "SELECT c.nome FROM categoria c WHERE c.ID={$id_categoria};";
+        $query = "SELECT c.nome as c_n FROM categoria c WHERE c.ID={$id_categoria};";
 
         try {
             $oid = $mysqli->query($query);
@@ -148,10 +147,10 @@
 
         $rows = $oid->fetch_all(MYSQLI_ASSOC);
 
-        $categoria = $rows[0]["nome"];
+        $categoria = $rows[0]["c_n"];
         // FINE query per estrarre il nome della categoria dato il suo ID
 
-        $articolo = [$id_utente, $id_categoria, "'".$titolo."'", "'".$contenuto."'", "'".$autore."'", "2022-09-07", "'".$categoria."'", "'".$path_img."'"];
+        $articolo = [$id_utente, $id_categoria, "'".$titolo."'", "'".$contenuto."'", "'".$autore."'", "'".$actual_date."'", "'".$categoria."'", "'".$path_img."'"];
         
         try {
             $id_articolo = insert_query('articolo', $articolo);
@@ -159,12 +158,16 @@
             // INIZIO inserimento dei tag dell'articolo nel DB
             $tags_array = split_tags($tags); // split_tags ritorna un array di tags
             
-            for($i;$i<count($tags_array);$i++) {
+            for($i=0;$i<count($tags_array);$i++) {
                 $tag = ["'".$tags_array[$i]."'"];
-                insert_query("tag", $tag);
+                $id_tag = insert_query("tag", $tag);
+                
+                // associa il tag al presente articolo
+                $articolo_tag = [$id_articolo, $id_tag];
+                insert_query('articolo_tag', $articolo_tag);
             }
             // FINE inserimento dei tag dell'articolo nel DB
-
+            
             header('Location: dettaglio-articolo.php?art=' . $id_articolo);
         } catch (Exception $e){
             echo $e;
@@ -179,7 +182,7 @@
             // fissa il vincolo di dimensioni per il quale non è possibile caricare immagini con
             // dimensione maggiore ai 5MB
             if ($_FILES["image"]["size"] > $GLOBALS['max_img_size']) {
-                header("Location: scrivi-articolo-admin.php?img_size_error=1");
+                header("Location: scrivi-la-tua-storia.php?img_size_error=1");
                 exit;
             }
         } else {
@@ -197,7 +200,7 @@
                 $extension = "png";
             } else {
                 // caso in cui una delle immagini ha un formato non consentito
-                header("Location: scrivi-articolo-admin.php?wrong_format=1");
+                header("Location: scrivi-la-tua-storia.php?wrong_format=1");
                 exit;  
             }
         }
@@ -209,7 +212,7 @@
   
         // "tmp_name" è il path dove il server salva temporaneamente il file caricato
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $path_image)) {
-            header("Location: scrivi-articolo-admin.php?img_upload_error=1");            
+            header("Location: scrivi-la-tua-storia.php?img_upload_error=1");            
         }
 
         return $path_image;
