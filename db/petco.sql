@@ -176,7 +176,9 @@ create table ugroup_has_service (
     ID smallint primary key auto_increment,
     ID_servizio smallint not NULL,
     ID_gruppo smallint not NULL,
+    # prima c'era on delete cascade
     constraint ugroup_has_service_servizio foreign key (ID_servizio) references `service`(ID) on update cascade on delete no action,
+	# prima c'era on delete cascade
     constraint ugroup_has_service_gruppo foreign key (ID_gruppo) references ugroup(ID) on update cascade on delete no action
 );
 
@@ -185,8 +187,8 @@ create table articolo_tag (
     ID smallint primary key auto_increment,
     ID_articolo smallint not null,
     ID_tag smallint not NULL,
-    constraint articolo_tag_articolo foreign key (ID_articolo) references articolo(ID) on update cascade on delete no action,
-    constraint articolo_tag_tag foreign key (ID_tag) references tag(ID) on update cascade on delete no action
+    constraint articolo_tag_articolo foreign key (ID_articolo) references articolo(ID) on update cascade on delete cascade,
+    constraint articolo_tag_tag foreign key (ID_tag) references tag(ID) on update cascade on delete cascade
 );
 
 #20) tabella slider-home

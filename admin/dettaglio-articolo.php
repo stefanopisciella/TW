@@ -13,67 +13,88 @@
         exit;   
     }
 
-    $main = new Template("skins/frame-private.html");
-    $item = new Template("skins/dettaglio-articolo.html");
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (isset($_GET['art'])) {
+            $main = new Template("skins/frame-private.html");
+            $item = new Template("skins/dettaglio-articolo.html");
 
-    $modifica = isset($_GET['mod']);
+            $modifica = isset($_GET['mod']);
 
-    // injection informazioni articolo selezionato
-    $id_articolo = $_GET['art'];
+            // injection informazioni articolo selezionato
+            $id_articolo = $_GET['art'];
 
-    $query = "SELECT titolo, contenuto, categoria, `path` AS img FROM articolo WHERE ID='{$id_articolo}';";
+            $query = "SELECT titolo, contenuto, categoria, `path` AS img FROM articolo WHERE ID='{$id_articolo}';";
 
-    try {
-        $oid = $mysqli->query($query);
-    }
-    catch (Exception $e) {
-        throw new Exception("{$mysqli->errno}");
-    }
+            try {
+                $oid = $mysqli->query($query);
+            } catch (Exception $e) {
+                throw new Exception("{$mysqli->errno}");
+            }
 
-    $info_articolo = $oid->fetch_all(MYSQLI_ASSOC);
+            $info_articolo = $oid->fetch_all(MYSQLI_ASSOC);
 
-    $contenuto = $info_articolo[0]['contenuto'];
+            $contenuto = $info_articolo[0]['contenuto'];
 
-    $item->setContent("titolo", $info_articolo[0]['titolo']);
-    $item->setContent("contenuto", $contenuto);
-    $item->setContent("categoria", $info_articolo[0]['categoria']);
-    $item->setContent("img", $info_articolo[0]['img']);
+            $item->setContent("titolo", $info_articolo[0]['titolo']);
+            $item->setContent("contenuto", $contenuto);
+            $item->setContent("categoria", $info_articolo[0]['categoria']);
+            $item->setContent("img", $info_articolo[0]['img']);
 
-    $query = "SELECT nome FROM tag JOIN articolo_tag ON tag.ID=articolo_tag.ID_tag AND ID_articolo='{$id_articolo}'";
+            $query = "SELECT nome FROM tag JOIN articolo_tag ON tag.ID=articolo_tag.ID_tag AND ID_articolo='{$id_articolo}'";
 
-    try {
-        $oid = $mysqli->query($query);
-    }
-    catch (Exception $e) {
-        throw new Exception("{$mysqli->errno}");
-    }
+            try {
+                $oid = $mysqli->query($query);
+            } catch (Exception $e) {
+                throw new Exception("{$mysqli->errno}");
+            }
 
-    //$tags = $oid->fetch_all(MYSQLI_ASSOC);
+            //$tags = $oid->fetch_all(MYSQLI_ASSOC);
 
-    // costruisco la stringa con i tags separati da virgola
-    $tags = "";
+            // costruisco la stringa con i tags separati da virgola
+            $tags = "";
 
-    while($row = mysqli_fetch_array($oid)) {
-        $tags = $tags.$row['nome'].",";
-    }
+            while($row = mysqli_fetch_array($oid)) {
+                $tags = $tags.$row['nome'].",";
+            }
 
-    $tags = substr($tags, 0, -1);
+            $tags = substr($tags, 0, -1);
 
-    $item->setContent("tags", $tags);
+            $item->setContent("tags", $tags);
     
-    $main->setContent("nome_cognome", initialize_frame());
+            $main->setContent("nome_cognome", initialize_frame());
 
-    $not = new Template("skins/notifiche.html");
+            $not = new Template("skins/notifiche.html");
 
-    $notifiche = notifiche();
+            $notifiche = notifiche();
 
-    foreach($notifiche as $notifica) {
-        $not->setContent("nome", $notifica['nome']);
-        $not->setContent("anteprima", $notifica['anteprima']);
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+            
+            // injection dell'id dell'articolo al pulsante di eliminazione dell'articolo
+            $item->setContent("id-articolo", $_GET['art']);
+
+            $main->setContent("contenuto", $item->get());
+            $main->close(); 
+        }
+
+        // INIZIO gestione eliminazione di un'articolo
+        if(isset($_GET['delete_art']) && is_numeric($_GET['delete_art']) && $_GET['delete_art'] > 0 ){
+            // caso in cui l'admin preme sul pulsante elimina 
+            
+            $id_art = (int) $_GET['delete_art'];
+
+            try {
+                delete_query('articolo', $id_art);
+                header("Location: blog-admin.php?success=1");
+                exit;
+            } catch (Exception $e){
+                echo $e;
+            }
+        }
+        // FINE gestione eliminazione di un'articolo
     }
-
-    $main->setContent("notifiche", $not->get());
-
-    $main->setContent("contenuto", $item->get());
-    $main->close(); 
 ?>
