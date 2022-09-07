@@ -25,9 +25,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-body">
-                    <div id="editor">
+                    <!-- <div id="editor">
                         <p></p>
-                    </div>
+                    </div> -->
+                    <textarea class="col-12" id="editor" name="testo" value="" placeholder="Articolo..."></textarea>
                 </div>
             </div>
         </div>
@@ -45,26 +46,41 @@
     </div>
 
     <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
-        <img class="card-img-top img-fluid" src="assets/images/samples/origami.jpg" alt="Card image cap"
-                            style="height: 20rem; margin-bottom: 2%;" />
-        <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        <img class="card-img-top img-fluid" id="display-image" src="assets/images/samples/origami.jpg" alt="immagine articolo" style="height: 20rem; margin-bottom: 2%;"/>
+        <input type="file" name="image" class="form-control" id="image" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
     </div>
 
     <button type="submit" class="btn btn-primary me-1 mb-1">Pubblica</button>
 </form>
 
 <label>
-    <[articolo_error]>
+    <[error]>
 </label>
 
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-
 <script>
+    // implementazione dell'editor di testo per scrivere l'articolo
     ClassicEditor
-    .create(document.querySelector('#editor'))
-    .catch(error => {
-        console.error(error);
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+
+    // visualizzazione dell'immagine caricata
+    const image_input = document.querySelector("#image");
+
+    image_input.addEventListener("change", function () {
+        console.log(image_input.value);
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+            const uploaded_image = reader.result;
+            // REMOVE
+            document.querySelector("#display-image").setAttribute('src', "");
+            document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`;
+        });
+
+        reader.readAsDataURL(this.files[0]);
     });
 </script>
 
@@ -78,3 +94,13 @@
 
     })
 </script>
+
+<style>
+    #display-image{
+        width: 462.55px;
+        height: 320px;
+        border: 0px;
+        background-position: center;
+        background-size: cover;
+    } 
+</style>

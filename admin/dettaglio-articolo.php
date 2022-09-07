@@ -4,6 +4,15 @@
     require "include/utils_dbms.php";
     require "frame-private.php";
 
+    session_start();
+    $nome_script = "admin/dettaglio-articolo";
+    if(!isset($_SESSION['user_id']) ||
+       user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
+    {
+        header("Location: error.php");
+        exit;   
+    }
+
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/dettaglio-articolo.html");
 
