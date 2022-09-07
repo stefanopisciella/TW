@@ -5,7 +5,14 @@
     require "frame-private.php";
 
     session_start();
-
+    $nome_script = "admin/blog";
+    if(!isset($_SESSION['user_id']) ||
+       user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
+    {
+        header("Location: error.php");
+        exit;   
+    }
+    
     global $mysqli;
 
     $main = new Template("skins/frame-private.html");
