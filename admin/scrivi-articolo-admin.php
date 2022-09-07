@@ -34,7 +34,6 @@
      
         while($row = mysqli_fetch_array($oid)) {
             $categorie_articolo->setContent("nome_categoria", $row['nome']);
-            // 
             $categorie_articolo->setContent("ID_categoria", $row['ID']);
 
         }
@@ -128,7 +127,7 @@
         }
 
         // controlla che la categoria sia stata selezionata
-        if (!isset($categoria) || (isset($categoria) && $categoria='')) {
+        if (!isset($id_categoria) || (isset($id_categoria) && empty($id_categoria))) {
             // categoria non selezionata
             header("Location: scrivi-articolo-admin.php?empty_select=1");
             exit;
@@ -151,14 +150,24 @@
 
         $categoria = $rows[0]["nome"];
         // FINE query per estrarre il nome della categoria dato il suo ID
-        
-        $articolo = [$id_utente, $id_categoria, "'".$titolo."'", "'".$contenuto."'", "'".$autore."'", "'".$actual_date."'", "'".$categoria."'", "'".$path_img."'"];
+
+        $articolo = [$id_utente, $id_categoria, "'".$titolo."'", "'".$contenuto."'", "'".$autore."'", "2022-09-07", "'".$categoria."'", "'".$path_img."'"];
         
         try {
             $id_articolo = insert_query('articolo', $articolo);
+
+            // INIZIO inserimento dei tag dell'articolo nel DB
+            $tags_array = split_tags($tags); // split_tags ritorna un array di tags
+            
+            for($i;$i<count($tags_array);$i++) {
+                $tag = ["'".$tags_array[$i]."'"];
+                insert_query("tag", $tag);
+            }
+            // FINE inserimento dei tag dell'articolo nel DB
+
             header('Location: dettaglio-articolo.php?art=' . $id_articolo);
         } catch (Exception $e){
-            
+            echo $e;
         }
     }
 
@@ -204,5 +213,33 @@
         }
 
         return $path_image;
+    }
+
+    function split_tags($tags) {
+        // controllare che $tags non sia vuoto
+        $tags .= ","; 
+        $tags_array = array();
+        $b = 0; //indice del primo carattere del tag leftmost contenuto in $tags
+    
+        for($i=0;$i<strlen($tags);$i++) {
+            $single_char = substr($tags, $i, 1);
+        
+            if(strcmp($single_char, ",") == 0) {
+                // caso in cui viene individuato un tag
+            
+                $tag = substr($tags, $b, $i - $b);
+                // $b contiene l'indice del primo carattere del tag attuale 
+                $b = $i + 1;
+                // tolgo gli eventuali spazi presenti a DX e a SX del tag
+                $tag = trim($tag);
+                
+                if(strlen($tag) > 0) {
+                    // caso in cui il tag T non è vuoto ==> t è un tag valido 
+                    array_push($tags_array, $tag);
+                }
+            }
+        }
+
+        return $tags_array;
     }
 ?>
