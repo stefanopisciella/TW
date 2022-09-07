@@ -90,7 +90,7 @@
         if (isset ($_GET['empty_fields'])) {
             $param = $_GET['empty_fields'];
             if ($param == 1) {
-                $signup->setContent("empty_fields", "Non tutti i campi sono stanti compilati <br>");
+                $signup->setContent("empty_fields", "Non tutti i campi sono stati compilati <br>");
                 $head->setContent("contenuto", $signup->get());
                 $head->close();
                 exit;
