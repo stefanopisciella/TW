@@ -2,6 +2,9 @@
 
 <form method="POST" action="scrivi-articolo-admin.php" style="margin-left: 10%; margin-right: 10%; margin-bottom: 4%; margin-top: 4%;" enctype="multipart/form-data">
     <div class="col-md-6 col-12">
+        <h5 style="color: red; margin-bottom: 2%;">
+            <[error]>
+        </h5>
         <div class="form-group">
             <label for="last-name-column">Categoria</label>
             <select name="categoria" class="form-select" id="basicSelect">
@@ -45,17 +48,13 @@
         </div>
     </div>
 
-    <div class="col-xl-12" style="margin-left: 20%; margin-top: 5%; margin-bottom: 5%; width: 60%;">
-        <img class="card-img-top img-fluid" id="display-image" src="assets/images/samples/origami.jpg" alt="immagine articolo" style="height: 20rem; margin-bottom: 2%;"/>
-        <input type="file" name="image" class="form-control" id="image" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+    <div class="col-xl-12" style="margin-top: 5%; margin-bottom: 5%; margin-left: 25%; margin-right: 25%;">
+        <img class="card-img-top img-fluid" id="display-image" src="assets/images/samples/origami.jpg" alt="immagine articolo" style="margin-bottom: 2%; display: block;"/>
+        <input type="file" name="image" class="form-control" style="width: 50%;" id="image" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
     </div>
 
     <button type="submit" class="btn btn-primary me-1 mb-1">Pubblica</button>
 </form>
-
-<label>
-    <[error]>
-</label>
 
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
