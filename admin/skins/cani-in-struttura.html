@@ -30,10 +30,9 @@
 </div>
 
 <script src="assets/js/jquery-3.6.0.min.js"></script>
-
+<script src="js/sweetalert.min.js"></script>
 <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
 <script src="assets/js/pages/simple-datatables.js"></script>
-
 <script>
     
     function init(){
@@ -44,6 +43,25 @@
     }
 
     setTimeout(init, 100);
+
+    // per far comparire l'alert in caso di avvenuta modifica dei dettagli di un cane
+    $( document ).ready(function() {
+        set_alert();
+    });
+
+    function set_alert() {
+        // estrae la query string dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        if(params.has('success')) {
+            // caso in cui la richiesta d'informazione è stata inviata correttamente
+            swal({
+                text: "É stato modificato con successo il dettaglio del cane",
+                type: "success"
+            })
+            return false;     
+        }   
+    } 
 </script>
 
 

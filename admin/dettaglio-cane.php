@@ -1,7 +1,6 @@
 <?php
     require "include/template2.inc.php"; 
     require "include/dbms_ops.php";
-
     require "include/dbms.inc.php";
     require "include/utils_dbms.php";
     require "frame-private.php";
@@ -24,31 +23,31 @@
 
     
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-
-        // INIZIO injection opzioni razza
-        $opzioni_razza = new Template("skins/opzioni-razza.html");
-
-        $query = "SELECT ID, nome FROM razza";
- 
-        try {
-            $oid = $mysqli->query($query);
-        }
-        catch (Exception $e) {
-            throw new Exception("{$mysqli->errno}");
-        }
- 
-        while($row = mysqli_fetch_array($oid)) {
-         
-            $opzioni_razza->setContent("nome_razza", $row['nome']);
-            $opzioni_razza->setContent("id", $row['ID']);
- 
-        }
- 
-        $item->setContent("opzioni_razza", $opzioni_razza->get());
-        // FINE injection opzioni razza
         
         if(isset($_GET['id'])) {
             $id_cane = $_GET['id']; 
+
+            // INIZIO injection opzioni razza
+            $opzioni_razza = new Template("skins/opzioni-razza.html");
+
+            $query = "SELECT ID, nome FROM razza";
+ 
+            try {
+                $oid = $mysqli->query($query);
+            }
+            catch (Exception $e) {
+                // REMOVE
+                echo $e;
+                throw new Exception("{$mysqli->errno}");
+            }
+ 
+            while($row = mysqli_fetch_array($oid)) {
+                $opzioni_razza->setContent("nome_razza", $row['nome']);
+                $opzioni_razza->setContent("id", $row['ID']);
+            }
+
+            $item->setContent("opzioni_razza", $opzioni_razza->get());
+            // FINE injection opzioni razza
             
             // inizio query
             $query_info_cane = "SELECT * FROM cane WHERE ID = '{$id_cane}';";
@@ -57,6 +56,8 @@
                 $oid = $mysqli->query($query_info_cane);
             }
             catch (Exception $e) {
+                // REMOVE
+                echo $e;
                 throw new Exception("{$mysqli->errno}");
             }
 
@@ -113,24 +114,212 @@
             }
 
             $item->setContent("slides", $slides->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
+
+            $not = new Template("skins/notifiche.html");
+    
+            $notifiche = notifiche();
+        
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+        
+            $main->setContent("notifiche", $not->get());
+
         } else {
             exit;
         }
 
-        $main->setContent("nome_cognome", initialize_frame());
-
-        $not = new Template("skins/notifiche.html");
-
-        $notifiche = notifiche();
-    
-        foreach($notifiche as $notifica) {
-            $not->setContent("nome", $notifica['nome']);
-            $not->setContent("anteprima", $notifica['anteprima']);
-        }
-    
-        $main->setContent("notifiche", $not->get());
         
+        // INIZIO gestione visualizzazione di messaggi di errore
+        if (isset ($_GET['empty_fields']) && $_GET['empty_fields'] == 1) {
+            $item->setContent("error", "Non tutti i campi sono stanti compilati");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        if (isset ($_GET['empty_select']) && $_GET['empty_select'] == 1) {
+            $item->setContent("error", "Non tutte le opzioni sono state selezionate");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        if (isset ($_GET['invalid_chip']) && $_GET['invalid_chip'] == 1) {
+            $item->setContent("error", "Il numero chip può avere al massimo 15 cifre");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+
+        if (isset ($_GET['wrong_age']) && $_GET['wrong_age'] == 1) {
+            $item->setContent("error", "L'età inerita non è valida");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $main->setContent("notifiche", $not->get());
+
+            $main->setContent("nome_cognome", initialize_frame());
+            $main->setContent("contenuto", $item->get());
+            $main->close();
+            exit; 
+        }
+        // FINE gestione visualizzazione di messaggi di errore
+
         $main->setContent("contenuto", $item->get());
         $main->close();
+
+    } else {
+        // caso in cui l'admin fa la submit delle modifiche (premendo il pulsante "Salva") apportate ai dettagli del cane
+
+        // $_POST['id'] contiene l'id del cane
+        if(!isset($_POST['id'])) {
+            exit;
+        }
+
+        $id_cane = $_POST['id'];
+        $nome = $_POST['nome'];
+        $razza = $_POST['razza'];
+        $eta = $_POST['eta'];
+        $anni_mesi = $_POST['anni_mesi'];
+        $taglia = $_POST['taglia'];
+        $sesso = $_POST['sesso'];
+        $chip = $_POST['chip'];
+        $descrizione = $_POST['descrizione'];
+
+        $param_name = 'id=';
+
+        // controlla che il nome non sia vuoto
+        if (!isset($nome) || strlen(trim($nome)) == 0) {
+            // nome vuoto
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_fields=1');
+            exit;
+        }
+
+        if (!isset($chip) || strlen(trim($chip)) == 0) {
+            header("Location: dettaglio-cane.php?empty_fields=1");
+            exit;
+        } else {
+            // controlla che il numero di chip non sia una stringa più lunga di 15 caratteri
+            if(strlen(trim($chip)) > 15) {
+                header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&invalid_chip=1');
+                exit;  
+            }
+        }
+
+        if (!isset($descrizione) || strlen(trim($descrizione)) == 0) {
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_fields=1');
+            exit;
+        }
+
+        // INIZIO controllo validità età
+        if (!isset($eta) || strlen(trim($eta)) == 0)
+        {
+            // età vuota
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_fields=1');
+            exit;
+        } else {
+            // età non vuota
+            $eta = trim($eta);
+              
+            // controlla che l'età sia numerica, intera e non negativa
+            if(is_numeric($eta) && (int) $eta > 0) {
+                // età valida
+                $eta = (int) $eta;
+            } else {
+                // età non valida
+                header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&wrong_age=1');
+                exit;  
+            }
+        }
+        
+        if (empty($anni_mesi)){
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_select=1');
+            exit;
+        } else {
+            if($anni_mesi == 'a') {
+                // caso in cui si vuole esprimere l'eta in anni
+                $eta = (string) $eta . 'a';
+            } else {
+                // caso in cui si vuole esprimere l'eta in mesi
+                $eta = (string) $eta . 'm';
+            }
+        }
+        // FINE controllo validità età
+
+        if (empty($razza)){
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_select=1');
+            exit;
+        }
+
+        if (empty($taglia)){
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_select=1');
+            exit;
+        }
+
+        if (empty($sesso)){
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_select=1');
+            exit;
+        }
+       
+        try {
+            $query = "UPDATE cane SET nome='{$nome}', sesso='{$sesso}', eta='{$eta}', razza='{$razza}', taglia='{$taglia}', presentazione='{$descrizione}', chip='{$chip}' WHERE ID = {$id_cane};";
+            $mysqli->query($query);
+            
+            header("Location: cani-in-struttura.php?success=1");
+         }
+         catch (Exception $e) {
+            echo $e;
+            throw new Exception("{$mysqli->errno}");
+        }
     }
 ?>

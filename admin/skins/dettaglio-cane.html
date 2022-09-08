@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form">
+                            <form class="form" method="POST" action="dettaglio-cane.php" onsubmit="set_dog_id()">
                                 <div class="row" id="dettagli">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -46,7 +46,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group" id="taglia-disabled">
                                             <label for="taglia-column-disabled">Taglia</label>
-                                            <input type="text" id="taglia-column-disabled" class="form-select" name="taglia"
+                                            <input type="text" id="taglia-column-disabled" class="form-select"
                                             value="<[taglia]>">
                                         </div>
                                         <div class="form-group" id="taglia-enabled">
@@ -61,7 +61,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group" id="sesso-disabled">
                                             <label for="sesso-column-disabled">Sesso</label>
-                                            <input type="text" id="sesso-column-disabled" class="form-select" name="sesso"
+                                            <input type="text" id="sesso-column-disabled" class="form-select"
                                             value="<[sesso]>">
                                         </div>
                                         <div class="form-group" id="sesso-enabled">
@@ -75,7 +75,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="chip-column-disabled">Numero Chip</label>
-                                            <input type="text" id="chip-column-disabled" class="form-control" name="numero-chip"
+                                            <input type="text" id="chip-column-disabled" class="form-control" name="chip"
                                                 value="<[chip]>">
                                         </div>
                                     </div>
@@ -134,20 +134,21 @@
                                         <!-- IN TEORIA QUANDO CLICCHI SU MODIFICA TI ABILITA TUTTO -->
                                     </div>
                                 </div>
+                                <!-- con questo input nascosto passo al server l'id del cane che il client sta visualizzando-->
+                                <input id="input_with_dog_id" name="id" type="hidden" value="">
                             </form>
+                            <label><[error]></label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- da qui-->
-     </input id="proviamo" value="ciao">
-    
     <!-- // Basic multiple Column Form section end -->
 </div>
 
 <script src="js/vendor/jquery-3.6.0.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
 <script>
     $(document).ready(function(){
         $("#dettagli").find("input").each(function(){
@@ -199,4 +200,23 @@
 
         window.location.href = "#scheda-dettaglio";
     });
+
+    function set_dog_id() {
+        // REMOVE
+        alert("ci arriva");
+        // estrae la query string B dall'url che il client sta visitanto
+        const params = new URLSearchParams(window.location.search);
+        
+        let param_value = null;
+        if(params.has('id')) {
+            // estrae da B il valore dell'attributo "id" (l'attributo "id" contiene il valore
+            // dell'id del cane)
+            param_value = params.get('id');
+        }
+        
+        // seleziono l'input A che è nascosto all'utente
+        let input  = document.querySelector('#input_with_dog_id');
+        // setto il valore di A con l'id del cane
+        input.setAttribute('value', param_value);
+    }
 </script>
