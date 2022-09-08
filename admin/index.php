@@ -14,6 +14,7 @@
 
     $main = new Template("skins/frame-private.html");
     $item = new Template("skins/index.html");
+    $tab_don = new Template("skins/tabella-donazioni.html");
 
     global $mysqli;
 
@@ -89,6 +90,41 @@
             $adozioni_a_distanza =  $oid ->fetch_assoc();
 
             $item->setContent("adozioni_a_distanza", $adozioni_a_distanza["c"]);
+
+    // query per donazioni
+
+    $query_donazioni = "SELECT SUM(importo) AS c FROM donazione";
+
+            try {
+                $oid = $mysqli->query($query_donazioni);
+            }
+            catch (Exception $e) {
+                throw new Exception("{$mysqli->errno}");
+            }
+
+            $donazioni =  $oid ->fetch_assoc();
+
+            $item->setContent("donazioni", $donazioni["c"]);
+
+    // INIZIO injection delle informazioni delle donazioni
+    $query = "SELECT importo, email, `data` as d FROM donazione ORDER BY `data` DESC LIMIT 2;"; 
+
+    try {
+        $oid = $mysqli->query($query);
+    }
+    catch (Exception $e) {
+        echo $e;
+        throw new Exception("errno: {$mysqli->errno}");
+    }
+
+    while($row = mysqli_fetch_array($oid)) {
+        $tab_don->setContent("importo", $row['importo']);
+        $tab_don->setContent("email", $row['email']);
+        $tab_don->setContent("data", $row['d']);
+    }
+    $item->setContent("tab-don", $tab_don->get());
+    // FINE injection delle informazioni delle donazioni
+
 
     $main->setContent("contenuto", $item->get());
     
