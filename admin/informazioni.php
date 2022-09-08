@@ -4,7 +4,15 @@
     require "include/php-utils/varie.php";
     require "include/utils_dbms.php";
     require "frame-private.php";
+
     session_start();
+    $nome_script = "admin/informazioni";
+    if(!isset($_SESSION['user_id']) ||
+       user_group_check_script($_SESSION['user_id'], $nome_script) == false) 
+    {
+        header("Location: error.php");
+        exit;   
+    }
 
     global $mysqli;
 

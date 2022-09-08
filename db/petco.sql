@@ -236,7 +236,9 @@ INSERT INTO `service`(ID, script, descrizione) VALUES
 	(10, "admin/dettaglio-adozione", "per visualizzare i dettagli di una determinata adozione arrivando dalla schermata 'lista-richieste' oppure 'cani-in-struttura' (lato admin)"),
 	(11, "admin/scrivi-articolo", "per scrivere articoli (lato admin) che appariranno nel blog del sito Petco"),
 	(12, "admin/blog", "per visualizzare (lato admin) gli articoli scritti sia dagli utenti normali che dall'admin stesso"),
-	(13, "admin/dettaglio-articolo", "per visualizzare e modificare/eliminare (lato admin) un singolo articolo");
+	(13, "admin/dettaglio-articolo", "per visualizzare e modificare/eliminare (lato admin) un singolo articolo"),
+	(14, "admin/informazioni", "per visualizzare le richieste di informazioni generali o su uno specifico cane (lato admin)");
+
 
 # popolamento tabella ugroup_has_service 
 INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
@@ -252,9 +254,8 @@ INSERT INTO ugroup_has_service(ID, ID_servizio, ID_gruppo) VALUES
     (10, 10, 1),
 	(11, 11, 1),
 	(12, 12, 1),
-	(13, 13, 1);
-
-
+	(13, 13, 1),
+	(14, 14, 1);
 
 
 # popolamento tabella categoria
