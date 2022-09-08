@@ -38,9 +38,17 @@
             $tab->setContent("id", $row['ID']);
             $tab->setContent("nome", $row['nome']);
             $tab->setContent("razza", $row['razza']);
+            
             // INIZIO formattazione dell'età
-            $suffix = substr($row['eta'], -1); 
-            $num = substr($row['eta'], 0, 1);  
+            if (strlen($row['eta']) == 3) {
+                // caso in cui il cane ha un età a due cifre
+                $num = substr($row['eta'], 0, 2);
+            } else {
+                // caso in cui il cane ha un età con un'unica cifra
+                $num = substr($row['eta'], 0, 1);
+            }
+            
+            $suffix = substr($row['eta'], -1, 1); 
             if($suffix == 'a') {
                 if($num == 1) {
                     $eta = $num . ' anno';
@@ -51,7 +59,7 @@
                 if($num == 1) {
                     $eta = $num . ' mese';
                 } else {
-                    $eta = $num . ' anni';
+                    $eta = $num . ' mesi';
                 } 
             }
             $tab->setContent("eta", $eta);

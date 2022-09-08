@@ -246,7 +246,7 @@
         }
 
         if (!isset($chip) || strlen(trim($chip)) == 0) {
-            header("Location: dettaglio-cane.php?empty_fields=1");
+            header('Location: dettaglio-cane.php?' . $param_name . $id_cane . '&empty_fields=1');
             exit;
         } else {
             // controlla che il numero di chip non sia una stringa più lunga di 15 caratteri

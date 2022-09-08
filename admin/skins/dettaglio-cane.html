@@ -52,9 +52,9 @@
                                         <div class="form-group" id="taglia-enabled">
                                             <label for="country-floating">Taglia</label>
                                             <select name="taglia" class="form-select" id="basicSelect" aria-placeholder="<[taglia]>">
-                                                <option id="piccola" value="piccola">Piccola</option>
-                                                <option id="media" value="media">Media</option>
-                                                <option id="grande" value="grande">Grande</option>
+                                                <option id="piccola" value="piccola">piccola</option>
+                                                <option id="media" value="media">media</option>
+                                                <option id="grande" value="grande">grande</option>
                                             </select>
                                         </div>
                                     </div>
@@ -202,8 +202,6 @@
     });
 
     function set_dog_id() {
-        // REMOVE
-        alert("ci arriva");
         // estrae la query string B dall'url che il client sta visitanto
         const params = new URLSearchParams(window.location.search);
         
