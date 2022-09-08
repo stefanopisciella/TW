@@ -66,23 +66,35 @@
             $item->setContent("nome", $info_cane[0]["nome"]);
             $item->setContent("descrizione", $info_cane[0]["presentazione"]);
             $item->setContent("sesso", $info_cane[0]["sesso"]);
+            $item->setContent("razza", $info_cane[0]["razza"]);
             
-            // sistemazione stringa età
-            $eta = $info_cane[0]['eta'];
-            if (substr($eta, -1) == 'a')   
-                $eta = substr($eta, 0, -1)." anni";
-            else 
-                $eta = substr($eta, 0, -1)." mesi";
+            // INIZIO sistemazione stringa età
+            if (strlen($info_cane[0]['eta']) == 3) {
+                // caso in cui il cane ha un età a due cifre
+                $eta = substr($info_cane[0]['eta'], 0, 2);
+            } else {
+                // caso in cui il cane ha un età con un'unica cifra
+                $eta = substr($info_cane[0]['eta'], 0, 1);
+            }
+            $item->setContent("eta", $eta); 
+
+            $anni_mesi = substr($info_cane[0]['eta'], -1, 1); 
+            if(strcmp($anni_mesi, 'a') == 0) {
+                // caso in cui l'età è espressa in anni
+                $item->setContent("anni_mesi", "anni"); 
+            } else {
+                // caso in cui l'età è espressa in mesi
+                $item->setContent("anni_mesi", "mesi"); 
+            }
+            // FINE sistemazione stringa età
 
             // sistemazione tipologia di adozione
             if($info_cane[0]["distanza"] == true) {
                 $item->setContent("distanza", "A distanza");
             } else {
                 $item->setContent("distanza", "Non a distanza");
-            }
+            } 
             
-            $item->setContent("eta", $eta);
-            $item->setContent("razza", $info_cane[0]["razza"]);
             $item->setContent("chip", $info_cane[0]["chip"]);
             $item->setContent("taglia", $info_cane[0]["taglia"]);
             $item->setContent("descrizione", $info_cane[0]["presentazione"]);

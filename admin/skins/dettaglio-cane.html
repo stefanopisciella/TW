@@ -34,11 +34,11 @@
                                         <div class="form-group">
                                             <label for="name-column-disabled">Età</label>
                                             <div style="display: flex">
-                                                <input name="eta" type="number" id="eta" class="form-control" placeholder="Età" value="<[eta]>">
-                                                <input name="anni_mesi" class="form-select" id="anni-mesi-disabled">
+                                                <input name="eta" type="number" id="eta" class="form-control" value="<[eta]>">
+                                                <input value="<[anni_mesi]>" name="anni_mesi" class="form-select" id="anni-mesi-disabled">
                                                 <select name="anni_mesi" class="form-select" id="anni-mesi-enabled">
-                                                    <option value="a">Anni</option>
-                                                    <option value="m">Mesi</option>
+                                                    <option id="anni" value="a">anni</option>
+                                                    <option id="mesi" value="m">mesi</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -52,9 +52,9 @@
                                         <div class="form-group" id="taglia-enabled">
                                             <label for="country-floating">Taglia</label>
                                             <select name="taglia" class="form-select" id="basicSelect" aria-placeholder="<[taglia]>">
-                                                <option value="piccola">Piccola</option>
-                                                <option value="media">Media</option>
-                                                <option value="grande">Grande</option>
+                                                <option id="piccola" value="piccola">Piccola</option>
+                                                <option id="media" value="media">Media</option>
+                                                <option id="grande" value="grande">Grande</option>
                                             </select>
                                         </div>
                                     </div>
@@ -67,8 +67,8 @@
                                         <div class="form-group" id="sesso-enabled">
                                             <label for="company-column">Sesso</label>
                                             <select name="sesso" class="form-select" id="basicSelect" aria-placeholder="<[sesso]>">
-                                                <option value="F">Femmina</option>
-                                                <option value="M">Maschio</option>
+                                                <option id="F" value="F" id="F">F</option>
+                                                <option id="M" value="M" id="M">M</option>
                                             </select>
                                         </div>
                                     </div>
@@ -141,6 +141,9 @@
             </div>
         </div>
     </section>
+    <!-- da qui-->
+     </input id="proviamo" value="ciao">
+    
     <!-- // Basic multiple Column Form section end -->
 </div>
 
@@ -156,6 +159,14 @@
         $("#taglia-enabled").hide();
         $("#sesso-enabled").hide();
         $("#anni-mesi-enabled").hide();
+
+        // INIZIO ripristino delle preferenze nelle select
+        
+        // nelle seguenti variabili sono salvati gli id delle <option> che l'admin ha selezionato durante la creazione dell'adozione
+        id_taglia = document.getElementById("taglia-column-disabled").getAttribute("value"); // in "taglia" è salvata l'id dell'option che l'admin ha selezionato nella select relativa alla taglia 
+        id_sesso = document.getElementById("sesso-column-disabled").getAttribute("value");
+        id_razza = document.getElementById("razza-column-disabled").getAttribute("value");
+        id_anni_mesi = document.getElementById("anni-mesi-disabled").getAttribute("value");
     });
 
     $("#modifica").on("click", function(){
@@ -173,7 +184,19 @@
         $("#exampleFormControlTextarea1").prop("readonly", false);
         $("#salva").show();
         $("#modifica").hide();
+
+        // INIZIO ripristino delle preferenze nelle select
+        let opt_taglia = document.getElementById(id_taglia);
+        let opt_sesso = document.getElementById(id_sesso);
+        let opt_razza = document.getElementById(id_razza);
+        let opt_anni_mesi = document.getElementById(id_anni_mesi);
+
+        opt_taglia.setAttribute("selected", "");
+        opt_sesso.setAttribute("selected", "");
+        opt_razza.setAttribute("selected", "");
+        opt_anni_mesi.setAttribute("selected", "");
+        // FINE ripristino delle preferenze nelle select
+
         window.location.href = "#scheda-dettaglio";
     });
-
 </script>
