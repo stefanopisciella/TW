@@ -307,6 +307,15 @@
                 // caso in cui il client carica almeno un immagine valida ==> aggiunge la nuova adozione ed i path path delle immagini nel DB 
                 $id_cane = insert_query('cane', $cane);
 
+                // inserimento nuova razza nel DB
+                // check che nel DB non sia già presente quella razza
+                // to lower case $razza
+                $razza = strtolower($razza);
+                if (!check_razza($razza)) {
+                    $param_razza = array("'".$razza."'");
+                    insert_query('razza', $param_razza);
+                }
+
                 for($i=0;$i<sizeof($imgs_path);$i++) {
                     $imgs_path[$i] = 'admin/' . $imgs_path[$i];
                     $immagine = [$id_cane, "'".$imgs_path[$i]."'", 1];
@@ -401,6 +410,23 @@
         }
 
         return $path_imgs;
+    }
+
+    function check_razza($razza) {
+        global $mysqli;
+
+        $query = "SELECT COUNT(nome) AS cont FROM razza WHERE nome='$razza';";
+
+        try {
+            $oid = $mysqli->query($query);
+        }
+        catch (Exception $e) {
+            throw new Exception("{$mysqli->errno}");
+        }
+
+        $trovato = $oid->fetch_assoc()['cont'];
+
+        return $trovato;
     }
 
 ?>

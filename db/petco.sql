@@ -279,12 +279,12 @@ insert into faq(domanda, risposta, categoria) values
 
 # popolamento tabella razza
 INSERT INTO razza(nome) VALUES 
-    ("Meticcio"),
-    ("Bulldog Inglese"),
-    ("Pitbull"),
-    ("Border Collie"),
-    ("Corso"),
-    ("Terrier");
+    ("meticcio"),
+    ("bulldog inglese"),
+    ("pitbull"),
+    ("border collie"),
+    ("corso"),
+    ("terrier");
    
 # popolamento tabella cane
 INSERT INTO cane(ID, nome, sesso, eta, razza, taglia, presentazione, chip, distanza, adottato) VALUES
