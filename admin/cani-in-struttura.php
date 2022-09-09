@@ -23,8 +23,8 @@
         // INIZIO injection delle informazioni dei cani presenti in struttura
         $query = "SELECT *
                   FROM cane c
-                  WHERE c.adottato=false or c.adottato is null;" ;
-                  
+                  WHERE c.adottato=false;" ;
+
 
         try {
             $oid = $mysqli->query($query);
