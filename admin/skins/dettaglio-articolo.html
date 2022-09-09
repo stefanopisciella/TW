@@ -21,7 +21,7 @@
         </div>
     </div>
     <label class="form-label">Articolo</label>
-    <textarea class="form-control" id="articolo-disabled" rows="8" name="articolo"><[contenuto]></textarea>
+    <div class="form-control" id="articolo-disabled" rows="8" name="articolo"><[contenuto]></div>
     
     <section class="section" id="articolo-enabled">
         <div class="row">
@@ -52,8 +52,6 @@
         <input type="file" name="image[]" class="form-control" id="inputGroupFile04" accept="image/png, image/jpeg"  aria-describedby="inputGroupFileAddon04" aria-label="Upload">
     </div>
 
-    <a class="btn btn-primary me-1 mb-1" id="modifica">Modifica</a>
-    <!---->
     <a class="btn btn-danger me-1 mb-1" href="dettaglio-articolo.php?delete_art=<[id-articolo]>" id="elimina">Elimina</a>
     <button type="submit" method="POST" class="btn btn-primary me-1 mb-1" id="salva">Salva</button>
 </form>
@@ -93,7 +91,6 @@
     })
 
     $("#modifica").on("click", function(){
-        $("#modifica").hide();
         $("#elimina").hide();
         $("#salva").show();
         $("#categoria-disabled").hide();
