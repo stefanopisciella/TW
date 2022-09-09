@@ -4,6 +4,7 @@
     require "include/utils_dbms.php";
     require "include/dbms_ops.php";
     require "include/template2.inc.php";
+    require "frame-private.php";
 
     session_start();
     $nome_script = "admin/scrivi-articolo";
@@ -42,21 +43,60 @@
     
         if (isset ($_GET['empty_fields']) && $_GET['empty_fields'] == 1) {
             $item->setContent("error", "Non tutti i campi sono stanti compilati");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $head->setContent("notifiche", $not->get());
+
             $head->setContent("contenuto", $item->get());
+            $head->setContent("nome_cognome", initialize_frame());
             $head->close();
             exit; 
         }
 
         if (isset ($_GET['empty_select']) && $_GET['empty_select'] == 1) {
             $item->setContent("error", "Non tutte le opzioni sono state selezionate");
+        
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $head->setContent("notifiche", $not->get());
+
             $head->setContent("contenuto", $item->get());
+            $head->setContent("nome_cognome", initialize_frame());
             $head->close();
             exit; 
         }
 
         if(isset($_GET['title_out_of_limit']) && $_GET['title_out_of_limit'] == 1){
             $item->setContent("error", "Il titolo non può avere più di $max_char_title caratteri");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $head->setContent("notifiche", $not->get());
+
             $head->setContent("contenuto", $item->get());
+            $head->setContent("nome_cognome", initialize_frame());
             $head->close();
             exit;
         } 
@@ -66,26 +106,80 @@
             $readble_size = $max_img_size/1000000;
             
             $item->setContent("error", "L'immagine non può avere dimensioni maggiori di $readble_size" . "MB");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $head->setContent("notifiche", $not->get());
+
             $head->setContent("contenuto", $item->get());
+            $head->setContent("nome_cognome", initialize_frame());
             $head->close();
             exit;
         } 
 
         if (isset ($_GET['img_upload_error']) && $_GET['img_upload_error'] == 1) {
             $item->setContent("error", "Non è stato possibile caricare l'immagine");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $head->setContent("notifiche", $not->get());
+
             $head->setContent("contenuto", $item->get());
+            $head->setContent("nome_cognome", initialize_frame());
             $head->close();
             exit; 
         }
 
         if (isset ($_GET['wrong_format']) && $_GET['wrong_format'] == 1) {
             $item->setContent("error", "La foto deve avere formato '.png' oppure '.jpg'");
+
+            $not = new Template("skins/notifiche.html");
+
+            $notifiche = notifiche();
+
+            foreach($notifiche as $notifica) {
+                $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+            }
+
+            $head->setContent("notifiche", $not->get());
+
             $head->setContent("contenuto", $item->get());
+            $head->setContent("nome_cognome", initialize_frame());
+
             $head->close();
             exit; 
         }
 
         $head->setContent("contenuto", $item->get());
+
+        $head->setContent("nome_cognome", initialize_frame());
+
+        $not = new Template("skins/notifiche.html");
+
+        $notifiche = notifiche();
+
+        foreach($notifiche as $notifica) {
+            $not->setContent("nome", $notifica['nome']);
+                $not->setContent("anteprima", $notifica['anteprima']);
+        }
+
+        $head->setContent("notifiche", $not->get());
+
         $head->close();
     } else {
         // caso in cui l'utente ha già visionato la pagina e fa "submit" dell'articolo ed
