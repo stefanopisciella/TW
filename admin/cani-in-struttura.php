@@ -24,6 +24,7 @@
         $query = "SELECT *
                   FROM cane c
                   WHERE c.adottato=false or c.adottato is null;" ;
+                  
 
         try {
             $oid = $mysqli->query($query);
