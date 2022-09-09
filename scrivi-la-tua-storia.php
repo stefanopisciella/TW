@@ -96,6 +96,8 @@ require "include/utils_dbms.php";
 
         $path_img = upload_image();
         
+        $titolo = addslashes($titolo);
+        $contenuto = addslashes($contenuto);
         $articolo = [$id_utente, $id_categoria, "'".$titolo."'", "'".$contenuto."'", "'".$autore."'", "'".$actual_date."'", "'".$categoria."'", "'".$path_img."'"];
         
         try {

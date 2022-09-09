@@ -93,6 +93,7 @@
         }
         
         $actual_date = date("Y/m/d");
+        $messaggio = addslashes($messaggio);
         $richiesta_info = [$user_id, "'".$nome."'", "'".$email."'", "'".$actual_date."'", "NULL", "'".$messaggio."'"];
         try {
             insert_query('richiesta_info', $richiesta_info);
