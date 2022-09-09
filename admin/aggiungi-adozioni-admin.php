@@ -300,6 +300,8 @@
 
         $imgs_path = upload_images();
 
+        $descrizione = addslashes($descrizione);
+
         $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, 0];
         
         try {
