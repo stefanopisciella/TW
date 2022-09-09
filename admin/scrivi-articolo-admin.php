@@ -25,7 +25,7 @@
         // INIZIO injection categorie articolo
         $categorie_articolo = new Template("skins/categorie-blog.html");
 
-        $query = "SELECT nome, ID FROM categoria WHERE tipo='articolo';";
+        $query = "SELECT nome, ID FROM categoria WHERE tipo='articolo' AND ID!=2;";
      
         try {
             $oid = $mysqli->query($query);
