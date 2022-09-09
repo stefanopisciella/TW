@@ -27,7 +27,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="last-name-column">Razza</label>
-                                                <select name="razza" class="form-select" id="basicSelect">
+                                                <select name="razza" class="form-select" id="razza_cane">
                                                     <option value="">-</option>
                                                     <[opzioni_razza]>
                                                 </select>
@@ -214,4 +214,36 @@
             return false;     
         }   
     } 
+
+    $('#razza_cane').change(function() {
+        if($('#razza_cane').val()=='Altro'){
+            swal({
+                title: "Inserisci una nuova razza",
+                input: 'text',
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fas fa-check"></i> Inserisci',
+                    inputValidator: async (text) => {
+                            if (!text) {
+                                return 'Razza non valida'
+                            }
+                            else
+                            {
+                                if (text.match('[0-9]+')) {
+                                    return 'Razza non valida'; 
+                                }
+                                else {
+                                    await swal({
+                                    title: "Razza inserita con successo",
+                                    type: "success",
+                                    confirmButtonText: 'Chiudi'
+                                    });  
+                                }
+                                $('#razza_cane').append('<option value="'+text+'" selected>'+text+'</option>');
+                            }
+                        }
+            })
+        }
+    })
+    
 </script>
