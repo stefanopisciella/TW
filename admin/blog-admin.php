@@ -21,7 +21,7 @@
     // injection articoli
     $articoli = new Template("skins/articolo-admin.html");
 
-    $query = "SELECT ID, titolo, contenuto, `data`, categoria, `path` AS img FROM articolo;";
+    $query = "SELECT ID, titolo, contenuto, `data`, categoria, `path` AS img FROM articolo  ORDER BY `data` DESC;";
 
     try {
         $oid = $mysqli->query($query);

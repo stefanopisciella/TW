@@ -26,7 +26,8 @@
         // INIZIO injection delle adozioni nella tabella
         $query = "SELECT c.nome as c_n, c.chip as c_c, u.nome as u_n, u.cognome as u_c, u.telefono as u_t, u.email as u_e, r.`data` as r_d, r.ID as r_i
                   FROM richiesta_adozione r join utente u join cane c on(r.ID_utente=u.ID and r.ID_cane=c.ID) 
-                  WHERE c.adottato is true;";
+                  WHERE c.adottato is true
+                  ORDER BY `data` DESC;";
 
         try {
             $oid = $mysqli->query($query);

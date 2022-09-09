@@ -27,7 +27,8 @@
         $query = "SELECT c.nome as c_n, c.chip as c_c, u.nome as u_n, u.cognome as u_c, u.telefono as u_t, u.email as u_e, r.`data` as r_d, r.ID as r_i
                   FROM richiesta_adozione r JOIN utente u JOIN cane c on(r.ID_utente=u.ID AND r.ID_cane=c.ID)
                   WHERE r.documento is null
-                  GROUP BY r.ID;";
+                  GROUP BY r.ID
+                  ORDER BY `data` DESC;";
 
         try {
             $oid = $mysqli->query($query);

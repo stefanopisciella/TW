@@ -96,7 +96,7 @@
     
             // estrazione informazioni 3 articoli da presentare
     
-            $query = "SELECT ID, titolo, contenuto, autore, `data`, categoria, `path` FROM articolo WHERE ID_categoria='{$id_categoria}';";
+            $query = "SELECT ID, titolo, contenuto, autore, `data`, categoria, `path` FROM articolo WHERE ID_categoria='{$id_categoria}' ORDER BY `data` DESC;";
     
             try {
                 $oid = $mysqli->query($query);
