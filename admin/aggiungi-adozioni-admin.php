@@ -46,7 +46,7 @@
 
 
         if (isset ($_GET['empty_fields']) && $_GET['empty_fields'] == 1) {
-            $item->setContent("error", "Non tutti i campi sono stanti compilati");
+            $item->setContent("error", "Non tutti i campi sono stati compilati");
 
             $not = new Template("skins/notifiche.html");
 
