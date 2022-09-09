@@ -106,7 +106,7 @@
         }
 
         if (isset ($_GET['wrong_age']) && $_GET['wrong_age'] == 1) {
-            $item->setContent("error", "L'età inerita non è valida");
+            $item->setContent("error", "L'età inserita non è valida");
 
             $not = new Template("skins/notifiche.html");
 
@@ -300,7 +300,7 @@
 
         $imgs_path = upload_images();
 
-        $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, false];
+        $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, 0];
         
         try {
             if(isset($imgs_path)) {

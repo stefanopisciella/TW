@@ -24,7 +24,7 @@
 
         // INIZIO injection delle informazioni delle adozioni a distanza
         $query = "SELECT a.importo as a_i, a.cadenza as a_c, c.nome as c_n, c.chip as c_c, u.nome as u_n, u.cognome as u_c, u.email as u_e
-                  FROM adozione_distanza a join utente u join cane c on(a.ID_utente=u.ID and a.ID_cane=c.ID);"; 
+                  FROM adozione_distanza a join utente u join cane c on(a.ID_utente=u.ID and a.ID_cane=c.ID) ORDER BY `data` DESC;"; 
 
         try {
             $oid = $mysqli->query($query);
@@ -55,7 +55,7 @@
         // FINE injection delle informazioni delle adozioni a distanza
 
         // INIZIO injection delle informazioni delle donazioni
-        $query = "SELECT importo, email, `data` as d FROM donazione;"; 
+        $query = "SELECT importo, email, `data` as d FROM donazione ORDER BY `data` DESC;"; 
 
         try {
             $oid = $mysqli->query($query);
