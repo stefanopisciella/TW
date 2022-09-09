@@ -211,6 +211,7 @@
         } else {
             // titolo non vuoto
             $titolo = trim($titolo);
+            $titolo = addslashes($titolo);
             // controlla che il numero di caratteri del titolo non superi il limite
             if(strlen($titolo) > $max_char_title)
             {
@@ -243,6 +244,7 @@
 
         $categoria = $rows[0]["c_n"];
         // FINE query per estrarre il nome della categoria dato il suo ID
+        $contenuto = addslashes($contenuto);
 
         $articolo = [$id_utente, $id_categoria, "'".$titolo."'", "'".$contenuto."'", "'".$autore."'", "'".$actual_date."'", "'".$categoria."'", "'".$path_img."'"];
         
@@ -253,7 +255,8 @@
             $tags_array = split_tags($tags); // split_tags ritorna un array di tags
             
             for($i=0;$i<count($tags_array);$i++) {
-                $tag = ["'".$tags_array[$i]."'"];
+                $temp = addslashes($tags_array[$i]);
+                $tag = ["'".$temp."'"];
                 $id_tag = insert_query("tag", $tag);
                 
                 // associa il tag al presente articolo

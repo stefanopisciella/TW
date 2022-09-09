@@ -312,6 +312,7 @@
         }
        
         try {
+            $descrizione = addslashes($descrizione);
             $query = "UPDATE cane SET nome='{$nome}', sesso='{$sesso}', eta='{$eta}', razza='{$razza}', taglia='{$taglia}', presentazione='{$descrizione}', chip='{$chip}' WHERE ID = {$id_cane};";
             $mysqli->query($query);
             

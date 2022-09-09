@@ -48,6 +48,9 @@
                 exit;
             }
 
+            $t_domanda = addslashes($t_domanda);
+            $t_risposta = addslashes($t_risposta);
+
             $faq = ["'".$t_domanda."'", "'".$t_risposta."'", "'".$categoria."'"];
 
             try {
