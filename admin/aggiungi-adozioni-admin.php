@@ -106,7 +106,7 @@
         }
 
         if (isset ($_GET['wrong_age']) && $_GET['wrong_age'] == 1) {
-            $item->setContent("error", "L'età inserita non è valida");
+            $item->setContent("error", "L'età inerita non è valida");
 
             $not = new Template("skins/notifiche.html");
 
@@ -300,7 +300,7 @@
 
         $imgs_path = upload_images();
 
-        $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, 0];
+        $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, false];
         
         try {
             if(isset($imgs_path)) {
@@ -308,6 +308,7 @@
                 $id_cane = insert_query('cane', $cane);
 
                 for($i=0;$i<sizeof($imgs_path);$i++) {
+                    $imgs_path[$i] = 'admin/' . $imgs_path[$i];
                     $immagine = [$id_cane, "'".$imgs_path[$i]."'", 1];
                     insert_query('immagine', $immagine);
                 }
