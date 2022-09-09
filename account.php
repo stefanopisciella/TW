@@ -41,7 +41,7 @@
     // injection adottati
     $cani_adottati = new Template("skins/cani-adottati.html");
 
-    $query_adottati = "SELECT cane.nome, `data`, documento as r_d, `path` AS img FROM richiesta_adozione JOIN cane ON ID_cane = cane.ID AND ID_utente = '{$user_id}' JOIN immagine ON immagine.ID_cane = cane.ID GROUP BY cane.nome;";
+    $query_adottati = "SELECT cane.nome, `data`, documento as r_d, `path` AS img FROM richiesta_adozione JOIN cane ON ID_cane = cane.ID AND ID_utente = '{$user_id}' JOIN immagine ON immagine.ID_cane = cane.ID AND documento IS NOT NULL GROUP BY cane.nome;";
 
     try {
         $oid = $mysqli->query($query_adottati);
