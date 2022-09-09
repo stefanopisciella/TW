@@ -137,7 +137,7 @@ require "include/utils_dbms.php";
             }
         }
   
-        $images_dir = "immagini/";   
+        $images_dir = "admin/immagini/";   
         // si assegna all'immagine un nome casuale per garantire l'univocità dei nomi delle
         //  immagini (azione necessaria per evitare errori a livello di filesystem)
         $path_image = $images_dir . "img_" . random_int(1, 10000) . "." . $extension;

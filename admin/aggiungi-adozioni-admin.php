@@ -301,8 +301,6 @@
         $imgs_path = upload_images();
 
         $cane = ["'".$nome."'", "'".$sesso."'", "'".$eta."'", "'".$razza."'", "'".$taglia."'", "'".$descrizione."'", "'".$chip."'", $a_distanza, "NULL"];
-        // REMOVE
-        print_r($cane);
         
         try {
             if(isset($imgs_path)) {

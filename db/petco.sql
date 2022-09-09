@@ -335,11 +335,12 @@ Un piccolo percorso con i nostri educatori sapranno inserirlo al meglio in famig
 
 # inserimento articoli prova
 INSERT INTO articolo(ID_utente, ID_categoria, titolo, contenuto, autore, `data`, categoria, `path`) VALUES
-    (4, 1, "VACCINI", "Questo è l'articolo 1 di prova. Si parlerà di cose varie e si torverà nella categoria 'Salute&Benessere' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-06-12", "Salute&Benessere", "immagini/articolo_1.jpg"),
-    (1, 2, "LA STORIA DI STE E ALBERT", "Questo è l'articolo 2 di prova. Si parlerà di cose varie e si torverà nella categoria 'Le Vostre Storie' e racconta la storia dell'adozione del cane Albert da parte di Stefano. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Stefano Pisciella", "2022-07-01", "Le Vostre Storie", "immagini/articolo_2.jpg"),
-    (4, 3, "FERIE ESTIVE", "Questo è l'articolo 3 di prova. Si parlerà di cose varie e si torverà nella categoria 'News' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-08-08", "News", "immagini/articolo_3.jpg"),
-    (4, 3, "Aggiornamenti procedure affido", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-05-27", "News", "immagini/articolo_4.jpg"),
-    (4, 3, "Aggiornamento norme di comportamento COVID-19", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-04-10", "News", "immagini/articolo_5.jpg");
+    (4, 1, "VACCINI", "Questo è l'articolo 1 di prova. Si parlerà di cose varie e si torverà nella categoria 'Salute&Benessere' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-06-12", "Salute&Benessere", "admin/immagini/articolo_1.jpg"),
+    (1, 2, "LA STORIA DI STE E ALBERT", "Questo è l'articolo 2 di prova. Si parlerà di cose varie e si torverà nella categoria 'Le Vostre Storie' e racconta la storia dell'adozione del cane Albert da parte di Stefano. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Stefano Pisciella", "2022-07-01", "Le Vostre Storie", "admin/immagini/articolo_2.jpg"),
+    (4, 3, "FERIE ESTIVE", "Questo è l'articolo 3 di prova. Si parlerà di cose varie e si torverà nella categoria 'News' e niente, ciao ciao. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-08-08", "News", "admin/immagini/articolo_3.jpg"),
+    (4, 3, "Aggiornamenti procedure affido", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-05-27", "News", "admin/immagini/articolo_4.jpg"),
+    (4, 3, "Aggiornamento norme di comportamento COVID-19", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "admin", "2022-04-10", "News", "admin/immagini/articolo_5.jpg");
+
 
 # popolamento tabella tags
 insert into tag (nome) values 
@@ -368,76 +369,76 @@ insert into articolo_tag (ID_articolo, ID_tag) VALUES
 INSERT INTO immagine(ID_cane, `path`, indice) VALUES
 
 	# immagini per lo slider della home
-    (null, "immagini/slider_home_1_1.jpg", 1),
-	(null, "immagini/slider_home_2_2.jpg", 1),
-    (null, "immagini/slider_home_3.jpg", 1),
+    (null, "admin/immagini/slider_home_1_1.jpg", 1),
+	(null, "admin/immagini/slider_home_2_2.jpg", 1),
+    (null, "admin/immagini/slider_home_3.jpg", 1),
 	
     #immagini cani
 
     # cane 1
-    (1, "immagini/bulldog_inglese_1_1.jpg", 1),
-    (1, "immagini/bulldog_inglese_1_2.jpg", 1),
+    (1, "admin/immagini/bulldog_inglese_1_1.jpg", 1),
+    (1, "admin/immagini/bulldog_inglese_1_2.jpg", 1),
 
     #cane 2
 
-	(2, "immagini/meticcio_2_1.jpeg", 1),
-    (2, "immagini/meticcio_2_2.jpeg", 1),
+	(2, "admin/immagini/meticcio_2_1.jpeg", 1),
+    (2, "admin/immagini/meticcio_2_2.jpeg", 1),
 
     # cane 3
-	(3, "immagini/meticcio_3_1.jpg", 1),
-    (3, "immagini/meticcio_3_2.jpg", 1),
+	(3, "admin/immagini/meticcio_3_1.jpg", 1),
+    (3, "admin/immagini/meticcio_3_2.jpg", 1),
 
     # cane 4
-	(4, "immagini/meticcio_4_1.jpeg", 1),
-    (4, "immagini/meticcio_4_2.jpeg", 1),
+	(4, "admin/immagini/meticcio_4_1.jpeg", 1),
+    (4, "admin/immagini/meticcio_4_2.jpeg", 1),
 
     # cane 5
-	(5, "immagini/border_collie_5_1.jpeg", 1),
+	(5, "admin/immagini/border_collie_5_1.jpeg", 1),
 
     # cane 6
-	(6, "immagini/pitbull_6_1.jpeg", 1),
-	(6, "immagini/pitbull_6_2.jpeg", 1),
+	(6, "admin/immagini/pitbull_6_1.jpeg", 1),
+	(6, "admin/immagini/pitbull_6_2.jpeg", 1),
 
     # cane 7
-    (7, "immagini/7_1.jpeg", 1),
-	(7, "immagini/7_2.jpeg", 1),
+    (7, "admin/immagini/7_1.jpeg", 1),
+	(7, "admin/immagini/7_2.jpeg", 1),
 
     # cane 8
-    (8, "immagini/8_1.png", 1),
-	(8, "immagini/8_2.png", 1),
+    (8, "admin/immagini/8_1.png", 1),
+	(8, "admin/immagini/8_2.png", 1),
 
     # cane 9
-    (9, "immagini/9_1.jpg", 1),
+    (9, "admin/immagini/9_1.jpg", 1),
 
     # cane 10
-    (10, "immagini/10_1.jpeg", 1),
-	(10, "immagini/10_2.jpeg", 1),
+    (10, "admin/immagini/10_1.jpeg", 1),
+	(10, "admin/immagini/10_2.jpeg", 1),
 
     # cane 11
-    (11, "immagini/11_1.png", 1),
-	(11, "immagini/11_2.png", 1),
+    (11, "admin/immagini/11_1.png", 1),
+	(11, "admin/immagini/11_2.png", 1),
 
     # cane 12
-    (12, "immagini/12_1.jpeg", 1),
-	(12, "immagini/12_2.jpeg", 1),
+    (12, "admin/immagini/12_1.jpeg", 1),
+	(12, "admin/immagini/12_2.jpeg", 1),
 
     # cane 13
-    (13, "immagini/13_1.jpg", 1),
-	(13, "immagini/13_2.jpg", 1),
+    (13, "admin/immagini/13_1.jpg", 1),
+	(13, "admin/immagini/13_2.jpg", 1),
 
     # cane 14
-    (14, "immagini/14_1.jpeg", 1),
+    (14, "admin/immagini/14_1.jpeg", 1),
 
     # cane 15
-    (15, "immagini/15_1.jpeg", 1),
-	(15, "immagini/15_2.jpeg", 1),
+    (15, "admin/immagini/15_1.jpeg", 1),
+	(15, "admin/immagini/15_2.jpeg", 1),
 
     # cane 16
-    (16, "immagini/16_1.jpeg", 1),
-	(16, "immagini/16_2.jpeg", 1),
+    (16, "admin/immagini/16_1.jpeg", 1),
+	(16, "admin/immagini/16_2.jpeg", 1),
 
     # cane 17 
-    (17, "immagini/17_1.jpeg", 1);
+    (17, "admin/immagini/17_1.jpeg", 1);
 
 # inserimento adozioni
 # Beatrice Tomassi adotta Calica
