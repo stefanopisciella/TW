@@ -342,4 +342,5 @@
 
         return $tags_array;
     }
+    
 ?>
