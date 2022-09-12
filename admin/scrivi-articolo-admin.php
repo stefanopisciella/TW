@@ -227,7 +227,7 @@
             exit;
         }
 
-        $path_img = upload_image();
+        $path_img = 'admin/' . upload_image();
 
         // INIZIO query per estrarre il nome della categoria dato il suo ID
         $query = "SELECT c.nome as c_n FROM categoria c WHERE c.ID={$id_categoria};";
