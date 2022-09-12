@@ -65,6 +65,22 @@
 
                 try {
                     insert_query('utente', $utente);
+
+                    // inserimento in user_has_group dell'id dell'utente appena inserito
+                    // estrazione dell'ultimo id inserito (utente)
+
+                    try {
+                        $oid = $mysqli->query("SELECT ID FROM utente ORDER BY ID DESC LIMIT 1; ");
+                    }
+                    catch (Exception $e) {
+                        
+                        throw new Exception("{$mysqli->errno}");
+                    }
+
+                    $temp = $oid->fetch_all(MYSQLI_ASSOC)[0]['ID'];
+
+                    $group = array("'".$temp."'", "'2'");
+                    insert_query('user_has_group', $group);
                     header("Location: login.php?");
                 } catch (Exception $e){
                     // caso in cui viene violato uno o più vincoli di univocità (abbiamo questi vincoli per quanto riguarda l' inserimento
