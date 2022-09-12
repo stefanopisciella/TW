@@ -78,7 +78,6 @@
                     }
 
                     $temp = $oid->fetch_all(MYSQLI_ASSOC)[0]['ID'];
-                    echo $temp;
 
                     $group = array("'".$temp."'", "'2'");
                     insert_query('user_has_group', $group);
