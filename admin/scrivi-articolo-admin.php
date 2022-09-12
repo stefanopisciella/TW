@@ -342,5 +342,6 @@
 
         return $tags_array;
     }
+
     
 ?>
